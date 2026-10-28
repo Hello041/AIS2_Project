@@ -1,0 +1,29 @@
+# 모델 가중치 (다운로드 방법은 inference/README.md)
+inference/weights/*
+!inference/weights/.gitkeep
+
+# 검증 이미지 (manifest.csv만 올림)
+ml/data/*
+!ml/data/manifest.csv
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Expo / Node
+node_modules/
+.expo/
+dist/
+web-build/
+
+# 환경 변수·비밀 키
+.env
+.env.*
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

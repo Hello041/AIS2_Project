@@ -1,0 +1,5 @@
+-r ../inference/requirements.txt
+
+pandas                  # manifest.csv, scores.csv
+scikit-learn            # Platt 보정, 로지스틱 회귀, GroupKFold
+psutil                  # measure.py 메모리 측정

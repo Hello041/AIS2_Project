@@ -1,0 +1,19 @@
+# 서버
+fastapi
+uvicorn[standard]
+python-multipart        # multipart/form-data 업로드
+
+# 모델 (CPU 추론)
+# Linux/Docker에서는 CUDA 버전을 피하려고 먼저 설치:
+#   pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
+torch
+torchvision
+open_clip_torch         # UnivFD(CLIP ViT-L/14), AIDE(ConvNeXt-XXL)
+
+# 이미지·설정
+pillow
+numpy
+pyyaml
+
+# (여유 시) 출처 확인
+# c2pa-python
