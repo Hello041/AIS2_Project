@@ -61,6 +61,11 @@ python inference/scripts/download_weights.py --list       # 받지 않고 URL·�
 - **AIDE 백본은 따로 받지 않는다.** 모델 생성자가 `resnet_path`·`convnext_path`를 받지만, `sd14_train.pth`에 ConvNeXt-XXL·ResNet 가중치가 모두 들어 있다(8.98억 파라미터). 둘 다 `None`으로 만든 뒤 체크포인트의 `model`을 올리면 키가 모두 일치한다(2026-11-04 확인).
 - AIDE 공식 코드의 `data/__init__.py`는 설치하지 않은 `kornia`를 끌어온다. 전처리는 `data/dct.py`만 직접 읽어 쓴다.
 - AIDE 출력은 2-클래스 logit이다. Detector에서 AI 쪽 softmax 값을 원점수로 쓴다(0~1, 확률 아님).
+- **점수 방향 (공식 코드 기준, 2026-11-04 확인): 세 모델 모두 클수록 AI.** 고정 커밋의 학습·평가 코드를 읽어 확인했다.
+  - UnivFD `030495a`: `validate.py`에서 `0_real`=0, `1_fake`=1. 출력 1개에 sigmoid.
+  - NPR `781ced3`: `ImageFolder`가 폴더 이름 정렬로 `0_real`=0, `1_fake`=1을 붙인다(라벨 값이 코드에 직접 적혀 있지는 않음). 출력 1개, `BCEWithLogitsLoss`로 학습, 평가 시 sigmoid.
+  - AIDE `6725b71`: `data/datasets.py`에서 `0_real`=0, `1_fake`=1. 평가 시 `softmax(...)[:, 1]`.
+  - **미검증:** 우리 Detector 구현(`detectors/*.py`, B1·B4)이 이 방향을 지키는지, 우리 데이터에서 실제로 AI 쪽 점수가 높은지는 아직 확인하지 않았다. B6에서 모델별 실제·AI 점수 분포로 확인한다.
 - AIDE 저장소의 `requirements.txt`는 `torch==1.11.0`이지만 설치 문서는 torch 2.0.1이다. 이 프로젝트는 설치 문서(2.0.1)를 따른다.
 - `numpy`는 1.24.3에 고정한다. torch 2.0.1은 numpy 2.x와 호환되지 않는다.
 - `huggingface_hub` 등 간접 의존성은 고정하지 않았다. 설치가 깨지면 동작하는 환경에서 `pip freeze`로 고정한다.

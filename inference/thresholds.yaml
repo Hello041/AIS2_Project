@@ -1,0 +1,8 @@
+# 모델별 원점수 경계값 (계획서 §5.2).
+# 임시값. 검증 이미지 점수 분포(ml/score_samples.py → scores.csv)를 보고 모델별로 조정한다(B6).
+#   score < low          → weak       (AI 흔적 약함)
+#   low ≤ score ≤ high   → uncertain  (판단하기 어려움)
+#   score > high         → strong     (AI 흔적 강함)
+univfd: { low: 0.3, high: 0.7 }
+aide:   { low: 0.3, high: 0.7 }
+npr:    { low: 0.3, high: 0.7 }
