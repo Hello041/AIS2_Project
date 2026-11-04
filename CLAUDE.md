@@ -100,4 +100,3 @@ cd app && npx expo start
 - `shared/`를 HF Spaces Docker 빌드에 포함하는 방법
 - `banding` 단위 테스트 위치 (임시: `inference/tests/`)
 - `usage_daily.day` 기준 시간대
-- `manifest.csv`에 파일 경로·생성기 열 추가 여부
