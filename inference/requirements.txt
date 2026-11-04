@@ -13,6 +13,7 @@ torch==2.0.1
 torchvision==0.15.2
 open-clip-torch==2.24.0    # AIDE(ConvNeXt-XXL). UnivFD는 쓰지 않음(공식 코드의 OpenAI clip 사용)
 timm==0.9.6                # open_clip의 convnext_xxlarge가 사용 (AIDE 고정값)
+openai-clip==1.0.1         # AIDE 공식 코드가 import (사용은 안 함, AIDE 고정값)
 ftfy==6.1.3                # UnivFD 공식 clip 토크나이저
 regex==2024.11.6           # UnivFD 공식 clip 토크나이저
 tqdm==4.66.1               # UnivFD 공식 clip
