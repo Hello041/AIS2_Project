@@ -42,10 +42,15 @@ FILES = [
      ("gdrive_folder", "1qx76UFvDpgCxaPLBCmsA2WY-SSzeJrd4", "sd14_train.pth")),
 ]
 
-# 내용이 알려진 파일의 sha256 (OpenAI가 URL에 넣어 둔 값). 다르면 경고한다.
+# 알려진 sha256. 다르면 경고하고 종료 코드 1. ViT-L-14.pt는 OpenAI가 URL에 넣어 둔 값,
+# 나머지는 2026-11-04에 받은 파일에서 계산한 값.
 KNOWN_SHA256 = {
+    "univfd/fc_weights.pth": "477100745713bcc957beb2b40859536859b6483fd6301b3b9293151b194c7847",
     "univfd/ViT-L-14.pt": "b8cca3fd41ae0c99ba7e8951adf17d267cdb84cd88be6f7c2e0eca1737a03836",
+    "npr/model_epoch_last_3090.pth": "b67a91555ce786a6d0463ff0cb2b0b874d1c3f971b0e3febd2ae5618a80f7e8a",
+    "aide/sd14_train.pth": "382a50d199541db79d4bb4f3b1647e69289dff3e88eb2d6907081f6f12f91989",
 }
+TIMEOUT_S = 60  # 연결·읽기가 이 시간 동안 멈추면 실패
 
 
 def sha256(path: Path) -> str:
@@ -66,7 +71,7 @@ def human(n: int) -> str:
 def fetch_url(url: str, dest: Path) -> None:
     tmp = dest.with_suffix(dest.suffix + ".part")
     req = urllib.request.Request(url, headers={"User-Agent": "ais2-download-weights"})
-    with urllib.request.urlopen(req) as r, tmp.open("wb") as f:
+    with urllib.request.urlopen(req, timeout=TIMEOUT_S) as r, tmp.open("wb") as f:
         total = int(r.headers.get("Content-Length") or 0)
         done = 0
         while chunk := r.read(1 << 20):
@@ -113,7 +118,7 @@ def fetch_code(name: str) -> None:
     url = f"https://codeload.github.com/{repo}/zip/{sha}"
     print(f"[코드] {name}: {repo}@{sha[:7]}")
     req = urllib.request.Request(url, headers={"User-Agent": "ais2-download-weights"})
-    with urllib.request.urlopen(req) as r:
+    with urllib.request.urlopen(req, timeout=TIMEOUT_S) as r:
         data = r.read()
     tmp = THIRD_PARTY / f".{name}.tmp"
     shutil.rmtree(tmp, ignore_errors=True)
@@ -167,15 +172,23 @@ def main() -> None:
             else:
                 fetch_gdrive(src[1], src[2], dest)
 
-    print("\n파일 | 크기 | sha256")
+    print("\n파일 | 크기 | sha256 | 검증")
+    mismatched = []
     for name, rel, _ in FILES:
         dest = WEIGHTS / rel
         if name in names and dest.exists():
             digest = sha256(dest)
-            warn = ""
-            if rel in KNOWN_SHA256 and KNOWN_SHA256[rel] != digest:
-                warn = "  <-- 알려진 값과 다름!"
-            print(f"weights/{rel} | {human(dest.stat().st_size)} | {digest}{warn}")
+            if rel not in KNOWN_SHA256:
+                status = "기준값 없음"
+            elif KNOWN_SHA256[rel] == digest:
+                status = "OK"
+            else:
+                status = "다름!"
+                mismatched.append(rel)
+            print(f"weights/{rel} | {human(dest.stat().st_size)} | {digest} | {status}")
+    if mismatched:
+        sys.exit(f"\nsha256이 알려진 값과 다릅니다(손상되었거나 다른 파일): {', '.join(mismatched)}\n"
+                 "해당 파일을 지우고 다시 받으세요.")
 
 
 if __name__ == "__main__":

@@ -3,6 +3,7 @@
 종료 코드: 0 = 문제 없음, 1 = 문제 행 있음, 2 = 파일을 읽을 수 없거나 헤더 불일치.
 """
 import csv
+import io
 import sys
 from collections import defaultdict
 from pathlib import Path
@@ -19,12 +20,16 @@ VERSIONS = {"original", "jpeg70", "resize50", "screenshot"}
 
 def validate(manifest: Path) -> int:
     try:
-        f = manifest.open(encoding="utf-8", newline="")
+        # utf-8-sig: Excel의 "CSV UTF-8" 저장은 파일 앞에 BOM을 붙인다
+        text = manifest.read_text(encoding="utf-8-sig")
     except OSError as e:
         print(f"읽을 수 없음: {manifest} ({e})")
         return 2
+    except UnicodeDecodeError:
+        print(f"UTF-8이 아님: {manifest}\n  Excel이면 '다른 이름으로 저장 → CSV UTF-8(쉼표로 분리)'로 저장하세요.")
+        return 2
 
-    with f:
+    with io.StringIO(text, newline="") as f:
         reader = csv.reader(f)
         header = next(reader, None)
         if header != HEADER:
@@ -35,10 +40,12 @@ def validate(manifest: Path) -> int:
         seen_ids: dict[str, int] = {}
         labels_by_source: dict[str, set[str]] = defaultdict(set)
         rows_by_source: dict[str, list[int]] = defaultdict(list)
+        n_rows = 0
 
         for line_no, values in enumerate(reader, start=2):
             if not any(v.strip() for v in values):
                 continue
+            n_rows += 1
             if len(values) != len(HEADER):
                 problems.append((line_no, f"열 개수 {len(values)} (기대 {len(HEADER)})"))
                 continue
@@ -79,7 +86,6 @@ def validate(manifest: Path) -> int:
 
     for line_no, msg in sorted(problems):
         print(f"{line_no}행: {msg}")
-    n_rows = len(seen_ids)
     if problems:
         print(f"문제 {len(problems)}건 (이미지 행 {n_rows}개)")
         return 1

@@ -7,7 +7,16 @@ Python 3.10 기준. 가상환경을 권장한다.
 ```bash
 python -m venv .venv && .venv\Scripts\activate      # macOS/Linux: source .venv/bin/activate
 pip install -r inference/requirements.txt
+pip install -r inference/requirements-dev.txt        # 테스트(pytest)까지
 ```
+
+테스트: `cd inference && pytest -q` (모델 가중치 없이 돈다).
+
+## Detector 추가하기
+
+`detectors/<이름>.py`에 `Detector`(detectors/base.py) 하위 클래스를 **하나** 만들고 `name = "<이름>"`, `_load()`, `_score(img)`를 구현한다.
+`score()`는 기반 클래스가 RGB 변환 → `_score` → 0~1 범위 검사 순으로 처리한다. 활성 모델은 환경 변수 `DETECTORS="univfd,npr"`로 고른다(없으면 셋 다).
+`main.py`·`banding.py`·`detectors/__init__.py`는 고치지 않는다.
 
 ## 가중치·공식 코드 받기
 

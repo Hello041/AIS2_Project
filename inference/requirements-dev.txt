@@ -1,0 +1,4 @@
+# 개발·테스트용 (Docker 이미지에는 넣지 않음)
+-r requirements.txt
+
+pytest==8.3.4

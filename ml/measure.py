@@ -118,12 +118,9 @@ def load_aide():
     model = aide.AIDE(resnet_path=None, convnext_path=None)
     ckpt = torch.load(ckpt_path, map_location="cpu")
     state = ckpt.get("model", ckpt)
-    missing, unexpected = model.load_state_dict(state, strict=False)
+    model.load_state_dict(state, strict=True)  # 키가 하나라도 다르면 실패 (2026-11-04 전부 일치 확인)
     del ckpt, state
     gc.collect()
-    if missing or unexpected:
-        print(f"[aide] missing {len(missing)}, unexpected {len(unexpected)}: "
-              f"{(missing + unexpected)[:5]}", file=sys.stderr)
     model.eval()
     dct = dct_mod.DCT_base_Rec_Module()
 
