@@ -22,6 +22,7 @@ ml/data/
 |---|---|---|
 | 출처 | RAISE 데이터셋, 받은 200장 중 중복 1장 제외 후 무작위 100장 (시드 42) | Cloudflare Workers AI로 직접 생성 (프롬프트 25장면 × 4조건) |
 | 생성기 | `camera` | `sdxl` 34, `sdxl-lightning` 33, `flux1-schnell` 33 |
+| 수집 (`collected_by`) | 김정효 | 임정민 |
 | 라이선스 | `RAISE-research-only` (연구·비상업) | SDXL·SDXL-Lightning `CreativeML-OpenRAIL++-M`, FLUX.1-schnell `Apache-2.0` |
 | 해상도 | 약 105만 화소 (원본 약 1,600만 화소에서 축소) | 약 103~105만 화소 (API 출력 그대로) |
 | 형식 | PNG 34 / JPEG q75 33 / JPEG q100 33 | PNG 34 (sdxl) / JPEG q75 33 (sdxl-lightning) / JPEG q100 33 (flux1-schnell) |
@@ -43,6 +44,7 @@ python ml/data/build_dataset.py --collected-by 이름
 `incoming/`을 읽어 실제 사진은 위 규칙으로 변환하고 AI 이미지는 그대로 복사해 `images/`에 넣고, manifest에 행을 추가한 뒤 `validate_manifest.py`를 실행한다.
 이미 manifest에 있는 `image_id`는 건너뛰므로 다시 실행해도 중복되지 않는다. 같은 입력·시드면 같은 결과가 나온다.
 AI 생성기는 생성 스크립트의 순환 규칙(`ai_land_NNN`의 번호 `(N-1) % 3` → sdxl, sdxl-lightning, flux1-schnell)으로 정한다.
+`incoming/ai/log.jsonl`(생성 스크립트 기록)이 있으면 모델이 순환 규칙과 같은지 확인하고, 시드·프롬프트를 `notes`에 넣는다(FLUX는 시드 지정 불가라 `seed 없음`).
 
 ## manifest.csv
 

@@ -18,6 +18,7 @@
 import argparse
 import csv
 import hashlib
+import json
 import math
 import random
 import re
@@ -92,7 +93,31 @@ def plan_real(collected_by: str) -> list[dict]:
     return jobs
 
 
+def load_ai_log() -> dict[str, dict]:
+    """생성 스크립트의 incoming/ai/log.jsonl (image_id → 기록). 재실행으로 중복된 줄은 마지막 것."""
+    path = INCOMING / "ai" / "log.jsonl"
+    if not path.exists():
+        print("[주의] incoming/ai/log.jsonl 없음: 프롬프트·시드를 notes에 넣지 못함")
+        return {}
+    log = {}
+    with path.open(encoding="utf-8") as f:
+        for line in f:
+            if line.strip():
+                r = json.loads(line)
+                log[r["image_id"]] = r
+    return log
+
+
+def ai_notes(src: Path, model_id: str, entry: dict | None) -> str:
+    parts = [f"Cloudflare Workers AI {model_id}", f"원본 {src.name}", "API 출력 그대로"]
+    if entry:
+        parts.append(f"seed {entry['seed'] if entry.get('seed') is not None else '없음'}")
+        parts.append(f"prompt: {entry['prompt']}")
+    return "; ".join(parts)
+
+
 def plan_ai(collected_by: str) -> list[dict]:
+    log = load_ai_log()
     jobs = []
     for src in sorted((INCOMING / "ai").glob("ai_land_*.*")):
         m = re.fullmatch(r"ai_land_(\d+)", src.stem)
@@ -101,6 +126,9 @@ def plan_ai(collected_by: str) -> list[dict]:
             continue
         n = int(m.group(1))
         gen, model_id, license_ = AI_GENERATORS[(n - 1) % len(AI_GENERATORS)]
+        entry = log.get(src.stem)
+        if entry and entry["model_id"] != model_id:
+            sys.exit(f"ai/{src.name}: log.jsonl의 모델({entry['model_id']})이 순환 규칙({model_id})과 다릅니다")
         sid = f"ai_{n:04d}"
         jobs.append({
             "kind": "ai", "src": src,
@@ -108,7 +136,7 @@ def plan_ai(collected_by: str) -> list[dict]:
                 "image_id": f"{sid}_original", "source_id": sid, "label": "ai", "version": "original",
                 "file_path": f"images/ai/{sid}_original{src.suffix.lower()}", "generator": gen,
                 "source_url": "", "license": license_, "collected_by": collected_by,
-                "notes": f"Cloudflare Workers AI {model_id}; 원본 {src.name}; API 출력 그대로",
+                "notes": ai_notes(src, model_id, entry),
             },
         })
     print(f"AI 이미지: {len(jobs)}장")
