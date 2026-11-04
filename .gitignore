@@ -2,9 +2,11 @@
 inference/weights/*
 !inference/weights/.gitkeep
 
-# 검증 이미지 (manifest.csv만 올림)
+# 검증 이미지 (manifest.csv, README.md, 도구 스크립트만 올림)
 ml/data/*
 !ml/data/manifest.csv
+!ml/data/README.md
+!ml/data/*.py
 
 # Python
 __pycache__/
