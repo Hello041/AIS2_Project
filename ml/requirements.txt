@@ -1,5 +1,5 @@
 -r ../inference/requirements.txt
 
-pandas                  # manifest.csv, scores.csv
-scikit-learn            # Platt 보정, 로지스틱 회귀, GroupKFold
-psutil                  # measure.py 메모리 측정
+pandas==2.0.3           # manifest.csv, scores.csv
+scikit-learn==1.3.2     # Platt 보정, 로지스틱 회귀, GroupKFold
+psutil==5.9.8           # measure.py 메모리 측정
