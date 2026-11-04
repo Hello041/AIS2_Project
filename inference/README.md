@@ -47,8 +47,10 @@ python inference/scripts/download_weights.py --list       # 받지 않고 URL·�
 
 ## 주의사항
 
-- **UnivFD는 OpenAI `clip` 구현을 쓴다.** 공식 코드는 저장소 안 `models/clip/`(OpenAI CLIP 복사본)으로 `ViT-L/14`를 올린다. 전처리: Resize 224(bicubic) → CenterCrop 224 → CLIP 정규화(mean `0.48145466, 0.4578275, 0.40821073`, std `0.26862954, 0.26130258, 0.27577711`). **open_clip으로 바꾸면 가중치와 전처리가 같은지 검증한다.** 이미지 인코더만 올린다.
-- **AIDE 백본 출처가 공식 문서에 없다.** 모델 생성자가 `resnet_path`(ResNet-50)와 `convnext_path`(open_clip `convnext_xxlarge`, `open_clip_pytorch_model.bin`)를 요구하는데 받을 곳이 적혀 있지 않다. 3.35GB 체크포인트에 ConvNeXt-XXL 가중치가 포함된 것으로 보여 따로 받지 않아도 될 수 있다 — 측정(A3) 때 체크포인트를 열어 확인한다. 필요하면 후보는 [laion/CLIP-convnext_xxlarge-laion2B-s34B-b82K-augreg](https://huggingface.co/laion/CLIP-convnext_xxlarge-laion2B-s34B-b82K-augreg) (약 4.8GB).
+- **UnivFD는 OpenAI `clip` 구현을 쓴다.** 공식 코드는 저장소 안 `models/clip/`(OpenAI CLIP 복사본)으로 `ViT-L/14`를 올린다. CLIP 정규화값은 mean `0.48145466, 0.4578275, 0.40821073`, std `0.26862954, 0.26130258, 0.27577711`. **open_clip으로 바꾸면 가중치와 전처리가 같은지 검증한다.** 이미지 인코더만 올린다(`ml/measure.py`의 `load_univfd`는 `visual.*` 가중치만 골라 인코더만 만든다).
+- **UnivFD 전처리 주의:** CLIP 기본 전처리는 Resize 224(bicubic) → CenterCrop 224지만, UnivFD 공식 평가 코드(`validate.py`)는 **Resize 없이 CenterCrop 224만** 한다. 큰 사진에서는 가운데 일부만 보게 된다. 어느 쪽을 쓸지는 `univfd.py` 구현 때 정한다.
+- **AIDE 백본은 따로 받지 않는다.** 모델 생성자가 `resnet_path`·`convnext_path`를 받지만, `sd14_train.pth`에 ConvNeXt-XXL·ResNet 가중치가 모두 들어 있다(8.98억 파라미터). 둘 다 `None`으로 만든 뒤 체크포인트의 `model`을 올리면 키가 모두 일치한다(2026-11-04 확인).
+- AIDE 공식 코드의 `data/__init__.py`는 설치하지 않은 `kornia`를 끌어온다. 전처리는 `data/dct.py`만 직접 읽어 쓴다.
 - AIDE 출력은 2-클래스 logit이다. Detector에서 AI 쪽 softmax 값을 원점수로 쓴다(0~1, 확률 아님).
 - AIDE 저장소의 `requirements.txt`는 `torch==1.11.0`이지만 설치 문서는 torch 2.0.1이다. 이 프로젝트는 설치 문서(2.0.1)를 따른다.
 - `numpy`는 1.24.3에 고정한다. torch 2.0.1은 numpy 2.x와 호환되지 않는다.
