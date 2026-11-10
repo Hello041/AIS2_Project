@@ -12,6 +12,35 @@ pip install -r inference/requirements-dev.txt        # 테스트(pytest)까지
 
 테스트: `cd inference && pytest -q` (모델 가중치 없이 돈다).
 
+## 서버 실행
+
+```bash
+cd inference
+uvicorn main:app --host 0.0.0.0 --port 8000      # 같은 Wi-Fi의 휴대폰에서 접속하려면 반드시 0.0.0.0
+DETECTORS=univfd,aide uvicorn main:app --host 0.0.0.0 --port 8000   # 모델 골라서 (PowerShell: $env:DETECTORS="univfd,aide")
+```
+
+Windows 방화벽에서 8000 포트 열기 (관리자 PowerShell, 한 번만):
+```powershell
+New-NetFirewallRule -DisplayName "AIS2 inference 8000" -Direction Inbound -Protocol TCP -LocalPort 8000 -Action Allow -Profile Private
+```
+- 노트북 IP 확인: `ipconfig` → Wi-Fi 어댑터의 IPv4 주소. 휴대폰 브라우저에서 `http://<IP>:8000/health`가 열리면 연결 성공.
+- 학교 Wi-Fi가 기기 간 통신을 막으면 휴대폰 핫스팟이나 ngrok을 쓴다.
+
+확인용 요청:
+```bash
+curl http://localhost:8000/health
+curl -F "image=@ml/data/images/ai/ai_0001_original.png" http://localhost:8000/analyze
+```
+
+서버 동작 메모:
+- 업로드는 요청 본문을 직접 스트리밍 파싱해 **메모리(BytesIO)에서만** 다룬다. FastAPI `UploadFile`·`File()`은 1MB 넘는 파일을 임시 파일(디스크)로 넘기므로 쓰지 않는다. 테스트(`test_no_temp_files_used`)가 임시 파일 사용을 막은 채 1MB 넘는 이미지를 보내 확인한다.
+- 413: `Content-Length`로 먼저 거르고, 읽는 중에도 10MB(+multipart 여유 64KB)를 넘으면 중단.
+- 400: JPEG/PNG/WebP가 아니거나 디코딩 실패, multipart가 아니거나 `image` 필드 없음, **2,500만 화소 초과**(환경 변수 `MAX_IMAGE_PIXELS`로 조정). AIDE 메모리가 해상도에 비례하기 때문(1,600만 화소에서 세 모델 최대 약 10GB).
+- 500: 추론 중 예외. 스택트레이스는 서버 로그에만 남고 이미지 정보는 없다.
+- 로그: `analyze status=200 bytes=123456 elapsed_ms=17000` 형식. 파일명·EXIF는 남기지 않는다.
+- 추론은 한 번에 하나씩(잠금). 동시에 여러 요청이 오면 순서대로 처리한다.
+
 ## Detector 추가하기
 
 `detectors/<이름>.py`에 `Detector`(detectors/base.py) 하위 클래스를 **하나** 만들고 `name = "<이름>"`, `_load()`, `_score(img)`를 구현한다.
