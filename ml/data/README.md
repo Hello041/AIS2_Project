@@ -34,6 +34,24 @@ ml/data/
 
 남은 차이: 축소 자체가 남기는 흔적(실제 쪽에만 있음), 화면 비율(실제 3:2, AI 9:7·1:1). 비교표 해석 시 한계로 적는다.
 
+## 변형 버전 (B5, 2026-11-10)
+
+원본 200장마다 3개씩 만들어 **총 800행**(실제 400 + AI 400). 같은 `source_id`를 공유하므로 GroupKFold에서 한 원본의 모든 버전이 같은 fold에 들어간다.
+
+| version | 만드는 방법 | 결과 크기 (실제 / AI) |
+|---|---|---|
+| `jpeg70` | JPEG 품질 70, 4:2:0 재압축 | 원본과 같음 |
+| `resize50` | 가로·세로 50% bicubic 축소, PNG | 약 629×417 / 576×448·512×512 |
+| `screenshot` | 긴 변 1080px로 bilinear 축소 후 PNG (휴대폰 FHD 화면 캡처 모사). 이미 1080 이하면 크기 그대로 PNG | 1080×716 / 1080×840·**1024×1024** |
+
+- 설정은 `inference/variants.py` 한 곳에만 있다. Sprint 2 판정 안정성(서버)도 같은 함수를 쓴다.
+- 주의: FLUX(1024×1024) 33장은 긴 변이 이미 1080 이하라 `screenshot`이 **축소 없이 PNG로 다시 저장만** 된다(픽셀은 원본과 같음). 다른 이미지는 약간 축소된다.
+
+```bash
+python ml/data/make_variants.py                  # jpeg70만 (MVP)
+python ml/data/make_variants.py --versions all   # 세 가지 전부
+```
+
 ## build_dataset.py
 
 ```bash
@@ -69,7 +87,8 @@ AI 생성기는 생성 스크립트의 순환 규칙(`ai_land_NNN`의 번호 `(N
 
 - `source_id`: `{label}_{4자리 순번}` — 예: `real_0001`, `ai_0042`
 - `image_id`: `{source_id}_{version}` — 예: `real_0001_original`, `ai_0042_jpeg70`
-- 확장자: `jpeg70` → `.jpg`, `screenshot` → `.png`, `original`·`resize50` → 원본 형식
+- 확장자: `jpeg70` → `.jpg`, `resize50`·`screenshot` → `.png`, `original` → 원본 형식
+  (resize50은 축소 효과만 보려고 무손실 PNG로 저장한다 — 압축 효과는 jpeg70이 따로 본다. 2026-11-10 결정)
 - 변형 버전 행은 원본 행의 `label`·`generator`·`source_url`·`license`·`collected_by`를 그대로 복사한다.
 
 ### 예시

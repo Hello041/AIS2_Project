@@ -57,7 +57,7 @@ python inference/scripts/download_weights.py --list       # 받지 않고 URL·�
 ## 주의사항
 
 - **UnivFD는 OpenAI `clip` 구현을 쓴다.** 공식 코드는 저장소 안 `models/clip/`(OpenAI CLIP 복사본)으로 `ViT-L/14`를 올린다. CLIP 정규화값은 mean `0.48145466, 0.4578275, 0.40821073`, std `0.26862954, 0.26130258, 0.27577711`. **open_clip으로 바꾸면 가중치와 전처리가 같은지 검증한다.** 이미지 인코더만 올린다(`ml/measure.py`의 `load_univfd`는 `visual.*` 가중치만 골라 인코더만 만든다).
-- **UnivFD 전처리 주의:** CLIP 기본 전처리는 Resize 224(bicubic) → CenterCrop 224지만, UnivFD 공식 평가 코드(`validate.py`)는 **Resize 없이 CenterCrop 224만** 한다. 큰 사진에서는 가운데 일부만 보게 된다. 어느 쪽을 쓸지는 `univfd.py` 구현 때 정한다.
+- **UnivFD 전처리: 공식 평가 코드(`validate.py`)대로 Resize 없이 CenterCrop 224** (`detectors/univfd.py` 기본값, 환경 변수 `UNIVFD_PREPROCESS=crop`). 2026-11-10 검증 데이터 200장 비교: crop은 AUC 0.66, CLIP 기본 전처리(Resize 224 → Crop, `UNIVFD_PREPROCESS=resize`)는 AUC 0.45 — 축소하면 흔적이 지워져 모든 이미지를 '실제'(점수 약 0)로 판정한다. crop의 약점: 큰 원본 사진은 가운데 224×224만 보므로 점수가 그 부분 내용에 흔들린다(원본 크기 실제 10장 중 2장 오탐).
 - **AIDE 백본은 따로 받지 않는다.** 모델 생성자가 `resnet_path`·`convnext_path`를 받지만, `sd14_train.pth`에 ConvNeXt-XXL·ResNet 가중치가 모두 들어 있다(8.98억 파라미터). 둘 다 `None`으로 만든 뒤 체크포인트의 `model`을 올리면 키가 모두 일치한다(2026-11-04 확인).
 - AIDE 공식 코드의 `data/__init__.py`는 설치하지 않은 `kornia`를 끌어온다. 전처리는 `data/dct.py`만 직접 읽어 쓴다.
 - AIDE 출력은 2-클래스 logit이다. Detector에서 AI 쪽 softmax 값을 원점수로 쓴다(0~1, 확률 아님).

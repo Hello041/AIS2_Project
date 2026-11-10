@@ -97,6 +97,11 @@ def load_npr():
     tf = transforms.Compose([transforms.ToTensor(), transforms.Normalize(IMAGENET_MEAN, IMAGENET_STD)])
 
     def score(img: Image.Image) -> float:
+        # NPR은 1/2 축소→확대 결과를 원본에서 빼므로 가로·세로가 홀수면 크기가 1px 어긋나 실패한다.
+        # 짝수가 되도록 오른쪽·아래 1px을 잘라낸다.
+        w, h = img.size
+        if w % 2 or h % 2:
+            img = img.crop((0, 0, w - w % 2, h - h % 2))
         return torch.sigmoid(model(tf(img).unsqueeze(0))).item()
 
     return [model], score
