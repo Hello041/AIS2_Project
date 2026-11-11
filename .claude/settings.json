@@ -3,7 +3,10 @@
     "allow": [
       "Bash(git status *)",
       "mcp__claude_ai_Claude_Docs__batch",
-      "mcp__claude_ai_Claude_Docs__update"
+      "mcp__claude_ai_Claude_Docs__update",
+      "Bash(PYTHONIOENCODING=utf-8 .venv/Scripts/python \"C:/Users/choij/AppData/Local/Temp/claude/08379172351e6a3a/b5c84b65-08bf-40dd-876b-28407006fe9f/scratchpad/quick_score.py\")",
+      "WebSearch",
+      "WebFetch(domain:arxiv.org)"
     ]
   }
 }

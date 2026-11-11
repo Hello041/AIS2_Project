@@ -11,6 +11,9 @@ ml/data/*
 !ml/data/README.md
 !ml/data/*.py
 
+# 채점 결과 (score_samples.py가 생성)
+ml/scores.csv
+
 # Python
 __pycache__/
 *.py[cod]
