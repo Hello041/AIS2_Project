@@ -1,7 +1,7 @@
 """모델 공식 코드와 가중치를 내려받는다.
 
-    python inference/scripts/download_weights.py              # 전부
-    python inference/scripts/download_weights.py --only bfree # 일부 (univfd,npr,aide,bfree)
+    python inference/scripts/download_weights.py              # 사용 중인 모델 전부 (univfd, aide, bfree)
+    python inference/scripts/download_weights.py --only bfree # 일부 (univfd,aide,bfree / npr은 비교 재현용)
     python inference/scripts/download_weights.py --list       # 받지 않고 URL·저장 경로만 출력
 
 - 공식 코드: inference/third_party/{univfd,npr,aide,bfree}/ (커밋 고정, git 제외)
@@ -170,12 +170,13 @@ def fetch_code(name: str) -> None:
 
 def main() -> None:
     p = argparse.ArgumentParser()
-    p.add_argument("--only", help="쉼표로 구분한 모델 이름 (univfd,npr,aide,bfree)")
+    p.add_argument("--only", help="쉼표로 구분한 모델 이름 (univfd,aide,bfree / npr)")
     p.add_argument("--list", action="store_true", help="URL과 저장 경로만 출력")
     p.add_argument("--skip-code", action="store_true", help="공식 코드는 받지 않음")
     args = p.parse_args()
 
-    names = args.only.split(",") if args.only else list(CODE)
+    # NPR은 2026-11-10 B-Free로 교체되어 기본에서 뺀다. 비교 재현이 필요하면 --only npr
+    names = args.only.split(",") if args.only else [n for n in CODE if n != "npr"]
     unknown = set(names) - set(CODE)
     if unknown:
         sys.exit(f"모르는 모델: {', '.join(sorted(unknown))}")

@@ -23,7 +23,8 @@ D는 MVP 이후 시작한다. 시작 전에 미결 사항(CLAUDE.md 하단)을 �
 [판정 안정성] inference/variants.py(B5)로 변형 3개를 메모리에서 만들고 같은 overall을 실행해 robustness 필드 추가.
 처리 시간이 60초를 넘으면 변형 버전에는 가장 가벼운 모델만 쓰고 응답에 그 모델명을 표시. 앱은 버전별 구간 막대(숫자 없음).
 
-[히트맵] UnivFD Attention Rollout과 NPR Grad-CAM을 샘플 10장으로 비교하는 스크립트를 먼저 만들고,
+[히트맵] (NPR이 B-Free로 교체됨 — 계획서 §12.4 '교체 후 재검토'에 따라 비교 대상을 먼저 다시 정할 것)
+UnivFD Attention Rollout과 NPR Grad-CAM을 샘플 10장으로 비교하는 스크립트를 먼저 만들고,
 내가 하나를 고르면 서버에 구현(짧은 변 512px 이하 PNG, base64, 디스크 저장 없음, 모델명 포함).
 ```
 

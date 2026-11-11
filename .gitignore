@@ -2,7 +2,7 @@
 inference/weights/*
 !inference/weights/.gitkeep
 
-# 모델 공식 코드 (download_weights.py가 받음. NPR은 라이선스가 없어 커밋하지 않음)
+# 모델 공식 코드 (download_weights.py가 받음. B-Free는 비영리 라이선스, NPR은 라이선스 없음 → 커밋하지 않음)
 inference/third_party/
 
 # 검증 이미지 (manifest.csv, README.md, 도구 스크립트만 올림)

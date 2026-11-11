@@ -67,10 +67,10 @@ def test_score_requires_load(img):
 
 
 def test_dummy_returns_fixed_score(img):
-    det = DummyDetector("npr", 0.7)
+    det = DummyDetector("bfree", 0.7)
     det.load()
     assert det.score(img) == 0.7
-    assert det.name == "npr"
+    assert det.name == "bfree"
 
 
 @pytest.mark.parametrize("bad", [-0.01, 1.01, math.nan, 2])
@@ -145,8 +145,8 @@ def test_active_names_default(monkeypatch):
 
 
 def test_active_names_from_env(monkeypatch):
-    monkeypatch.setenv("DETECTORS", " UnivFD , npr ,")
-    assert active_names() == ["univfd", "npr"]
+    monkeypatch.setenv("DETECTORS", " UnivFD , bfree ,")
+    assert active_names() == ["univfd", "bfree"]
 
 
 def test_active_names_empty_env_means_default(monkeypatch):
@@ -156,7 +156,7 @@ def test_active_names_empty_env_means_default(monkeypatch):
 
 def test_active_names_rejects_duplicates():
     with pytest.raises(ValueError, match="중복"):
-        active_names("npr,npr")
+        active_names("bfree,bfree")
 
 
 def test_create_detectors_from_env(monkeypatch, img):

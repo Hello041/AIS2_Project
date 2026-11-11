@@ -3,7 +3,7 @@
 모듈 이름 = 모델 이름: ``detectors/<name>.py``에 Detector 하위 클래스를 하나 정의하면
 ``create_detectors(["<name>"])``로 만들 수 있다. 모델을 추가할 때 이 파일은 고치지 않는다.
 
-활성 모델은 환경 변수 ``DETECTORS``(예: ``"univfd,npr"``)로 고른다. 없으면 DEFAULT_DETECTORS.
+활성 모델은 환경 변수 ``DETECTORS``(예: ``"univfd,bfree"``)로 고른다. 없으면 DEFAULT_DETECTORS.
 """
 from __future__ import annotations
 

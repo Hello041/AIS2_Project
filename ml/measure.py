@@ -2,7 +2,7 @@
 
     python ml/measure.py                          # 임의의 1024x1024 이미지
     python ml/measure.py ml/data/samples/x.png    # 지정 이미지
-    python ml/measure.py --models univfd,npr      # 일부 모델만
+    python ml/measure.py --models univfd,bfree    # 일부 모델만 (npr은 비교 재현용)
 
 - 모델마다 별도 프로세스에서 측정한다(서로의 메모리가 섞이지 않게). 마지막에 세 모델을 한 프로세스에 함께 올려 총 RSS와 순차 추론 시간을 잰다.
 - 추론 시간은 PIL 이미지 → 원점수까지(전처리 포함). 워밍업 1회 후 5회 평균·최대. torch.inference_mode, 배치 1, CPU.
@@ -27,7 +27,7 @@ from PIL import Image
 ROOT = Path(__file__).resolve().parents[1]
 WEIGHTS = ROOT / "inference" / "weights"
 THIRD_PARTY = ROOT / "inference" / "third_party"
-ALL_MODELS = ["univfd", "npr", "aide"]
+ALL_MODELS = ["univfd", "aide", "bfree"]  # npr은 --models npr로만 (2026-11-10 B-Free로 교체)
 RUNS = 5
 
 IMAGENET_MEAN, IMAGENET_STD = [0.485, 0.456, 0.406], [0.229, 0.224, 0.225]
