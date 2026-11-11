@@ -143,7 +143,32 @@ def load_aide():
     return [model], score
 
 
-LOADERS = {"univfd": load_univfd, "npr": load_npr, "aide": load_aide}
+# ---------------------------------------------------------------- B-Free
+def load_bfree():
+    """B-Free (CVPR 2025, GRIP-UNINA). ViT-B/14 DINOv2 + 레지스터 4개, 504x504 5-crop(가운데+네 모서리) 평균.
+
+    공식 main_bfree_single.py와 같은 전처리: ToTensor + ImageNet 정규화, Resize·Crop 없음
+    (504보다 작은 이미지는 모델 내부에서 반복해 채운다). 출력은 로짓 1개, 양수 = AI.
+    """
+    import yaml
+    from torchvision import transforms
+    wdir = WEIGHTS / "bfree" / "BFREE_dino2reg4"
+    cfg = yaml.safe_load((wdir / "config.yaml").read_text())
+    networks = _import_from("bfree/code", "networks")
+    model = networks.get_network(cfg["arch"])  # pretrained=False: 인터넷에서 받지 않음
+    model = networks.load_weights(model, str(wdir / cfg["weights_file"])).eval()
+    assert cfg["norm_type"] == "resnet"
+    tf = transforms.Compose([transforms.ToTensor(), transforms.Normalize(IMAGENET_MEAN, IMAGENET_STD)])
+
+    def score(img: Image.Image) -> float:
+        logit = model(tf(img).unsqueeze(0))[:, 0]
+        return torch.sigmoid(logit).item()
+
+    score.logit = lambda img: model(tf(img).unsqueeze(0))[:, 0].item()  # 공식 결과와 비교용
+    return [model], score
+
+
+LOADERS = {"univfd": load_univfd, "npr": load_npr, "aide": load_aide, "bfree": load_bfree}
 
 
 # ---------------------------------------------------------------- 측정
