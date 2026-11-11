@@ -13,7 +13,10 @@ from banding import STRONG, UNCERTAIN, WEAK, ThresholdError, band, load_threshol
 from detectors import ScoreRangeError
 from detectors.dummy import DummyDetector
 
-T = {"univfd": (0.3, 0.7), "aide": (0.3, 0.7), "npr": (0.3, 0.7)}
+# 활성 모델 (2026-11-11 팀 결정: NPR 제거, UnivFD·AIDE·B-Free). 서버 기본 모델과 같아야 한다.
+ACTIVE = ("univfd", "aide", "bfree")
+# 테스트 전용 경계값. 실제 thresholds.yaml 값(B6에서 바뀔 수 있음)과 분리해 기대값이 흔들리지 않게 한다.
+T = {name: (0.3, 0.7) for name in ACTIVE}
 
 
 @pytest.fixture
@@ -23,13 +26,19 @@ def no_ensemble(tmp_path):
 
 
 def rule(bands, no_ensemble):
-    return overall(dict(zip(["univfd", "aide", "npr"], bands)), ensemble_path=no_ensemble)
+    return overall(dict(zip(ACTIVE, bands)), ensemble_path=no_ensemble)
 
 
 # ---------------------------------------------------------------- thresholds.yaml
-def test_repo_thresholds_match_plan():
-    """§5.2 임시값. B6에서 조정하면 이 테스트도 함께 고친다."""
-    assert load_thresholds() == T
+def test_repo_thresholds_cover_exactly_active_models():
+    """실제 파일에는 활성 모델 3개만 있어야 한다(NPR 없음). 값은 검사하지 않는다(B6에서 바뀜)."""
+    assert set(load_thresholds()) == set(ACTIVE)
+    assert "npr" not in load_thresholds()
+
+
+def test_repo_thresholds_are_valid_ranges():
+    for name, (low, high) in load_thresholds().items():
+        assert 0.0 <= low <= high <= 1.0, name
 
 
 def write(tmp_path, text):
@@ -39,8 +48,8 @@ def write(tmp_path, text):
 
 
 def test_load_thresholds_custom(tmp_path):
-    p = write(tmp_path, "univfd: { low: 0.2, high: 0.9 }\nnpr: { low: 0.5, high: 0.5 }\n")
-    assert load_thresholds(p) == {"univfd": (0.2, 0.9), "npr": (0.5, 0.5)}
+    p = write(tmp_path, "univfd: { low: 0.2, high: 0.9 }\nbfree: { low: 0.5, high: 0.5 }\n")
+    assert load_thresholds(p) == {"univfd": (0.2, 0.9), "bfree": (0.5, 0.5)}
 
 
 @pytest.mark.parametrize("text", [
@@ -75,10 +84,10 @@ def test_band_boundaries(score, expected):
 
 
 def test_band_uses_per_model_thresholds():
-    t = {"univfd": (0.3, 0.7), "npr": (0.6, 0.95)}
+    t = {"univfd": (0.3, 0.7), "bfree": (0.6, 0.95)}
     assert band("univfd", 0.8, t) == STRONG
-    assert band("npr", 0.8, t) == UNCERTAIN
-    assert band("npr", 0.5, t) == WEAK
+    assert band("bfree", 0.8, t) == UNCERTAIN
+    assert band("bfree", 0.5, t) == WEAK
 
 
 def test_band_low_equals_high():
@@ -86,8 +95,18 @@ def test_band_low_equals_high():
     assert [band("m", s, t) for s in (0.49, 0.5, 0.51)] == [WEAK, UNCERTAIN, STRONG]
 
 
-def test_band_defaults_to_repo_file():
-    assert band("aide", 0.81) == STRONG
+@pytest.mark.parametrize("name", ACTIVE)
+def test_band_defaults_to_repo_file(name):
+    """thresholds 인자를 생략하면 실제 파일 값을 쓴다. 값이 바뀌어도 깨지지 않게 파일에서 읽은 값과 비교."""
+    repo = load_thresholds()
+    low, high = repo[name]
+    for s in sorted({0.0, low / 2, low, (low + high) / 2, high, (high + 1) / 2, 1.0}):
+        assert band(name, s) == band(name, s, repo)
+
+
+def test_band_removed_npr_is_not_active():
+    with pytest.raises(ThresholdError):
+        band("npr", 0.5)
 
 
 def test_band_unknown_model_raises():
@@ -145,16 +164,17 @@ def test_three_never_strong_with_weak(no_ensemble):
 # ---------------------------------------------------------------- overall: 모델 2개·1개·0개
 @pytest.mark.parametrize("b", [WEAK, UNCERTAIN, STRONG])
 def test_two_same(b, no_ensemble):
-    assert overall({"univfd": b, "npr": b}, ensemble_path=no_ensemble) == (b, "rule")
+    assert overall({"univfd": b, "bfree": b}, ensemble_path=no_ensemble) == (b, "rule")
 
 
 @pytest.mark.parametrize("a, b", [(WEAK, STRONG), (WEAK, UNCERTAIN), (STRONG, UNCERTAIN)])
 def test_two_different(a, b, no_ensemble):
-    assert overall({"univfd": a, "npr": b}, ensemble_path=no_ensemble) == (UNCERTAIN, "rule")
-    assert overall({"univfd": b, "npr": a}, ensemble_path=no_ensemble) == (UNCERTAIN, "rule")
+    # 모델 2개에서 서로 다르면 1:1 동률 → 과반수 없음 → uncertain
+    assert overall({"univfd": a, "bfree": b}, ensemble_path=no_ensemble) == (UNCERTAIN, "rule")
+    assert overall({"univfd": b, "bfree": a}, ensemble_path=no_ensemble) == (UNCERTAIN, "rule")
 
 
-@pytest.mark.parametrize("bands", [{}, {"univfd": STRONG}, {"npr": WEAK}])
+@pytest.mark.parametrize("bands", [{}, {"univfd": STRONG}, {"bfree": WEAK}])
 def test_zero_or_one_model_is_uncertain(bands, no_ensemble):
     assert overall(bands, ensemble_path=no_ensemble) == (UNCERTAIN, "rule")
 
@@ -242,34 +262,50 @@ def test_general_rule_properties(n, no_ensemble):
 @pytest.mark.parametrize("bad", ["Strong", "high", "", None, 0.9])
 def test_unknown_band_raises(bad, no_ensemble):
     with pytest.raises(ValueError, match="알 수 없는 구간"):
-        overall({"univfd": STRONG, "npr": bad}, ensemble_path=no_ensemble)
+        overall({"univfd": STRONG, "bfree": bad}, ensemble_path=no_ensemble)
 
 
 def test_ensemble_file_present_is_not_silently_ignored(tmp_path):
     p = tmp_path / "ensemble.yaml"
     p.write_text("bands: {low: 0.3, high: 0.7}\n", encoding="utf-8")
     with pytest.raises(NotImplementedError):
-        overall({"univfd": WEAK, "aide": WEAK, "npr": WEAK}, ensemble_path=p)
+        overall({"univfd": WEAK, "aide": WEAK, "bfree": WEAK}, ensemble_path=p)
 
 
 def test_default_ensemble_path_is_next_to_banding():
     assert banding.ENSEMBLE_PATH.parent == banding.THRESHOLDS_PATH.parent
 
 
+# ---------------------------------------------------------------- overall: 활성 모델 3개의 주요 조합
+@pytest.mark.parametrize("bands, expected", [
+    ([STRONG, STRONG, STRONG], STRONG),          # 전원 AI 쪽
+    ([WEAK, WEAK, WEAK], WEAK),                  # 전원 실제 쪽
+    ([UNCERTAIN, UNCERTAIN, UNCERTAIN], UNCERTAIN),
+    ([STRONG, STRONG, UNCERTAIN], STRONG),       # 일부 모델 uncertain, 과반수 strong
+    ([WEAK, UNCERTAIN, WEAK], WEAK),             # 일부 모델 uncertain, 과반수 weak
+    ([UNCERTAIN, STRONG, UNCERTAIN], UNCERTAIN), # 과반수가 uncertain
+    ([STRONG, STRONG, WEAK], UNCERTAIN),         # strong·weak 공존 → 과반수여도 uncertain (FPR 우선)
+    ([WEAK, STRONG, UNCERTAIN], UNCERTAIN),      # 셋 다 다름
+])
+def test_active_models_main_cases(bands, expected, no_ensemble):
+    assert overall(dict(zip(ACTIVE, bands)), ensemble_path=no_ensemble) == (expected, "rule")
+
+
 # ---------------------------------------------------------------- 모의 Detector → band → overall
 @pytest.mark.parametrize("scores, bands, expected", [
-    ({"univfd": 0.1, "aide": 0.2, "npr": 0.05}, [WEAK, WEAK, WEAK], WEAK),
-    ({"univfd": 0.52, "aide": 0.81, "npr": 0.12}, [UNCERTAIN, STRONG, WEAK], UNCERTAIN),  # §5.4 예시
-    ({"univfd": 0.9, "aide": 0.95, "npr": 0.5}, [STRONG, STRONG, UNCERTAIN], STRONG),
-    ({"univfd": 0.3, "aide": 0.7, "npr": 0.71}, [UNCERTAIN, UNCERTAIN, STRONG], UNCERTAIN),
-    ({"univfd": 0.99, "aide": 0.99, "npr": 0.01}, [STRONG, STRONG, WEAK], UNCERTAIN),
+    ({"univfd": 0.1, "aide": 0.2, "bfree": 0.05}, [WEAK, WEAK, WEAK], WEAK),
+    ({"univfd": 0.52, "aide": 0.81, "bfree": 0.12}, [UNCERTAIN, STRONG, WEAK], UNCERTAIN),  # §5.4 예시
+    ({"univfd": 0.9, "aide": 0.95, "bfree": 0.5}, [STRONG, STRONG, UNCERTAIN], STRONG),
+    ({"univfd": 0.3, "aide": 0.7, "bfree": 0.71}, [UNCERTAIN, UNCERTAIN, STRONG], UNCERTAIN),
+    ({"univfd": 0.99, "aide": 0.99, "bfree": 0.01}, [STRONG, STRONG, WEAK], UNCERTAIN),
 ])
 def test_mock_detectors_end_to_end(scores, bands, expected, no_ensemble):
+    """Detector.score → band → overall. 경계값은 테스트용 T(0.3/0.7)를 넘겨 실제 파일 값과 분리한다."""
     img = Image.new("RGB", (32, 32))
     detectors = [DummyDetector(name, s) for name, s in scores.items()]
     for d in detectors:
         d.load()
     raw = {d.name: d.score(img) for d in detectors}
-    got = {name: band(name, s) for name, s in raw.items()}
+    got = {name: band(name, s, T) for name, s in raw.items()}
     assert list(got.values()) == bands
     assert overall(got, raw, ensemble_path=no_ensemble) == (expected, "rule")
