@@ -1,0 +1,15 @@
+# 모델별 원점수 경계값 (계획서 §5.2).
+# 활성 모델: univfd, aide, bfree — 서버 기본 모델(detectors.DEFAULT_DETECTORS)과 같아야 한다.
+# 활성 모델의 경계값이 없으면 /analyze가 판정하지 못한다(banding.ThresholdError → 500).
+#
+# ※ 세 모델 모두 임시값이다(미확정). 검증 이미지 점수 분포(ml/score_samples.py → ml/scores.csv)를 보고
+#   모델별로 확정한다(B6). 확정하면 해당 줄 주석에 근거(날짜, 데이터 장수, 기준)를 남긴다.
+# ※ bfree: 2026-11-11 기준 점수 원자료(scores.csv)가 저장소에 없어 §5.2 임시값을 그대로 둔다. 확정값 아님.
+# ※ NPR은 2026-11-10 B-Free로 교체되어 활성 설정에서 뺐다(과거 기록: 계획서 §7 '11/10 점검 결과').
+#
+#   score < low          → weak       (AI 흔적 약함)
+#   low ≤ score ≤ high   → uncertain  (판단하기 어려움)
+#   score > high         → strong     (AI 흔적 강함)
+univfd: { low: 0.3, high: 0.7 }   # 임시 (§5.2)
+aide:   { low: 0.3, high: 0.7 }   # 임시 (§5.2)
+bfree:  { low: 0.3, high: 0.7 }   # 임시 (§5.2), B-Free 점수 분포로 미검증

@@ -43,7 +43,8 @@ docs/
 - UnivFD는 CLIP **이미지 인코더만** 올린다. 공식 코드는 OpenAI `clip` 패키지를 쓰므로, open_clip으로 바꾸면 가중치·전처리가 같은지 검증한다.
 - 경계값: `score < low` → `weak`, `low ≤ score ≤ high` → `uncertain`, `score > high` → `strong`.
 - 종합 판정은 `banding.overall()` 하나에만 둔다. `ensemble.yaml`이 있으면 스태킹, 없으면 규칙(단계 0).
-- 단계 0 규칙: ① strong과 weak가 함께 있으면 uncertain ② 아니면 2개 이상 나온 구간 ③ (셋 다 다르면 uncertain — ①에 포함되므로 별도 분기 불필요). 모델 2개일 때는 같으면 그 구간, 다르면 uncertain.
+- 단계 0 규칙 (모델 수와 무관, 2026-11-04 팀 결정, 계획서 §5.3): ① strong과 weak가 함께 있으면 uncertain ② 아니면 전체 모델의 과반수(50% 초과)를 차지하는 구간 ③ 과반수 구간이 없으면(동률 포함) uncertain. 모델 0~1개는 uncertain.
+  - 모델 2·3개의 결과는 기존 규칙과 같다: 3개는 "2개 이상 나온 구간"(셋 다 다르면 ①에 걸림), 2개는 "같으면 그 구간, 다르면 uncertain". 4개 이상에도 같은 규칙을 그대로 적용한다.
 - 판단이 애매하면 항상 `uncertain` 쪽으로 기운다 (FPR 우선).
 - 스태킹 학습 시 Platt·LR·τ·t_high는 **각 fold의 학습 부분에서만** 맞춘다. 교차검증은 `GroupKFold`(원본 ID 기준, 5-fold).
 
