@@ -14,7 +14,7 @@
 
 11/18에 **간단한 데모 프로토타입**을 시연한다. 시연 흐름은 다음과 같다.
 
-> 휴대폰 앱에서 이미지 한 장 선택 → 노트북의 추론 서버가 모델 3종(UnivFD, AIDE, NPR)으로 분석 → 결과 화면에 **종합 판정 배지**와 **모델별 3구간 막대**, 참고용 안내 문구 표시
+> 휴대폰 앱에서 이미지 한 장 선택 → 노트북의 추론 서버가 모델 3종(UnivFD, AIDE, B-Free)으로 분석 → 결과 화면에 **종합 판정 배지**와 **모델별 3구간 막대**, 참고용 안내 문구 표시
 
 기획서 기준으로 Sprint 1 프로토타입("앱에서 이미지를 선택하면 추론 서버가 AI 탐지 점수를 돌려주고, 세 구간으로 표시")에 해당한다. 여기에 더해 **앙상블(점수 보정 + 스태킹)을 단계적 목표로 포함**한다. 진행 상황에 따라 어느 단계까지 넣을지 정한다(§5.3).
 
@@ -71,7 +71,7 @@ AIS2_Project/            # https://github.com/Hello041/AIS2_Project
 │  │  ├─ base.py         # Detector 인터페이스
 │  │  ├─ univfd.py
 │  │  ├─ aide.py
-│  │  └─ npr.py
+│  │  └─ bfree.py       # NPR 대체 (2026-11-10, §7)
 │  ├─ banding.py         # 원점수→구간, 종합 판정(규칙/스태킹)
 │  ├─ provenance.py      # (여유 시) C2PA·EXIF
 │  ├─ thresholds.yaml    # 모델별 경계값
@@ -99,7 +99,7 @@ AIS2_Project/            # https://github.com/Hello041/AIS2_Project
 
 ```python
 class Detector:
-    name: str                              # "univfd" | "aide" | "npr"
+    name: str                              # "univfd" | "aide" | "bfree"
     def load(self) -> None: ...            # 서버 시작 시 1회 호출
     def score(self, img: PIL.Image) -> float:
         """0~1 원점수. 클수록 AI 생성 쪽. 확률이 아님."""
@@ -116,7 +116,7 @@ class Detector:
 # 임시값. 검증 이미지 점수 분포를 보고 모델별로 조정한다.
 univfd: { low: 0.3, high: 0.7 }
 aide:   { low: 0.3, high: 0.7 }
-npr:    { low: 0.3, high: 0.7 }
+bfree:  { low: 0.3, high: 0.7 }
 ```
 
 - `score < low` → `weak`(AI 흔적 약함)
@@ -147,7 +147,7 @@ npr:    { low: 0.3, high: 0.7 }
 
 ```yaml
 # ensemble.yaml — ml/fit_ensemble.py가 생성. 손으로 고치지 않는다.
-calibration: { univfd: [a, b], aide: [a, b], npr: [a, b] }
+calibration: { univfd: [a, b], aide: [a, b], bfree: [a, b] }
 stacking:    { weights: [w1, w2, w3], bias: c }
 disagreement_tau: 0.5
 bands:       { low: t_low, high: t_high }
@@ -167,7 +167,7 @@ trained_on:  "mvp-200 (2026-11-xx)"
 **`GET /health`** — 앱이 홈 화면에 들어올 때 호출해 연결을 확인한다.
 
 ```json
-{ "status": "ok", "models": ["univfd", "aide", "npr"] }
+{ "status": "ok", "models": ["univfd", "aide", "bfree"] }
 ```
 
 **`POST /analyze`** — `multipart/form-data`, 필드 이름은 `image`
@@ -181,7 +181,7 @@ trained_on:  "mvp-200 (2026-11-xx)"
   "models": [
     { "name": "univfd", "raw_score": 0.52, "band": "uncertain" },
     { "name": "aide",   "raw_score": 0.81, "band": "strong" },
-    { "name": "npr",    "raw_score": 0.12, "band": "weak" }
+    { "name": "bfree",  "raw_score": 0.12, "band": "weak" }
   ],
   "provenance": null,
   "elapsed_ms": 8421,
@@ -220,7 +220,7 @@ trained_on:  "mvp-200 (2026-11-xx)"
      ```
      UnivFD  [ 약함 ][■어려움■][ 강함 ]
      AIDE    [ 약함 ][ 어려움 ][■강함■]
-     NPR     [■약함■][ 어려움 ][ 강함 ]
+     B-Free  [■약함■][ 어려움 ][ 강함 ]
      ※ 모델별 추정 구간이며 확률이 아닙니다.
      ```
    - 시안의 '원시 점수', '판단 근거(히트맵)', '판정 안정성', '내 기록 저장' 영역은 이번 데모에서 뺀다.
@@ -239,7 +239,7 @@ trained_on:  "mvp-200 (2026-11-xx)"
 |---|---|
 | UnivFD (CLIP ViT-L/14 이미지 인코더) | 약 1.2GB |
 | AIDE (OpenCLIP ConvNeXt-XXL + ResNet 전문가) | 약 3.5~4GB |
-| NPR (경량 CNN) | 100MB 미만 |
+| B-Free (DINOv2 ViT-B/14) — NPR 대체 | 약 0.4GB (실측 0.36GB) |
 | PyTorch 런타임 + 추론 중 메모리 | 약 1GB |
 | **합계** | **약 6GB** |
 
@@ -257,8 +257,10 @@ trained_on:  "mvp-200 (2026-11-xx)"
 | NPR | 0.4s | 0.02GB | 0.45GB / 4.01GB | 1.02s · 1.15s | 15.28s · 17.47s |
 | AIDE (sd14_train) | 26.4s | 3.44GB | 6.95GB / 9.38GB | 3.49s · 3.71s | 14.76s · 17.14s |
 | 세 모델 함께 | — | 총 RSS 4.66GB | 7.95GB / 10.07GB | 순차 6.03s | 순차 37.36s |
+| B-Free (2026-11-10 추가 측정) | 1.8s | 0.36GB | 1.47GB / 1.70GB | 11.29s · 11.37s | 12.36s · 12.72s |
 
 - 1024²는 임의 잡음 이미지, 4948×3280은 RAISE 실제 사진(PNG).
+- B-Free는 항상 504×504 다섯 곳을 보므로 해상도와 무관하게 약 12초. UnivFD + AIDE + B-Free 순차 추론 예상: 약 100만 화소 약 17초, 1,600만 화소 약 29초.
 - AIDE 체크포인트(3.6GB, 8.98억 파라미터, fp32)에 ConvNeXt-XXL·ResNet 가중치가 모두 들어 있어 백본은 따로 받지 않는다(`resnet_path`·`convnext_path`=None으로 만든 뒤 체크포인트를 올리면 키가 모두 일치).
 - AIDE의 최대 RSS 6.95GB는 대부분 로드 순간(무작위 초기화 모델 + 체크포인트가 동시에 메모리에 있음)이다. 상주 메모리는 3.44GB.
 - 원본 크기를 그대로 쓰는 NPR과 AIDE(DCT 패치 추출)는 해상도에 따라 시간·메모리가 커진다.
@@ -270,6 +272,32 @@ trained_on:  "mvp-200 (2026-11-xx)"
 - **앙상블 진행 여부도 함께 정한다.** 이때까지 모델 3개가 동작하고 데이터 100장(원본 기준)을 70% 이상 모았으면 단계 1로 진행한다. 그렇지 않으면 단계 0만으로 데모를 준비하고, 앙상블은 Sprint 2로 넘긴다.
 - 대체 모델을 쓰기로 했다면 데이터셋 채점(`score_samples.py`)을 다시 돌려야 한다. 모델 구성이 바뀌면 보정 계수와 융합 가중치도 다시 학습해야 하기 때문이다.
 
+**11/10 점검 결과**
+
+| 기준 | 결과 |
+|---|---|
+| 메모리 (16GB) | 상주 약 5.0GB(UnivFD 1.18 + AIDE 3.44 + B-Free 0.36), 최대 약 10GB(AIDE 로드 순간·큰 사진) → 통과 |
+| 1장 60초 이내 | 약 100만 화소 약 17초, 1,600만 화소 약 29초 → 통과 |
+| 모델 3개 동작 | UnivFD·AIDE·B-Free detector 구현, 레지스트리 기본값 `univfd, aide, bfree` |
+| 데이터 70% 이상 | 원본 200장(실제 100 + AI 100), 변형 포함 800장 → 충족 |
+
+**결정 (2026-11-11): NPR을 B-Free로 교체한다.** UnivFD·AIDE는 유지. 다른 모델이 필요해지면 `detectors/` 모듈만 바꾼다(경계값·앙상블은 다시 맞춘다).
+
+- 근거: 검증 데이터 원본 200장 확인용 채점(경계 임시 0.5)
+
+  | 모델 | FPR | AI 탐지율 | sdxl | sdxl-lightning | flux1-schnell | AUC |
+  |---|---|---|---|---|---|---|
+  | UnivFD | 2% | 17% | 15% | 33% | 3% | 0.66 |
+  | NPR | 42% | 29% | 85% | 0% | 0% | 0.43 |
+  | AIDE | 17% | 53% | 85% | 64% | 9% | 0.84 |
+  | **B-Free** | **1%** | **97%** | 100% | 100% | **91%** | **0.999** |
+
+- NPR은 AI 흔적이 아니라 압축 여부에 반응했다. 실제 사진 오탐률이 PNG 91% · JPEG q100 33% · JPEG q75 0%이고, JPEG로 출력되는 AI 이미지는 하나도 잡지 못했다. 원본 크기(약 1,600만 화소) 실제 사진 10장 중 9장을 AI로 판정했다.
+- B-Free는 형식별 오탐률이 0~3%로 형식에 흔들리지 않고, 다른 모델이 거의 못 잡는 FLUX도 91% 잡는다. 앞 절반(1~50번)과 뒤 절반(51~100번)의 결과도 비슷했다(AUC 모두 1.000).
+- B-Free: Guillaro et al., CVPR 2025, [grip-unina/B-Free](https://github.com/grip-unina/B-Free). **라이선스는 정보·비영리 목적만**(수업 데모 가능, 상업 서비스 불가), 결과를 공개할 때 원저자 인용 필수. 의존성으로 timm 1.0.12 필요(AIDE 점수는 0.9.6과 동일 확인).
+- 한계: 실제 사진 출처가 RAISE 하나, 주제가 풍경 하나다. 휴대폰 사진과 변형 버전(jpeg70·resize50·screenshot)으로 다시 확인해야 한다(B6).
+- 앙상블 단계 1 진행 여부: 미정 (조건은 충족). B-Free 단독도 비교 대상에 넣는다(§12.4 기준: 스태킹이 단일 최고 모델보다 FPR이 낮지 않으면 단일 최고 모델).
+
 ## 8. 주차별 일정
 
 ### 1주차 (10/28 ~ 11/3) — 각자 단독으로 동작하게 만들기
@@ -277,9 +305,9 @@ trained_on:  "mvp-200 (2026-11-xx)"
 | 담당 | 작업 | 완료 기준 |
 |---|---|---|
 | 공통 | 모노레포 구성, `.gitignore`, 브랜치·PR 규칙, `ml/data/manifest.csv` 형식 확정 | `main`에 폴더 구조가 올라가 있음 |
-| 김정효 | UnivFD·NPR·AIDE 공식 저장소와 가중치 확보, 코드·가중치 라이선스 확인 | 라이선스 확인 결과를 `inference/README.md`에 기록 |
+| 김정효 | UnivFD·AIDE·B-Free(NPR 대체) 공식 저장소와 가중치 확보, 코드·가중치 라이선스 확인 | 라이선스 확인 결과를 `inference/README.md`에 기록 |
 | 김정효 | `ml/measure.py`: 모델별 메모리·추론 시간 측정 | 측정값을 §7에 기록 |
-| 김정효 | `detectors/univfd.py`, `npr.py` 구현 | 로컬 스크립트로 이미지 1장의 원점수 출력 |
+| 김정효 | `detectors/univfd.py`, `bfree.py` 구현 | 로컬 스크립트로 이미지 1장의 원점수 출력 |
 | 김정효 | FastAPI 골격: `/health`, `/analyze`(두 모델) | `curl`로 이미지를 보내 JSON 응답을 받음 |
 | 임정민 | Expo 프로젝트 생성, 탭 구조, 홈 화면과 이미지 선택 | 실제 휴대폰에서 이미지를 선택할 수 있음 |
 | 임정민 | 분석 중 화면과 결과 화면을 가짜 응답으로 구현 | 가짜 응답으로 결과 화면 전체가 그려짐 |
@@ -432,6 +460,7 @@ trained_on:  "mvp-200 (2026-11-xx)"
 
 - 앙상블 결과 자체의 히트맵은 만들기 어렵다. 그래서 대표 모델 하나의 히트맵을 쓰고, 화면에 모델명을 표시한다.
 - Sprint 2 첫 주에 두 방법을 짧게 시험해 보고 하나를 고른다: UnivFD(ViT)에는 Attention Rollout, NPR(CNN)에는 Grad-CAM(`pytorch-grad-cam`).
+  - **교체 후 재검토 필요 (2026-11-11):** NPR이 B-Free(ViT)로 바뀌어 'CNN에는 Grad-CAM' 후보가 없어졌다. Sprint 2 시작 때 후보(AIDE의 ResNet 부분에 Grad-CAM, 또는 UnivFD·B-Free 모두 Attention Rollout)를 다시 정한다.
 - 원본 위에 반투명하게 겹친 이미지를 짧은 변 512px 이하 PNG로 만들어 base64로 응답에 넣는다. 서버에는 저장하지 않는다.
 - 화면 안내 문구: "모델 반응 영역을 보여주는 참고 정보이며, AI 생성의 증거가 아닙니다."
 
@@ -523,7 +552,7 @@ usage_daily (
   "overall_method": "stacking",
   "models": [{ "name": "univfd", "raw_score": 0.52, "band": "uncertain" }],
   "provenance": { "c2pa": "none", "summary": null, "exif": { "camera": null, "software": null } },
-  "heatmap": { "model": "npr", "png_base64": "…" },
+  "heatmap": { "model": "npr", "png_base64": "…" },   // NPR 교체 후 대표 모델 재선정 필요 (§12.4)
   "robustness": [{ "variant": "original", "band": "uncertain" }],
   "model_version": "v800-2026-11-xx",
   "elapsed_ms": 23456,

@@ -2,7 +2,7 @@
 
     python ml/measure.py                          # 임의의 1024x1024 이미지
     python ml/measure.py ml/data/samples/x.png    # 지정 이미지
-    python ml/measure.py --models univfd,npr      # 일부 모델만
+    python ml/measure.py --models univfd,bfree    # 일부 모델만 (npr은 비교 재현용)
 
 - 모델마다 별도 프로세스에서 측정한다(서로의 메모리가 섞이지 않게). 마지막에 세 모델을 한 프로세스에 함께 올려 총 RSS와 순차 추론 시간을 잰다.
 - 추론 시간은 PIL 이미지 → 원점수까지(전처리 포함). 워밍업 1회 후 5회 평균·최대. torch.inference_mode, 배치 1, CPU.
@@ -27,7 +27,7 @@ from PIL import Image
 ROOT = Path(__file__).resolve().parents[1]
 WEIGHTS = ROOT / "inference" / "weights"
 THIRD_PARTY = ROOT / "inference" / "third_party"
-ALL_MODELS = ["univfd", "npr", "aide"]
+ALL_MODELS = ["univfd", "aide", "bfree"]  # npr은 --models npr로만 (2026-11-10 B-Free로 교체)
 RUNS = 5
 
 IMAGENET_MEAN, IMAGENET_STD = [0.485, 0.456, 0.406], [0.229, 0.224, 0.225]
@@ -97,6 +97,11 @@ def load_npr():
     tf = transforms.Compose([transforms.ToTensor(), transforms.Normalize(IMAGENET_MEAN, IMAGENET_STD)])
 
     def score(img: Image.Image) -> float:
+        # NPR은 1/2 축소→확대 결과를 원본에서 빼므로 가로·세로가 홀수면 크기가 1px 어긋나 실패한다.
+        # 짝수가 되도록 오른쪽·아래 1px을 잘라낸다.
+        w, h = img.size
+        if w % 2 or h % 2:
+            img = img.crop((0, 0, w - w % 2, h - h % 2))
         return torch.sigmoid(model(tf(img).unsqueeze(0))).item()
 
     return [model], score
@@ -138,7 +143,32 @@ def load_aide():
     return [model], score
 
 
-LOADERS = {"univfd": load_univfd, "npr": load_npr, "aide": load_aide}
+# ---------------------------------------------------------------- B-Free
+def load_bfree():
+    """B-Free (CVPR 2025, GRIP-UNINA). ViT-B/14 DINOv2 + 레지스터 4개, 504x504 5-crop(가운데+네 모서리) 평균.
+
+    공식 main_bfree_single.py와 같은 전처리: ToTensor + ImageNet 정규화, Resize·Crop 없음
+    (504보다 작은 이미지는 모델 내부에서 반복해 채운다). 출력은 로짓 1개, 양수 = AI.
+    """
+    import yaml
+    from torchvision import transforms
+    wdir = WEIGHTS / "bfree" / "BFREE_dino2reg4"
+    cfg = yaml.safe_load((wdir / "config.yaml").read_text())
+    networks = _import_from("bfree/code", "networks")
+    model = networks.get_network(cfg["arch"])  # pretrained=False: 인터넷에서 받지 않음
+    model = networks.load_weights(model, str(wdir / cfg["weights_file"])).eval()
+    assert cfg["norm_type"] == "resnet"
+    tf = transforms.Compose([transforms.ToTensor(), transforms.Normalize(IMAGENET_MEAN, IMAGENET_STD)])
+
+    def score(img: Image.Image) -> float:
+        logit = model(tf(img).unsqueeze(0))[:, 0]
+        return torch.sigmoid(logit).item()
+
+    score.logit = lambda img: model(tf(img).unsqueeze(0))[:, 0].item()  # 공식 결과와 비교용
+    return [model], score
+
+
+LOADERS = {"univfd": load_univfd, "npr": load_npr, "aide": load_aide, "bfree": load_bfree}
 
 
 # ---------------------------------------------------------------- 측정

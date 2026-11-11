@@ -199,3 +199,603 @@ ai_0097_original,ai_0097,ai,original,images/ai/ai_0097_original.png,sdxl,,Creati
 ai_0098_original,ai_0098,ai,original,images/ai/ai_0098_original.jpg,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,"Cloudflare Workers AI @cf/bytedance/stable-diffusion-xl-lightning; 원본 ai_land_098.jpg; API 출력 그대로; seed 1097; prompt: a smartphone photo of a highway rest area overlooking mountains at sunset, realistic, natural colors"
 ai_0099_original,ai_0099,ai,original,images/ai/ai_0099_original.jpg,flux1-schnell,,Apache-2.0,임정민,"Cloudflare Workers AI @cf/black-forest-labs/flux-1-schnell; 원본 ai_land_099.jpg; API 출력 그대로; seed 없음; prompt: a smartphone photo of a highway rest area overlooking mountains on an overcast afternoon, realistic, natural colors"
 ai_0100_original,ai_0100,ai,original,images/ai/ai_0100_original.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"Cloudflare Workers AI @cf/stabilityai/stable-diffusion-xl-base-1.0; 원본 ai_land_100.png; API 출력 그대로; seed 1099; prompt: a smartphone photo of a highway rest area overlooking mountains under a clear blue sky at noon, realistic, natural colors"
+real_0001_jpeg70,real_0001,real,jpeg70,images/real/real_0001_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0001_original의 변형: JPEG q70 4:2:0 재압축
+real_0001_resize50,real_0001,real,resize50,images/real/real_0001_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0001_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0001_screenshot,real_0001,real,screenshot,images/real/real_0001_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0001_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0002_jpeg70,real_0002,real,jpeg70,images/real/real_0002_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0002_original의 변형: JPEG q70 4:2:0 재압축
+real_0002_resize50,real_0002,real,resize50,images/real/real_0002_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0002_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0002_screenshot,real_0002,real,screenshot,images/real/real_0002_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0002_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0003_jpeg70,real_0003,real,jpeg70,images/real/real_0003_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0003_original의 변형: JPEG q70 4:2:0 재압축
+real_0003_resize50,real_0003,real,resize50,images/real/real_0003_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0003_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0003_screenshot,real_0003,real,screenshot,images/real/real_0003_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0003_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0004_jpeg70,real_0004,real,jpeg70,images/real/real_0004_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0004_original의 변형: JPEG q70 4:2:0 재압축
+real_0004_resize50,real_0004,real,resize50,images/real/real_0004_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0004_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0004_screenshot,real_0004,real,screenshot,images/real/real_0004_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0004_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0005_jpeg70,real_0005,real,jpeg70,images/real/real_0005_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0005_original의 변형: JPEG q70 4:2:0 재압축
+real_0005_resize50,real_0005,real,resize50,images/real/real_0005_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0005_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0005_screenshot,real_0005,real,screenshot,images/real/real_0005_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0005_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0006_jpeg70,real_0006,real,jpeg70,images/real/real_0006_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0006_original의 변형: JPEG q70 4:2:0 재압축
+real_0006_resize50,real_0006,real,resize50,images/real/real_0006_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0006_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0006_screenshot,real_0006,real,screenshot,images/real/real_0006_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0006_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0007_jpeg70,real_0007,real,jpeg70,images/real/real_0007_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0007_original의 변형: JPEG q70 4:2:0 재압축
+real_0007_resize50,real_0007,real,resize50,images/real/real_0007_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0007_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0007_screenshot,real_0007,real,screenshot,images/real/real_0007_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0007_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0008_jpeg70,real_0008,real,jpeg70,images/real/real_0008_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0008_original의 변형: JPEG q70 4:2:0 재압축
+real_0008_resize50,real_0008,real,resize50,images/real/real_0008_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0008_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0008_screenshot,real_0008,real,screenshot,images/real/real_0008_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0008_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0009_jpeg70,real_0009,real,jpeg70,images/real/real_0009_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0009_original의 변형: JPEG q70 4:2:0 재압축
+real_0009_resize50,real_0009,real,resize50,images/real/real_0009_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0009_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0009_screenshot,real_0009,real,screenshot,images/real/real_0009_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0009_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0010_jpeg70,real_0010,real,jpeg70,images/real/real_0010_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0010_original의 변형: JPEG q70 4:2:0 재압축
+real_0010_resize50,real_0010,real,resize50,images/real/real_0010_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0010_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0010_screenshot,real_0010,real,screenshot,images/real/real_0010_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0010_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0011_jpeg70,real_0011,real,jpeg70,images/real/real_0011_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0011_original의 변형: JPEG q70 4:2:0 재압축
+real_0011_resize50,real_0011,real,resize50,images/real/real_0011_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0011_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0011_screenshot,real_0011,real,screenshot,images/real/real_0011_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0011_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0012_jpeg70,real_0012,real,jpeg70,images/real/real_0012_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0012_original의 변형: JPEG q70 4:2:0 재압축
+real_0012_resize50,real_0012,real,resize50,images/real/real_0012_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0012_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0012_screenshot,real_0012,real,screenshot,images/real/real_0012_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0012_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0013_jpeg70,real_0013,real,jpeg70,images/real/real_0013_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0013_original의 변형: JPEG q70 4:2:0 재압축
+real_0013_resize50,real_0013,real,resize50,images/real/real_0013_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0013_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0013_screenshot,real_0013,real,screenshot,images/real/real_0013_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0013_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0014_jpeg70,real_0014,real,jpeg70,images/real/real_0014_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0014_original의 변형: JPEG q70 4:2:0 재압축
+real_0014_resize50,real_0014,real,resize50,images/real/real_0014_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0014_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0014_screenshot,real_0014,real,screenshot,images/real/real_0014_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0014_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0015_jpeg70,real_0015,real,jpeg70,images/real/real_0015_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0015_original의 변형: JPEG q70 4:2:0 재압축
+real_0015_resize50,real_0015,real,resize50,images/real/real_0015_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0015_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0015_screenshot,real_0015,real,screenshot,images/real/real_0015_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0015_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0016_jpeg70,real_0016,real,jpeg70,images/real/real_0016_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0016_original의 변형: JPEG q70 4:2:0 재압축
+real_0016_resize50,real_0016,real,resize50,images/real/real_0016_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0016_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0016_screenshot,real_0016,real,screenshot,images/real/real_0016_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0016_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0017_jpeg70,real_0017,real,jpeg70,images/real/real_0017_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0017_original의 변형: JPEG q70 4:2:0 재압축
+real_0017_resize50,real_0017,real,resize50,images/real/real_0017_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0017_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0017_screenshot,real_0017,real,screenshot,images/real/real_0017_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0017_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0018_jpeg70,real_0018,real,jpeg70,images/real/real_0018_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0018_original의 변형: JPEG q70 4:2:0 재압축
+real_0018_resize50,real_0018,real,resize50,images/real/real_0018_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0018_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0018_screenshot,real_0018,real,screenshot,images/real/real_0018_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0018_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0019_jpeg70,real_0019,real,jpeg70,images/real/real_0019_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0019_original의 변형: JPEG q70 4:2:0 재압축
+real_0019_resize50,real_0019,real,resize50,images/real/real_0019_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0019_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0019_screenshot,real_0019,real,screenshot,images/real/real_0019_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0019_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0020_jpeg70,real_0020,real,jpeg70,images/real/real_0020_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0020_original의 변형: JPEG q70 4:2:0 재압축
+real_0020_resize50,real_0020,real,resize50,images/real/real_0020_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0020_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0020_screenshot,real_0020,real,screenshot,images/real/real_0020_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0020_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0021_jpeg70,real_0021,real,jpeg70,images/real/real_0021_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0021_original의 변형: JPEG q70 4:2:0 재압축
+real_0021_resize50,real_0021,real,resize50,images/real/real_0021_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0021_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0021_screenshot,real_0021,real,screenshot,images/real/real_0021_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0021_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0022_jpeg70,real_0022,real,jpeg70,images/real/real_0022_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0022_original의 변형: JPEG q70 4:2:0 재압축
+real_0022_resize50,real_0022,real,resize50,images/real/real_0022_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0022_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0022_screenshot,real_0022,real,screenshot,images/real/real_0022_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0022_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0023_jpeg70,real_0023,real,jpeg70,images/real/real_0023_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0023_original의 변형: JPEG q70 4:2:0 재압축
+real_0023_resize50,real_0023,real,resize50,images/real/real_0023_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0023_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0023_screenshot,real_0023,real,screenshot,images/real/real_0023_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0023_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0024_jpeg70,real_0024,real,jpeg70,images/real/real_0024_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0024_original의 변형: JPEG q70 4:2:0 재압축
+real_0024_resize50,real_0024,real,resize50,images/real/real_0024_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0024_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0024_screenshot,real_0024,real,screenshot,images/real/real_0024_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0024_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0025_jpeg70,real_0025,real,jpeg70,images/real/real_0025_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0025_original의 변형: JPEG q70 4:2:0 재압축
+real_0025_resize50,real_0025,real,resize50,images/real/real_0025_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0025_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0025_screenshot,real_0025,real,screenshot,images/real/real_0025_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0025_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0026_jpeg70,real_0026,real,jpeg70,images/real/real_0026_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0026_original의 변형: JPEG q70 4:2:0 재압축
+real_0026_resize50,real_0026,real,resize50,images/real/real_0026_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0026_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0026_screenshot,real_0026,real,screenshot,images/real/real_0026_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0026_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0027_jpeg70,real_0027,real,jpeg70,images/real/real_0027_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0027_original의 변형: JPEG q70 4:2:0 재압축
+real_0027_resize50,real_0027,real,resize50,images/real/real_0027_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0027_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0027_screenshot,real_0027,real,screenshot,images/real/real_0027_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0027_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0028_jpeg70,real_0028,real,jpeg70,images/real/real_0028_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0028_original의 변형: JPEG q70 4:2:0 재압축
+real_0028_resize50,real_0028,real,resize50,images/real/real_0028_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0028_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0028_screenshot,real_0028,real,screenshot,images/real/real_0028_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0028_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0029_jpeg70,real_0029,real,jpeg70,images/real/real_0029_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0029_original의 변형: JPEG q70 4:2:0 재압축
+real_0029_resize50,real_0029,real,resize50,images/real/real_0029_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0029_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0029_screenshot,real_0029,real,screenshot,images/real/real_0029_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0029_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0030_jpeg70,real_0030,real,jpeg70,images/real/real_0030_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0030_original의 변형: JPEG q70 4:2:0 재압축
+real_0030_resize50,real_0030,real,resize50,images/real/real_0030_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0030_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0030_screenshot,real_0030,real,screenshot,images/real/real_0030_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0030_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0031_jpeg70,real_0031,real,jpeg70,images/real/real_0031_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0031_original의 변형: JPEG q70 4:2:0 재압축
+real_0031_resize50,real_0031,real,resize50,images/real/real_0031_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0031_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0031_screenshot,real_0031,real,screenshot,images/real/real_0031_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0031_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0032_jpeg70,real_0032,real,jpeg70,images/real/real_0032_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0032_original의 변형: JPEG q70 4:2:0 재압축
+real_0032_resize50,real_0032,real,resize50,images/real/real_0032_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0032_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0032_screenshot,real_0032,real,screenshot,images/real/real_0032_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0032_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0033_jpeg70,real_0033,real,jpeg70,images/real/real_0033_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0033_original의 변형: JPEG q70 4:2:0 재압축
+real_0033_resize50,real_0033,real,resize50,images/real/real_0033_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0033_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0033_screenshot,real_0033,real,screenshot,images/real/real_0033_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0033_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0034_jpeg70,real_0034,real,jpeg70,images/real/real_0034_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0034_original의 변형: JPEG q70 4:2:0 재압축
+real_0034_resize50,real_0034,real,resize50,images/real/real_0034_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0034_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0034_screenshot,real_0034,real,screenshot,images/real/real_0034_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0034_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0035_jpeg70,real_0035,real,jpeg70,images/real/real_0035_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0035_original의 변형: JPEG q70 4:2:0 재압축
+real_0035_resize50,real_0035,real,resize50,images/real/real_0035_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0035_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0035_screenshot,real_0035,real,screenshot,images/real/real_0035_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0035_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0036_jpeg70,real_0036,real,jpeg70,images/real/real_0036_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0036_original의 변형: JPEG q70 4:2:0 재압축
+real_0036_resize50,real_0036,real,resize50,images/real/real_0036_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0036_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0036_screenshot,real_0036,real,screenshot,images/real/real_0036_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0036_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0037_jpeg70,real_0037,real,jpeg70,images/real/real_0037_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0037_original의 변형: JPEG q70 4:2:0 재압축
+real_0037_resize50,real_0037,real,resize50,images/real/real_0037_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0037_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0037_screenshot,real_0037,real,screenshot,images/real/real_0037_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0037_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0038_jpeg70,real_0038,real,jpeg70,images/real/real_0038_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0038_original의 변형: JPEG q70 4:2:0 재압축
+real_0038_resize50,real_0038,real,resize50,images/real/real_0038_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0038_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0038_screenshot,real_0038,real,screenshot,images/real/real_0038_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0038_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0039_jpeg70,real_0039,real,jpeg70,images/real/real_0039_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0039_original의 변형: JPEG q70 4:2:0 재압축
+real_0039_resize50,real_0039,real,resize50,images/real/real_0039_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0039_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0039_screenshot,real_0039,real,screenshot,images/real/real_0039_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0039_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0040_jpeg70,real_0040,real,jpeg70,images/real/real_0040_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0040_original의 변형: JPEG q70 4:2:0 재압축
+real_0040_resize50,real_0040,real,resize50,images/real/real_0040_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0040_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0040_screenshot,real_0040,real,screenshot,images/real/real_0040_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0040_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0041_jpeg70,real_0041,real,jpeg70,images/real/real_0041_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0041_original의 변형: JPEG q70 4:2:0 재압축
+real_0041_resize50,real_0041,real,resize50,images/real/real_0041_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0041_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0041_screenshot,real_0041,real,screenshot,images/real/real_0041_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0041_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0042_jpeg70,real_0042,real,jpeg70,images/real/real_0042_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0042_original의 변형: JPEG q70 4:2:0 재압축
+real_0042_resize50,real_0042,real,resize50,images/real/real_0042_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0042_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0042_screenshot,real_0042,real,screenshot,images/real/real_0042_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0042_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0043_jpeg70,real_0043,real,jpeg70,images/real/real_0043_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0043_original의 변형: JPEG q70 4:2:0 재압축
+real_0043_resize50,real_0043,real,resize50,images/real/real_0043_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0043_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0043_screenshot,real_0043,real,screenshot,images/real/real_0043_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0043_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0044_jpeg70,real_0044,real,jpeg70,images/real/real_0044_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0044_original의 변형: JPEG q70 4:2:0 재압축
+real_0044_resize50,real_0044,real,resize50,images/real/real_0044_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0044_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0044_screenshot,real_0044,real,screenshot,images/real/real_0044_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0044_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0045_jpeg70,real_0045,real,jpeg70,images/real/real_0045_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0045_original의 변형: JPEG q70 4:2:0 재압축
+real_0045_resize50,real_0045,real,resize50,images/real/real_0045_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0045_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0045_screenshot,real_0045,real,screenshot,images/real/real_0045_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0045_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0046_jpeg70,real_0046,real,jpeg70,images/real/real_0046_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0046_original의 변형: JPEG q70 4:2:0 재압축
+real_0046_resize50,real_0046,real,resize50,images/real/real_0046_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0046_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0046_screenshot,real_0046,real,screenshot,images/real/real_0046_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0046_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0047_jpeg70,real_0047,real,jpeg70,images/real/real_0047_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0047_original의 변형: JPEG q70 4:2:0 재압축
+real_0047_resize50,real_0047,real,resize50,images/real/real_0047_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0047_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0047_screenshot,real_0047,real,screenshot,images/real/real_0047_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0047_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0048_jpeg70,real_0048,real,jpeg70,images/real/real_0048_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0048_original의 변형: JPEG q70 4:2:0 재압축
+real_0048_resize50,real_0048,real,resize50,images/real/real_0048_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0048_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0048_screenshot,real_0048,real,screenshot,images/real/real_0048_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0048_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0049_jpeg70,real_0049,real,jpeg70,images/real/real_0049_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0049_original의 변형: JPEG q70 4:2:0 재압축
+real_0049_resize50,real_0049,real,resize50,images/real/real_0049_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0049_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0049_screenshot,real_0049,real,screenshot,images/real/real_0049_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0049_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0050_jpeg70,real_0050,real,jpeg70,images/real/real_0050_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0050_original의 변형: JPEG q70 4:2:0 재압축
+real_0050_resize50,real_0050,real,resize50,images/real/real_0050_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0050_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0050_screenshot,real_0050,real,screenshot,images/real/real_0050_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0050_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0051_jpeg70,real_0051,real,jpeg70,images/real/real_0051_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0051_original의 변형: JPEG q70 4:2:0 재압축
+real_0051_resize50,real_0051,real,resize50,images/real/real_0051_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0051_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0051_screenshot,real_0051,real,screenshot,images/real/real_0051_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0051_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0052_jpeg70,real_0052,real,jpeg70,images/real/real_0052_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0052_original의 변형: JPEG q70 4:2:0 재압축
+real_0052_resize50,real_0052,real,resize50,images/real/real_0052_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0052_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0052_screenshot,real_0052,real,screenshot,images/real/real_0052_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0052_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0053_jpeg70,real_0053,real,jpeg70,images/real/real_0053_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0053_original의 변형: JPEG q70 4:2:0 재압축
+real_0053_resize50,real_0053,real,resize50,images/real/real_0053_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0053_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0053_screenshot,real_0053,real,screenshot,images/real/real_0053_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0053_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0054_jpeg70,real_0054,real,jpeg70,images/real/real_0054_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0054_original의 변형: JPEG q70 4:2:0 재압축
+real_0054_resize50,real_0054,real,resize50,images/real/real_0054_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0054_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0054_screenshot,real_0054,real,screenshot,images/real/real_0054_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0054_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0055_jpeg70,real_0055,real,jpeg70,images/real/real_0055_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0055_original의 변형: JPEG q70 4:2:0 재압축
+real_0055_resize50,real_0055,real,resize50,images/real/real_0055_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0055_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0055_screenshot,real_0055,real,screenshot,images/real/real_0055_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0055_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0056_jpeg70,real_0056,real,jpeg70,images/real/real_0056_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0056_original의 변형: JPEG q70 4:2:0 재압축
+real_0056_resize50,real_0056,real,resize50,images/real/real_0056_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0056_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0056_screenshot,real_0056,real,screenshot,images/real/real_0056_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0056_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0057_jpeg70,real_0057,real,jpeg70,images/real/real_0057_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0057_original의 변형: JPEG q70 4:2:0 재압축
+real_0057_resize50,real_0057,real,resize50,images/real/real_0057_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0057_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0057_screenshot,real_0057,real,screenshot,images/real/real_0057_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0057_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0058_jpeg70,real_0058,real,jpeg70,images/real/real_0058_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0058_original의 변형: JPEG q70 4:2:0 재압축
+real_0058_resize50,real_0058,real,resize50,images/real/real_0058_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0058_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0058_screenshot,real_0058,real,screenshot,images/real/real_0058_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0058_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0059_jpeg70,real_0059,real,jpeg70,images/real/real_0059_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0059_original의 변형: JPEG q70 4:2:0 재압축
+real_0059_resize50,real_0059,real,resize50,images/real/real_0059_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0059_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0059_screenshot,real_0059,real,screenshot,images/real/real_0059_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0059_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0060_jpeg70,real_0060,real,jpeg70,images/real/real_0060_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0060_original의 변형: JPEG q70 4:2:0 재압축
+real_0060_resize50,real_0060,real,resize50,images/real/real_0060_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0060_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0060_screenshot,real_0060,real,screenshot,images/real/real_0060_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0060_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0061_jpeg70,real_0061,real,jpeg70,images/real/real_0061_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0061_original의 변형: JPEG q70 4:2:0 재압축
+real_0061_resize50,real_0061,real,resize50,images/real/real_0061_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0061_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0061_screenshot,real_0061,real,screenshot,images/real/real_0061_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0061_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0062_jpeg70,real_0062,real,jpeg70,images/real/real_0062_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0062_original의 변형: JPEG q70 4:2:0 재압축
+real_0062_resize50,real_0062,real,resize50,images/real/real_0062_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0062_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0062_screenshot,real_0062,real,screenshot,images/real/real_0062_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0062_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0063_jpeg70,real_0063,real,jpeg70,images/real/real_0063_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0063_original의 변형: JPEG q70 4:2:0 재압축
+real_0063_resize50,real_0063,real,resize50,images/real/real_0063_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0063_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0063_screenshot,real_0063,real,screenshot,images/real/real_0063_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0063_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0064_jpeg70,real_0064,real,jpeg70,images/real/real_0064_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0064_original의 변형: JPEG q70 4:2:0 재압축
+real_0064_resize50,real_0064,real,resize50,images/real/real_0064_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0064_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0064_screenshot,real_0064,real,screenshot,images/real/real_0064_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0064_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0065_jpeg70,real_0065,real,jpeg70,images/real/real_0065_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0065_original의 변형: JPEG q70 4:2:0 재압축
+real_0065_resize50,real_0065,real,resize50,images/real/real_0065_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0065_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0065_screenshot,real_0065,real,screenshot,images/real/real_0065_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0065_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0066_jpeg70,real_0066,real,jpeg70,images/real/real_0066_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0066_original의 변형: JPEG q70 4:2:0 재압축
+real_0066_resize50,real_0066,real,resize50,images/real/real_0066_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0066_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0066_screenshot,real_0066,real,screenshot,images/real/real_0066_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0066_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0067_jpeg70,real_0067,real,jpeg70,images/real/real_0067_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0067_original의 변형: JPEG q70 4:2:0 재압축
+real_0067_resize50,real_0067,real,resize50,images/real/real_0067_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0067_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0067_screenshot,real_0067,real,screenshot,images/real/real_0067_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0067_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0068_jpeg70,real_0068,real,jpeg70,images/real/real_0068_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0068_original의 변형: JPEG q70 4:2:0 재압축
+real_0068_resize50,real_0068,real,resize50,images/real/real_0068_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0068_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0068_screenshot,real_0068,real,screenshot,images/real/real_0068_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0068_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0069_jpeg70,real_0069,real,jpeg70,images/real/real_0069_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0069_original의 변형: JPEG q70 4:2:0 재압축
+real_0069_resize50,real_0069,real,resize50,images/real/real_0069_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0069_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0069_screenshot,real_0069,real,screenshot,images/real/real_0069_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0069_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0070_jpeg70,real_0070,real,jpeg70,images/real/real_0070_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0070_original의 변형: JPEG q70 4:2:0 재압축
+real_0070_resize50,real_0070,real,resize50,images/real/real_0070_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0070_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0070_screenshot,real_0070,real,screenshot,images/real/real_0070_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0070_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0071_jpeg70,real_0071,real,jpeg70,images/real/real_0071_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0071_original의 변형: JPEG q70 4:2:0 재압축
+real_0071_resize50,real_0071,real,resize50,images/real/real_0071_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0071_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0071_screenshot,real_0071,real,screenshot,images/real/real_0071_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0071_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0072_jpeg70,real_0072,real,jpeg70,images/real/real_0072_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0072_original의 변형: JPEG q70 4:2:0 재압축
+real_0072_resize50,real_0072,real,resize50,images/real/real_0072_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0072_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0072_screenshot,real_0072,real,screenshot,images/real/real_0072_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0072_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0073_jpeg70,real_0073,real,jpeg70,images/real/real_0073_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0073_original의 변형: JPEG q70 4:2:0 재압축
+real_0073_resize50,real_0073,real,resize50,images/real/real_0073_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0073_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0073_screenshot,real_0073,real,screenshot,images/real/real_0073_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0073_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0074_jpeg70,real_0074,real,jpeg70,images/real/real_0074_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0074_original의 변형: JPEG q70 4:2:0 재압축
+real_0074_resize50,real_0074,real,resize50,images/real/real_0074_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0074_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0074_screenshot,real_0074,real,screenshot,images/real/real_0074_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0074_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0075_jpeg70,real_0075,real,jpeg70,images/real/real_0075_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0075_original의 변형: JPEG q70 4:2:0 재압축
+real_0075_resize50,real_0075,real,resize50,images/real/real_0075_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0075_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0075_screenshot,real_0075,real,screenshot,images/real/real_0075_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0075_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0076_jpeg70,real_0076,real,jpeg70,images/real/real_0076_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0076_original의 변형: JPEG q70 4:2:0 재압축
+real_0076_resize50,real_0076,real,resize50,images/real/real_0076_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0076_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0076_screenshot,real_0076,real,screenshot,images/real/real_0076_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0076_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0077_jpeg70,real_0077,real,jpeg70,images/real/real_0077_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0077_original의 변형: JPEG q70 4:2:0 재압축
+real_0077_resize50,real_0077,real,resize50,images/real/real_0077_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0077_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0077_screenshot,real_0077,real,screenshot,images/real/real_0077_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0077_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0078_jpeg70,real_0078,real,jpeg70,images/real/real_0078_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0078_original의 변형: JPEG q70 4:2:0 재압축
+real_0078_resize50,real_0078,real,resize50,images/real/real_0078_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0078_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0078_screenshot,real_0078,real,screenshot,images/real/real_0078_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0078_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0079_jpeg70,real_0079,real,jpeg70,images/real/real_0079_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0079_original의 변형: JPEG q70 4:2:0 재압축
+real_0079_resize50,real_0079,real,resize50,images/real/real_0079_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0079_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0079_screenshot,real_0079,real,screenshot,images/real/real_0079_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0079_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0080_jpeg70,real_0080,real,jpeg70,images/real/real_0080_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0080_original의 변형: JPEG q70 4:2:0 재압축
+real_0080_resize50,real_0080,real,resize50,images/real/real_0080_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0080_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0080_screenshot,real_0080,real,screenshot,images/real/real_0080_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0080_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0081_jpeg70,real_0081,real,jpeg70,images/real/real_0081_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0081_original의 변형: JPEG q70 4:2:0 재압축
+real_0081_resize50,real_0081,real,resize50,images/real/real_0081_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0081_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0081_screenshot,real_0081,real,screenshot,images/real/real_0081_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0081_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0082_jpeg70,real_0082,real,jpeg70,images/real/real_0082_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0082_original의 변형: JPEG q70 4:2:0 재압축
+real_0082_resize50,real_0082,real,resize50,images/real/real_0082_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0082_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0082_screenshot,real_0082,real,screenshot,images/real/real_0082_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0082_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0083_jpeg70,real_0083,real,jpeg70,images/real/real_0083_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0083_original의 변형: JPEG q70 4:2:0 재압축
+real_0083_resize50,real_0083,real,resize50,images/real/real_0083_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0083_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0083_screenshot,real_0083,real,screenshot,images/real/real_0083_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0083_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0084_jpeg70,real_0084,real,jpeg70,images/real/real_0084_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0084_original의 변형: JPEG q70 4:2:0 재압축
+real_0084_resize50,real_0084,real,resize50,images/real/real_0084_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0084_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0084_screenshot,real_0084,real,screenshot,images/real/real_0084_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0084_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0085_jpeg70,real_0085,real,jpeg70,images/real/real_0085_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0085_original의 변형: JPEG q70 4:2:0 재압축
+real_0085_resize50,real_0085,real,resize50,images/real/real_0085_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0085_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0085_screenshot,real_0085,real,screenshot,images/real/real_0085_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0085_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0086_jpeg70,real_0086,real,jpeg70,images/real/real_0086_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0086_original의 변형: JPEG q70 4:2:0 재압축
+real_0086_resize50,real_0086,real,resize50,images/real/real_0086_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0086_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0086_screenshot,real_0086,real,screenshot,images/real/real_0086_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0086_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0087_jpeg70,real_0087,real,jpeg70,images/real/real_0087_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0087_original의 변형: JPEG q70 4:2:0 재압축
+real_0087_resize50,real_0087,real,resize50,images/real/real_0087_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0087_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0087_screenshot,real_0087,real,screenshot,images/real/real_0087_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0087_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0088_jpeg70,real_0088,real,jpeg70,images/real/real_0088_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0088_original의 변형: JPEG q70 4:2:0 재압축
+real_0088_resize50,real_0088,real,resize50,images/real/real_0088_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0088_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0088_screenshot,real_0088,real,screenshot,images/real/real_0088_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0088_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0089_jpeg70,real_0089,real,jpeg70,images/real/real_0089_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0089_original의 변형: JPEG q70 4:2:0 재압축
+real_0089_resize50,real_0089,real,resize50,images/real/real_0089_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0089_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0089_screenshot,real_0089,real,screenshot,images/real/real_0089_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0089_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0090_jpeg70,real_0090,real,jpeg70,images/real/real_0090_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0090_original의 변형: JPEG q70 4:2:0 재압축
+real_0090_resize50,real_0090,real,resize50,images/real/real_0090_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0090_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0090_screenshot,real_0090,real,screenshot,images/real/real_0090_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0090_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0091_jpeg70,real_0091,real,jpeg70,images/real/real_0091_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0091_original의 변형: JPEG q70 4:2:0 재압축
+real_0091_resize50,real_0091,real,resize50,images/real/real_0091_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0091_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0091_screenshot,real_0091,real,screenshot,images/real/real_0091_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0091_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0092_jpeg70,real_0092,real,jpeg70,images/real/real_0092_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0092_original의 변형: JPEG q70 4:2:0 재압축
+real_0092_resize50,real_0092,real,resize50,images/real/real_0092_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0092_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0092_screenshot,real_0092,real,screenshot,images/real/real_0092_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0092_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0093_jpeg70,real_0093,real,jpeg70,images/real/real_0093_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0093_original의 변형: JPEG q70 4:2:0 재압축
+real_0093_resize50,real_0093,real,resize50,images/real/real_0093_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0093_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0093_screenshot,real_0093,real,screenshot,images/real/real_0093_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0093_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0094_jpeg70,real_0094,real,jpeg70,images/real/real_0094_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0094_original의 변형: JPEG q70 4:2:0 재압축
+real_0094_resize50,real_0094,real,resize50,images/real/real_0094_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0094_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0094_screenshot,real_0094,real,screenshot,images/real/real_0094_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0094_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0095_jpeg70,real_0095,real,jpeg70,images/real/real_0095_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0095_original의 변형: JPEG q70 4:2:0 재압축
+real_0095_resize50,real_0095,real,resize50,images/real/real_0095_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0095_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0095_screenshot,real_0095,real,screenshot,images/real/real_0095_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0095_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0096_jpeg70,real_0096,real,jpeg70,images/real/real_0096_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0096_original의 변형: JPEG q70 4:2:0 재압축
+real_0096_resize50,real_0096,real,resize50,images/real/real_0096_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0096_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0096_screenshot,real_0096,real,screenshot,images/real/real_0096_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0096_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0097_jpeg70,real_0097,real,jpeg70,images/real/real_0097_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0097_original의 변형: JPEG q70 4:2:0 재압축
+real_0097_resize50,real_0097,real,resize50,images/real/real_0097_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0097_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0097_screenshot,real_0097,real,screenshot,images/real/real_0097_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0097_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0098_jpeg70,real_0098,real,jpeg70,images/real/real_0098_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0098_original의 변형: JPEG q70 4:2:0 재압축
+real_0098_resize50,real_0098,real,resize50,images/real/real_0098_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0098_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0098_screenshot,real_0098,real,screenshot,images/real/real_0098_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0098_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0099_jpeg70,real_0099,real,jpeg70,images/real/real_0099_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0099_original의 변형: JPEG q70 4:2:0 재압축
+real_0099_resize50,real_0099,real,resize50,images/real/real_0099_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0099_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0099_screenshot,real_0099,real,screenshot,images/real/real_0099_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0099_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+real_0100_jpeg70,real_0100,real,jpeg70,images/real/real_0100_jpeg70.jpg,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,real_0100_original의 변형: JPEG q70 4:2:0 재압축
+real_0100_resize50,real_0100,real,resize50,images/real/real_0100_resize50.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0100_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+real_0100_screenshot,real_0100,real,screenshot,images/real/real_0100_screenshot.png,camera,http://loki.disi.unitn.it/RAISE/,RAISE-research-only,김정효,"real_0100_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0001_jpeg70,ai_0001,ai,jpeg70,images/ai/ai_0001_jpeg70.jpg,sdxl,,CreativeML-OpenRAIL++-M,임정민,ai_0001_original의 변형: JPEG q70 4:2:0 재압축
+ai_0001_resize50,ai_0001,ai,resize50,images/ai/ai_0001_resize50.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"ai_0001_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0001_screenshot,ai_0001,ai,screenshot,images/ai/ai_0001_screenshot.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"ai_0001_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0002_jpeg70,ai_0002,ai,jpeg70,images/ai/ai_0002_jpeg70.jpg,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,ai_0002_original의 변형: JPEG q70 4:2:0 재압축
+ai_0002_resize50,ai_0002,ai,resize50,images/ai/ai_0002_resize50.png,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,"ai_0002_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0002_screenshot,ai_0002,ai,screenshot,images/ai/ai_0002_screenshot.png,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,"ai_0002_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0003_jpeg70,ai_0003,ai,jpeg70,images/ai/ai_0003_jpeg70.jpg,flux1-schnell,,Apache-2.0,임정민,ai_0003_original의 변형: JPEG q70 4:2:0 재압축
+ai_0003_resize50,ai_0003,ai,resize50,images/ai/ai_0003_resize50.png,flux1-schnell,,Apache-2.0,임정민,"ai_0003_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0003_screenshot,ai_0003,ai,screenshot,images/ai/ai_0003_screenshot.png,flux1-schnell,,Apache-2.0,임정민,"ai_0003_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0004_jpeg70,ai_0004,ai,jpeg70,images/ai/ai_0004_jpeg70.jpg,sdxl,,CreativeML-OpenRAIL++-M,임정민,ai_0004_original의 변형: JPEG q70 4:2:0 재압축
+ai_0004_resize50,ai_0004,ai,resize50,images/ai/ai_0004_resize50.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"ai_0004_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0004_screenshot,ai_0004,ai,screenshot,images/ai/ai_0004_screenshot.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"ai_0004_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0005_jpeg70,ai_0005,ai,jpeg70,images/ai/ai_0005_jpeg70.jpg,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,ai_0005_original의 변형: JPEG q70 4:2:0 재압축
+ai_0005_resize50,ai_0005,ai,resize50,images/ai/ai_0005_resize50.png,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,"ai_0005_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0005_screenshot,ai_0005,ai,screenshot,images/ai/ai_0005_screenshot.png,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,"ai_0005_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0006_jpeg70,ai_0006,ai,jpeg70,images/ai/ai_0006_jpeg70.jpg,flux1-schnell,,Apache-2.0,임정민,ai_0006_original의 변형: JPEG q70 4:2:0 재압축
+ai_0006_resize50,ai_0006,ai,resize50,images/ai/ai_0006_resize50.png,flux1-schnell,,Apache-2.0,임정민,"ai_0006_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0006_screenshot,ai_0006,ai,screenshot,images/ai/ai_0006_screenshot.png,flux1-schnell,,Apache-2.0,임정민,"ai_0006_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0007_jpeg70,ai_0007,ai,jpeg70,images/ai/ai_0007_jpeg70.jpg,sdxl,,CreativeML-OpenRAIL++-M,임정민,ai_0007_original의 변형: JPEG q70 4:2:0 재압축
+ai_0007_resize50,ai_0007,ai,resize50,images/ai/ai_0007_resize50.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"ai_0007_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0007_screenshot,ai_0007,ai,screenshot,images/ai/ai_0007_screenshot.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"ai_0007_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0008_jpeg70,ai_0008,ai,jpeg70,images/ai/ai_0008_jpeg70.jpg,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,ai_0008_original의 변형: JPEG q70 4:2:0 재압축
+ai_0008_resize50,ai_0008,ai,resize50,images/ai/ai_0008_resize50.png,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,"ai_0008_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0008_screenshot,ai_0008,ai,screenshot,images/ai/ai_0008_screenshot.png,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,"ai_0008_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0009_jpeg70,ai_0009,ai,jpeg70,images/ai/ai_0009_jpeg70.jpg,flux1-schnell,,Apache-2.0,임정민,ai_0009_original의 변형: JPEG q70 4:2:0 재압축
+ai_0009_resize50,ai_0009,ai,resize50,images/ai/ai_0009_resize50.png,flux1-schnell,,Apache-2.0,임정민,"ai_0009_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0009_screenshot,ai_0009,ai,screenshot,images/ai/ai_0009_screenshot.png,flux1-schnell,,Apache-2.0,임정민,"ai_0009_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0010_jpeg70,ai_0010,ai,jpeg70,images/ai/ai_0010_jpeg70.jpg,sdxl,,CreativeML-OpenRAIL++-M,임정민,ai_0010_original의 변형: JPEG q70 4:2:0 재압축
+ai_0010_resize50,ai_0010,ai,resize50,images/ai/ai_0010_resize50.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"ai_0010_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0010_screenshot,ai_0010,ai,screenshot,images/ai/ai_0010_screenshot.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"ai_0010_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0011_jpeg70,ai_0011,ai,jpeg70,images/ai/ai_0011_jpeg70.jpg,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,ai_0011_original의 변형: JPEG q70 4:2:0 재압축
+ai_0011_resize50,ai_0011,ai,resize50,images/ai/ai_0011_resize50.png,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,"ai_0011_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0011_screenshot,ai_0011,ai,screenshot,images/ai/ai_0011_screenshot.png,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,"ai_0011_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0012_jpeg70,ai_0012,ai,jpeg70,images/ai/ai_0012_jpeg70.jpg,flux1-schnell,,Apache-2.0,임정민,ai_0012_original의 변형: JPEG q70 4:2:0 재압축
+ai_0012_resize50,ai_0012,ai,resize50,images/ai/ai_0012_resize50.png,flux1-schnell,,Apache-2.0,임정민,"ai_0012_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0012_screenshot,ai_0012,ai,screenshot,images/ai/ai_0012_screenshot.png,flux1-schnell,,Apache-2.0,임정민,"ai_0012_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0013_jpeg70,ai_0013,ai,jpeg70,images/ai/ai_0013_jpeg70.jpg,sdxl,,CreativeML-OpenRAIL++-M,임정민,ai_0013_original의 변형: JPEG q70 4:2:0 재압축
+ai_0013_resize50,ai_0013,ai,resize50,images/ai/ai_0013_resize50.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"ai_0013_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0013_screenshot,ai_0013,ai,screenshot,images/ai/ai_0013_screenshot.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"ai_0013_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0014_jpeg70,ai_0014,ai,jpeg70,images/ai/ai_0014_jpeg70.jpg,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,ai_0014_original의 변형: JPEG q70 4:2:0 재압축
+ai_0014_resize50,ai_0014,ai,resize50,images/ai/ai_0014_resize50.png,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,"ai_0014_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0014_screenshot,ai_0014,ai,screenshot,images/ai/ai_0014_screenshot.png,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,"ai_0014_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0015_jpeg70,ai_0015,ai,jpeg70,images/ai/ai_0015_jpeg70.jpg,flux1-schnell,,Apache-2.0,임정민,ai_0015_original의 변형: JPEG q70 4:2:0 재압축
+ai_0015_resize50,ai_0015,ai,resize50,images/ai/ai_0015_resize50.png,flux1-schnell,,Apache-2.0,임정민,"ai_0015_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0015_screenshot,ai_0015,ai,screenshot,images/ai/ai_0015_screenshot.png,flux1-schnell,,Apache-2.0,임정민,"ai_0015_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0016_jpeg70,ai_0016,ai,jpeg70,images/ai/ai_0016_jpeg70.jpg,sdxl,,CreativeML-OpenRAIL++-M,임정민,ai_0016_original의 변형: JPEG q70 4:2:0 재압축
+ai_0016_resize50,ai_0016,ai,resize50,images/ai/ai_0016_resize50.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"ai_0016_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0016_screenshot,ai_0016,ai,screenshot,images/ai/ai_0016_screenshot.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"ai_0016_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0017_jpeg70,ai_0017,ai,jpeg70,images/ai/ai_0017_jpeg70.jpg,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,ai_0017_original의 변형: JPEG q70 4:2:0 재압축
+ai_0017_resize50,ai_0017,ai,resize50,images/ai/ai_0017_resize50.png,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,"ai_0017_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0017_screenshot,ai_0017,ai,screenshot,images/ai/ai_0017_screenshot.png,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,"ai_0017_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0018_jpeg70,ai_0018,ai,jpeg70,images/ai/ai_0018_jpeg70.jpg,flux1-schnell,,Apache-2.0,임정민,ai_0018_original의 변형: JPEG q70 4:2:0 재압축
+ai_0018_resize50,ai_0018,ai,resize50,images/ai/ai_0018_resize50.png,flux1-schnell,,Apache-2.0,임정민,"ai_0018_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0018_screenshot,ai_0018,ai,screenshot,images/ai/ai_0018_screenshot.png,flux1-schnell,,Apache-2.0,임정민,"ai_0018_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0019_jpeg70,ai_0019,ai,jpeg70,images/ai/ai_0019_jpeg70.jpg,sdxl,,CreativeML-OpenRAIL++-M,임정민,ai_0019_original의 변형: JPEG q70 4:2:0 재압축
+ai_0019_resize50,ai_0019,ai,resize50,images/ai/ai_0019_resize50.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"ai_0019_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0019_screenshot,ai_0019,ai,screenshot,images/ai/ai_0019_screenshot.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"ai_0019_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0020_jpeg70,ai_0020,ai,jpeg70,images/ai/ai_0020_jpeg70.jpg,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,ai_0020_original의 변형: JPEG q70 4:2:0 재압축
+ai_0020_resize50,ai_0020,ai,resize50,images/ai/ai_0020_resize50.png,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,"ai_0020_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0020_screenshot,ai_0020,ai,screenshot,images/ai/ai_0020_screenshot.png,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,"ai_0020_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0021_jpeg70,ai_0021,ai,jpeg70,images/ai/ai_0021_jpeg70.jpg,flux1-schnell,,Apache-2.0,임정민,ai_0021_original의 변형: JPEG q70 4:2:0 재압축
+ai_0021_resize50,ai_0021,ai,resize50,images/ai/ai_0021_resize50.png,flux1-schnell,,Apache-2.0,임정민,"ai_0021_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0021_screenshot,ai_0021,ai,screenshot,images/ai/ai_0021_screenshot.png,flux1-schnell,,Apache-2.0,임정민,"ai_0021_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0022_jpeg70,ai_0022,ai,jpeg70,images/ai/ai_0022_jpeg70.jpg,sdxl,,CreativeML-OpenRAIL++-M,임정민,ai_0022_original의 변형: JPEG q70 4:2:0 재압축
+ai_0022_resize50,ai_0022,ai,resize50,images/ai/ai_0022_resize50.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"ai_0022_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0022_screenshot,ai_0022,ai,screenshot,images/ai/ai_0022_screenshot.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"ai_0022_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0023_jpeg70,ai_0023,ai,jpeg70,images/ai/ai_0023_jpeg70.jpg,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,ai_0023_original의 변형: JPEG q70 4:2:0 재압축
+ai_0023_resize50,ai_0023,ai,resize50,images/ai/ai_0023_resize50.png,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,"ai_0023_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0023_screenshot,ai_0023,ai,screenshot,images/ai/ai_0023_screenshot.png,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,"ai_0023_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0024_jpeg70,ai_0024,ai,jpeg70,images/ai/ai_0024_jpeg70.jpg,flux1-schnell,,Apache-2.0,임정민,ai_0024_original의 변형: JPEG q70 4:2:0 재압축
+ai_0024_resize50,ai_0024,ai,resize50,images/ai/ai_0024_resize50.png,flux1-schnell,,Apache-2.0,임정민,"ai_0024_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0024_screenshot,ai_0024,ai,screenshot,images/ai/ai_0024_screenshot.png,flux1-schnell,,Apache-2.0,임정민,"ai_0024_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0025_jpeg70,ai_0025,ai,jpeg70,images/ai/ai_0025_jpeg70.jpg,sdxl,,CreativeML-OpenRAIL++-M,임정민,ai_0025_original의 변형: JPEG q70 4:2:0 재압축
+ai_0025_resize50,ai_0025,ai,resize50,images/ai/ai_0025_resize50.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"ai_0025_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0025_screenshot,ai_0025,ai,screenshot,images/ai/ai_0025_screenshot.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"ai_0025_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0026_jpeg70,ai_0026,ai,jpeg70,images/ai/ai_0026_jpeg70.jpg,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,ai_0026_original의 변형: JPEG q70 4:2:0 재압축
+ai_0026_resize50,ai_0026,ai,resize50,images/ai/ai_0026_resize50.png,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,"ai_0026_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0026_screenshot,ai_0026,ai,screenshot,images/ai/ai_0026_screenshot.png,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,"ai_0026_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0027_jpeg70,ai_0027,ai,jpeg70,images/ai/ai_0027_jpeg70.jpg,flux1-schnell,,Apache-2.0,임정민,ai_0027_original의 변형: JPEG q70 4:2:0 재압축
+ai_0027_resize50,ai_0027,ai,resize50,images/ai/ai_0027_resize50.png,flux1-schnell,,Apache-2.0,임정민,"ai_0027_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0027_screenshot,ai_0027,ai,screenshot,images/ai/ai_0027_screenshot.png,flux1-schnell,,Apache-2.0,임정민,"ai_0027_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0028_jpeg70,ai_0028,ai,jpeg70,images/ai/ai_0028_jpeg70.jpg,sdxl,,CreativeML-OpenRAIL++-M,임정민,ai_0028_original의 변형: JPEG q70 4:2:0 재압축
+ai_0028_resize50,ai_0028,ai,resize50,images/ai/ai_0028_resize50.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"ai_0028_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0028_screenshot,ai_0028,ai,screenshot,images/ai/ai_0028_screenshot.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"ai_0028_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0029_jpeg70,ai_0029,ai,jpeg70,images/ai/ai_0029_jpeg70.jpg,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,ai_0029_original의 변형: JPEG q70 4:2:0 재압축
+ai_0029_resize50,ai_0029,ai,resize50,images/ai/ai_0029_resize50.png,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,"ai_0029_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0029_screenshot,ai_0029,ai,screenshot,images/ai/ai_0029_screenshot.png,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,"ai_0029_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0030_jpeg70,ai_0030,ai,jpeg70,images/ai/ai_0030_jpeg70.jpg,flux1-schnell,,Apache-2.0,임정민,ai_0030_original의 변형: JPEG q70 4:2:0 재압축
+ai_0030_resize50,ai_0030,ai,resize50,images/ai/ai_0030_resize50.png,flux1-schnell,,Apache-2.0,임정민,"ai_0030_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0030_screenshot,ai_0030,ai,screenshot,images/ai/ai_0030_screenshot.png,flux1-schnell,,Apache-2.0,임정민,"ai_0030_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0031_jpeg70,ai_0031,ai,jpeg70,images/ai/ai_0031_jpeg70.jpg,sdxl,,CreativeML-OpenRAIL++-M,임정민,ai_0031_original의 변형: JPEG q70 4:2:0 재압축
+ai_0031_resize50,ai_0031,ai,resize50,images/ai/ai_0031_resize50.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"ai_0031_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0031_screenshot,ai_0031,ai,screenshot,images/ai/ai_0031_screenshot.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"ai_0031_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0032_jpeg70,ai_0032,ai,jpeg70,images/ai/ai_0032_jpeg70.jpg,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,ai_0032_original의 변형: JPEG q70 4:2:0 재압축
+ai_0032_resize50,ai_0032,ai,resize50,images/ai/ai_0032_resize50.png,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,"ai_0032_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0032_screenshot,ai_0032,ai,screenshot,images/ai/ai_0032_screenshot.png,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,"ai_0032_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0033_jpeg70,ai_0033,ai,jpeg70,images/ai/ai_0033_jpeg70.jpg,flux1-schnell,,Apache-2.0,임정민,ai_0033_original의 변형: JPEG q70 4:2:0 재압축
+ai_0033_resize50,ai_0033,ai,resize50,images/ai/ai_0033_resize50.png,flux1-schnell,,Apache-2.0,임정민,"ai_0033_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0033_screenshot,ai_0033,ai,screenshot,images/ai/ai_0033_screenshot.png,flux1-schnell,,Apache-2.0,임정민,"ai_0033_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0034_jpeg70,ai_0034,ai,jpeg70,images/ai/ai_0034_jpeg70.jpg,sdxl,,CreativeML-OpenRAIL++-M,임정민,ai_0034_original의 변형: JPEG q70 4:2:0 재압축
+ai_0034_resize50,ai_0034,ai,resize50,images/ai/ai_0034_resize50.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"ai_0034_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0034_screenshot,ai_0034,ai,screenshot,images/ai/ai_0034_screenshot.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"ai_0034_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0035_jpeg70,ai_0035,ai,jpeg70,images/ai/ai_0035_jpeg70.jpg,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,ai_0035_original의 변형: JPEG q70 4:2:0 재압축
+ai_0035_resize50,ai_0035,ai,resize50,images/ai/ai_0035_resize50.png,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,"ai_0035_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0035_screenshot,ai_0035,ai,screenshot,images/ai/ai_0035_screenshot.png,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,"ai_0035_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0036_jpeg70,ai_0036,ai,jpeg70,images/ai/ai_0036_jpeg70.jpg,flux1-schnell,,Apache-2.0,임정민,ai_0036_original의 변형: JPEG q70 4:2:0 재압축
+ai_0036_resize50,ai_0036,ai,resize50,images/ai/ai_0036_resize50.png,flux1-schnell,,Apache-2.0,임정민,"ai_0036_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0036_screenshot,ai_0036,ai,screenshot,images/ai/ai_0036_screenshot.png,flux1-schnell,,Apache-2.0,임정민,"ai_0036_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0037_jpeg70,ai_0037,ai,jpeg70,images/ai/ai_0037_jpeg70.jpg,sdxl,,CreativeML-OpenRAIL++-M,임정민,ai_0037_original의 변형: JPEG q70 4:2:0 재압축
+ai_0037_resize50,ai_0037,ai,resize50,images/ai/ai_0037_resize50.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"ai_0037_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0037_screenshot,ai_0037,ai,screenshot,images/ai/ai_0037_screenshot.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"ai_0037_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0038_jpeg70,ai_0038,ai,jpeg70,images/ai/ai_0038_jpeg70.jpg,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,ai_0038_original의 변형: JPEG q70 4:2:0 재압축
+ai_0038_resize50,ai_0038,ai,resize50,images/ai/ai_0038_resize50.png,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,"ai_0038_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0038_screenshot,ai_0038,ai,screenshot,images/ai/ai_0038_screenshot.png,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,"ai_0038_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0039_jpeg70,ai_0039,ai,jpeg70,images/ai/ai_0039_jpeg70.jpg,flux1-schnell,,Apache-2.0,임정민,ai_0039_original의 변형: JPEG q70 4:2:0 재압축
+ai_0039_resize50,ai_0039,ai,resize50,images/ai/ai_0039_resize50.png,flux1-schnell,,Apache-2.0,임정민,"ai_0039_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0039_screenshot,ai_0039,ai,screenshot,images/ai/ai_0039_screenshot.png,flux1-schnell,,Apache-2.0,임정민,"ai_0039_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0040_jpeg70,ai_0040,ai,jpeg70,images/ai/ai_0040_jpeg70.jpg,sdxl,,CreativeML-OpenRAIL++-M,임정민,ai_0040_original의 변형: JPEG q70 4:2:0 재압축
+ai_0040_resize50,ai_0040,ai,resize50,images/ai/ai_0040_resize50.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"ai_0040_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0040_screenshot,ai_0040,ai,screenshot,images/ai/ai_0040_screenshot.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"ai_0040_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0041_jpeg70,ai_0041,ai,jpeg70,images/ai/ai_0041_jpeg70.jpg,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,ai_0041_original의 변형: JPEG q70 4:2:0 재압축
+ai_0041_resize50,ai_0041,ai,resize50,images/ai/ai_0041_resize50.png,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,"ai_0041_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0041_screenshot,ai_0041,ai,screenshot,images/ai/ai_0041_screenshot.png,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,"ai_0041_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0042_jpeg70,ai_0042,ai,jpeg70,images/ai/ai_0042_jpeg70.jpg,flux1-schnell,,Apache-2.0,임정민,ai_0042_original의 변형: JPEG q70 4:2:0 재압축
+ai_0042_resize50,ai_0042,ai,resize50,images/ai/ai_0042_resize50.png,flux1-schnell,,Apache-2.0,임정민,"ai_0042_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0042_screenshot,ai_0042,ai,screenshot,images/ai/ai_0042_screenshot.png,flux1-schnell,,Apache-2.0,임정민,"ai_0042_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0043_jpeg70,ai_0043,ai,jpeg70,images/ai/ai_0043_jpeg70.jpg,sdxl,,CreativeML-OpenRAIL++-M,임정민,ai_0043_original의 변형: JPEG q70 4:2:0 재압축
+ai_0043_resize50,ai_0043,ai,resize50,images/ai/ai_0043_resize50.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"ai_0043_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0043_screenshot,ai_0043,ai,screenshot,images/ai/ai_0043_screenshot.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"ai_0043_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0044_jpeg70,ai_0044,ai,jpeg70,images/ai/ai_0044_jpeg70.jpg,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,ai_0044_original의 변형: JPEG q70 4:2:0 재압축
+ai_0044_resize50,ai_0044,ai,resize50,images/ai/ai_0044_resize50.png,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,"ai_0044_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0044_screenshot,ai_0044,ai,screenshot,images/ai/ai_0044_screenshot.png,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,"ai_0044_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0045_jpeg70,ai_0045,ai,jpeg70,images/ai/ai_0045_jpeg70.jpg,flux1-schnell,,Apache-2.0,임정민,ai_0045_original의 변형: JPEG q70 4:2:0 재압축
+ai_0045_resize50,ai_0045,ai,resize50,images/ai/ai_0045_resize50.png,flux1-schnell,,Apache-2.0,임정민,"ai_0045_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0045_screenshot,ai_0045,ai,screenshot,images/ai/ai_0045_screenshot.png,flux1-schnell,,Apache-2.0,임정민,"ai_0045_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0046_jpeg70,ai_0046,ai,jpeg70,images/ai/ai_0046_jpeg70.jpg,sdxl,,CreativeML-OpenRAIL++-M,임정민,ai_0046_original의 변형: JPEG q70 4:2:0 재압축
+ai_0046_resize50,ai_0046,ai,resize50,images/ai/ai_0046_resize50.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"ai_0046_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0046_screenshot,ai_0046,ai,screenshot,images/ai/ai_0046_screenshot.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"ai_0046_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0047_jpeg70,ai_0047,ai,jpeg70,images/ai/ai_0047_jpeg70.jpg,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,ai_0047_original의 변형: JPEG q70 4:2:0 재압축
+ai_0047_resize50,ai_0047,ai,resize50,images/ai/ai_0047_resize50.png,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,"ai_0047_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0047_screenshot,ai_0047,ai,screenshot,images/ai/ai_0047_screenshot.png,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,"ai_0047_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0048_jpeg70,ai_0048,ai,jpeg70,images/ai/ai_0048_jpeg70.jpg,flux1-schnell,,Apache-2.0,임정민,ai_0048_original의 변형: JPEG q70 4:2:0 재압축
+ai_0048_resize50,ai_0048,ai,resize50,images/ai/ai_0048_resize50.png,flux1-schnell,,Apache-2.0,임정민,"ai_0048_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0048_screenshot,ai_0048,ai,screenshot,images/ai/ai_0048_screenshot.png,flux1-schnell,,Apache-2.0,임정민,"ai_0048_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0049_jpeg70,ai_0049,ai,jpeg70,images/ai/ai_0049_jpeg70.jpg,sdxl,,CreativeML-OpenRAIL++-M,임정민,ai_0049_original의 변형: JPEG q70 4:2:0 재압축
+ai_0049_resize50,ai_0049,ai,resize50,images/ai/ai_0049_resize50.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"ai_0049_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0049_screenshot,ai_0049,ai,screenshot,images/ai/ai_0049_screenshot.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"ai_0049_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0050_jpeg70,ai_0050,ai,jpeg70,images/ai/ai_0050_jpeg70.jpg,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,ai_0050_original의 변형: JPEG q70 4:2:0 재압축
+ai_0050_resize50,ai_0050,ai,resize50,images/ai/ai_0050_resize50.png,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,"ai_0050_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0050_screenshot,ai_0050,ai,screenshot,images/ai/ai_0050_screenshot.png,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,"ai_0050_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0051_jpeg70,ai_0051,ai,jpeg70,images/ai/ai_0051_jpeg70.jpg,flux1-schnell,,Apache-2.0,임정민,ai_0051_original의 변형: JPEG q70 4:2:0 재압축
+ai_0051_resize50,ai_0051,ai,resize50,images/ai/ai_0051_resize50.png,flux1-schnell,,Apache-2.0,임정민,"ai_0051_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0051_screenshot,ai_0051,ai,screenshot,images/ai/ai_0051_screenshot.png,flux1-schnell,,Apache-2.0,임정민,"ai_0051_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0052_jpeg70,ai_0052,ai,jpeg70,images/ai/ai_0052_jpeg70.jpg,sdxl,,CreativeML-OpenRAIL++-M,임정민,ai_0052_original의 변형: JPEG q70 4:2:0 재압축
+ai_0052_resize50,ai_0052,ai,resize50,images/ai/ai_0052_resize50.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"ai_0052_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0052_screenshot,ai_0052,ai,screenshot,images/ai/ai_0052_screenshot.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"ai_0052_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0053_jpeg70,ai_0053,ai,jpeg70,images/ai/ai_0053_jpeg70.jpg,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,ai_0053_original의 변형: JPEG q70 4:2:0 재압축
+ai_0053_resize50,ai_0053,ai,resize50,images/ai/ai_0053_resize50.png,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,"ai_0053_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0053_screenshot,ai_0053,ai,screenshot,images/ai/ai_0053_screenshot.png,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,"ai_0053_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0054_jpeg70,ai_0054,ai,jpeg70,images/ai/ai_0054_jpeg70.jpg,flux1-schnell,,Apache-2.0,임정민,ai_0054_original의 변형: JPEG q70 4:2:0 재압축
+ai_0054_resize50,ai_0054,ai,resize50,images/ai/ai_0054_resize50.png,flux1-schnell,,Apache-2.0,임정민,"ai_0054_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0054_screenshot,ai_0054,ai,screenshot,images/ai/ai_0054_screenshot.png,flux1-schnell,,Apache-2.0,임정민,"ai_0054_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0055_jpeg70,ai_0055,ai,jpeg70,images/ai/ai_0055_jpeg70.jpg,sdxl,,CreativeML-OpenRAIL++-M,임정민,ai_0055_original의 변형: JPEG q70 4:2:0 재압축
+ai_0055_resize50,ai_0055,ai,resize50,images/ai/ai_0055_resize50.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"ai_0055_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0055_screenshot,ai_0055,ai,screenshot,images/ai/ai_0055_screenshot.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"ai_0055_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0056_jpeg70,ai_0056,ai,jpeg70,images/ai/ai_0056_jpeg70.jpg,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,ai_0056_original의 변형: JPEG q70 4:2:0 재압축
+ai_0056_resize50,ai_0056,ai,resize50,images/ai/ai_0056_resize50.png,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,"ai_0056_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0056_screenshot,ai_0056,ai,screenshot,images/ai/ai_0056_screenshot.png,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,"ai_0056_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0057_jpeg70,ai_0057,ai,jpeg70,images/ai/ai_0057_jpeg70.jpg,flux1-schnell,,Apache-2.0,임정민,ai_0057_original의 변형: JPEG q70 4:2:0 재압축
+ai_0057_resize50,ai_0057,ai,resize50,images/ai/ai_0057_resize50.png,flux1-schnell,,Apache-2.0,임정민,"ai_0057_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0057_screenshot,ai_0057,ai,screenshot,images/ai/ai_0057_screenshot.png,flux1-schnell,,Apache-2.0,임정민,"ai_0057_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0058_jpeg70,ai_0058,ai,jpeg70,images/ai/ai_0058_jpeg70.jpg,sdxl,,CreativeML-OpenRAIL++-M,임정민,ai_0058_original의 변형: JPEG q70 4:2:0 재압축
+ai_0058_resize50,ai_0058,ai,resize50,images/ai/ai_0058_resize50.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"ai_0058_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0058_screenshot,ai_0058,ai,screenshot,images/ai/ai_0058_screenshot.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"ai_0058_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0059_jpeg70,ai_0059,ai,jpeg70,images/ai/ai_0059_jpeg70.jpg,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,ai_0059_original의 변형: JPEG q70 4:2:0 재압축
+ai_0059_resize50,ai_0059,ai,resize50,images/ai/ai_0059_resize50.png,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,"ai_0059_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0059_screenshot,ai_0059,ai,screenshot,images/ai/ai_0059_screenshot.png,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,"ai_0059_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0060_jpeg70,ai_0060,ai,jpeg70,images/ai/ai_0060_jpeg70.jpg,flux1-schnell,,Apache-2.0,임정민,ai_0060_original의 변형: JPEG q70 4:2:0 재압축
+ai_0060_resize50,ai_0060,ai,resize50,images/ai/ai_0060_resize50.png,flux1-schnell,,Apache-2.0,임정민,"ai_0060_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0060_screenshot,ai_0060,ai,screenshot,images/ai/ai_0060_screenshot.png,flux1-schnell,,Apache-2.0,임정민,"ai_0060_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0061_jpeg70,ai_0061,ai,jpeg70,images/ai/ai_0061_jpeg70.jpg,sdxl,,CreativeML-OpenRAIL++-M,임정민,ai_0061_original의 변형: JPEG q70 4:2:0 재압축
+ai_0061_resize50,ai_0061,ai,resize50,images/ai/ai_0061_resize50.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"ai_0061_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0061_screenshot,ai_0061,ai,screenshot,images/ai/ai_0061_screenshot.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"ai_0061_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0062_jpeg70,ai_0062,ai,jpeg70,images/ai/ai_0062_jpeg70.jpg,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,ai_0062_original의 변형: JPEG q70 4:2:0 재압축
+ai_0062_resize50,ai_0062,ai,resize50,images/ai/ai_0062_resize50.png,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,"ai_0062_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0062_screenshot,ai_0062,ai,screenshot,images/ai/ai_0062_screenshot.png,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,"ai_0062_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0063_jpeg70,ai_0063,ai,jpeg70,images/ai/ai_0063_jpeg70.jpg,flux1-schnell,,Apache-2.0,임정민,ai_0063_original의 변형: JPEG q70 4:2:0 재압축
+ai_0063_resize50,ai_0063,ai,resize50,images/ai/ai_0063_resize50.png,flux1-schnell,,Apache-2.0,임정민,"ai_0063_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0063_screenshot,ai_0063,ai,screenshot,images/ai/ai_0063_screenshot.png,flux1-schnell,,Apache-2.0,임정민,"ai_0063_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0064_jpeg70,ai_0064,ai,jpeg70,images/ai/ai_0064_jpeg70.jpg,sdxl,,CreativeML-OpenRAIL++-M,임정민,ai_0064_original의 변형: JPEG q70 4:2:0 재압축
+ai_0064_resize50,ai_0064,ai,resize50,images/ai/ai_0064_resize50.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"ai_0064_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0064_screenshot,ai_0064,ai,screenshot,images/ai/ai_0064_screenshot.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"ai_0064_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0065_jpeg70,ai_0065,ai,jpeg70,images/ai/ai_0065_jpeg70.jpg,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,ai_0065_original의 변형: JPEG q70 4:2:0 재압축
+ai_0065_resize50,ai_0065,ai,resize50,images/ai/ai_0065_resize50.png,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,"ai_0065_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0065_screenshot,ai_0065,ai,screenshot,images/ai/ai_0065_screenshot.png,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,"ai_0065_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0066_jpeg70,ai_0066,ai,jpeg70,images/ai/ai_0066_jpeg70.jpg,flux1-schnell,,Apache-2.0,임정민,ai_0066_original의 변형: JPEG q70 4:2:0 재압축
+ai_0066_resize50,ai_0066,ai,resize50,images/ai/ai_0066_resize50.png,flux1-schnell,,Apache-2.0,임정민,"ai_0066_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0066_screenshot,ai_0066,ai,screenshot,images/ai/ai_0066_screenshot.png,flux1-schnell,,Apache-2.0,임정민,"ai_0066_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0067_jpeg70,ai_0067,ai,jpeg70,images/ai/ai_0067_jpeg70.jpg,sdxl,,CreativeML-OpenRAIL++-M,임정민,ai_0067_original의 변형: JPEG q70 4:2:0 재압축
+ai_0067_resize50,ai_0067,ai,resize50,images/ai/ai_0067_resize50.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"ai_0067_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0067_screenshot,ai_0067,ai,screenshot,images/ai/ai_0067_screenshot.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"ai_0067_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0068_jpeg70,ai_0068,ai,jpeg70,images/ai/ai_0068_jpeg70.jpg,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,ai_0068_original의 변형: JPEG q70 4:2:0 재압축
+ai_0068_resize50,ai_0068,ai,resize50,images/ai/ai_0068_resize50.png,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,"ai_0068_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0068_screenshot,ai_0068,ai,screenshot,images/ai/ai_0068_screenshot.png,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,"ai_0068_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0069_jpeg70,ai_0069,ai,jpeg70,images/ai/ai_0069_jpeg70.jpg,flux1-schnell,,Apache-2.0,임정민,ai_0069_original의 변형: JPEG q70 4:2:0 재압축
+ai_0069_resize50,ai_0069,ai,resize50,images/ai/ai_0069_resize50.png,flux1-schnell,,Apache-2.0,임정민,"ai_0069_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0069_screenshot,ai_0069,ai,screenshot,images/ai/ai_0069_screenshot.png,flux1-schnell,,Apache-2.0,임정민,"ai_0069_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0070_jpeg70,ai_0070,ai,jpeg70,images/ai/ai_0070_jpeg70.jpg,sdxl,,CreativeML-OpenRAIL++-M,임정민,ai_0070_original의 변형: JPEG q70 4:2:0 재압축
+ai_0070_resize50,ai_0070,ai,resize50,images/ai/ai_0070_resize50.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"ai_0070_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0070_screenshot,ai_0070,ai,screenshot,images/ai/ai_0070_screenshot.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"ai_0070_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0071_jpeg70,ai_0071,ai,jpeg70,images/ai/ai_0071_jpeg70.jpg,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,ai_0071_original의 변형: JPEG q70 4:2:0 재압축
+ai_0071_resize50,ai_0071,ai,resize50,images/ai/ai_0071_resize50.png,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,"ai_0071_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0071_screenshot,ai_0071,ai,screenshot,images/ai/ai_0071_screenshot.png,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,"ai_0071_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0072_jpeg70,ai_0072,ai,jpeg70,images/ai/ai_0072_jpeg70.jpg,flux1-schnell,,Apache-2.0,임정민,ai_0072_original의 변형: JPEG q70 4:2:0 재압축
+ai_0072_resize50,ai_0072,ai,resize50,images/ai/ai_0072_resize50.png,flux1-schnell,,Apache-2.0,임정민,"ai_0072_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0072_screenshot,ai_0072,ai,screenshot,images/ai/ai_0072_screenshot.png,flux1-schnell,,Apache-2.0,임정민,"ai_0072_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0073_jpeg70,ai_0073,ai,jpeg70,images/ai/ai_0073_jpeg70.jpg,sdxl,,CreativeML-OpenRAIL++-M,임정민,ai_0073_original의 변형: JPEG q70 4:2:0 재압축
+ai_0073_resize50,ai_0073,ai,resize50,images/ai/ai_0073_resize50.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"ai_0073_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0073_screenshot,ai_0073,ai,screenshot,images/ai/ai_0073_screenshot.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"ai_0073_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0074_jpeg70,ai_0074,ai,jpeg70,images/ai/ai_0074_jpeg70.jpg,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,ai_0074_original의 변형: JPEG q70 4:2:0 재압축
+ai_0074_resize50,ai_0074,ai,resize50,images/ai/ai_0074_resize50.png,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,"ai_0074_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0074_screenshot,ai_0074,ai,screenshot,images/ai/ai_0074_screenshot.png,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,"ai_0074_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0075_jpeg70,ai_0075,ai,jpeg70,images/ai/ai_0075_jpeg70.jpg,flux1-schnell,,Apache-2.0,임정민,ai_0075_original의 변형: JPEG q70 4:2:0 재압축
+ai_0075_resize50,ai_0075,ai,resize50,images/ai/ai_0075_resize50.png,flux1-schnell,,Apache-2.0,임정민,"ai_0075_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0075_screenshot,ai_0075,ai,screenshot,images/ai/ai_0075_screenshot.png,flux1-schnell,,Apache-2.0,임정민,"ai_0075_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0076_jpeg70,ai_0076,ai,jpeg70,images/ai/ai_0076_jpeg70.jpg,sdxl,,CreativeML-OpenRAIL++-M,임정민,ai_0076_original의 변형: JPEG q70 4:2:0 재압축
+ai_0076_resize50,ai_0076,ai,resize50,images/ai/ai_0076_resize50.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"ai_0076_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0076_screenshot,ai_0076,ai,screenshot,images/ai/ai_0076_screenshot.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"ai_0076_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0077_jpeg70,ai_0077,ai,jpeg70,images/ai/ai_0077_jpeg70.jpg,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,ai_0077_original의 변형: JPEG q70 4:2:0 재압축
+ai_0077_resize50,ai_0077,ai,resize50,images/ai/ai_0077_resize50.png,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,"ai_0077_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0077_screenshot,ai_0077,ai,screenshot,images/ai/ai_0077_screenshot.png,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,"ai_0077_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0078_jpeg70,ai_0078,ai,jpeg70,images/ai/ai_0078_jpeg70.jpg,flux1-schnell,,Apache-2.0,임정민,ai_0078_original의 변형: JPEG q70 4:2:0 재압축
+ai_0078_resize50,ai_0078,ai,resize50,images/ai/ai_0078_resize50.png,flux1-schnell,,Apache-2.0,임정민,"ai_0078_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0078_screenshot,ai_0078,ai,screenshot,images/ai/ai_0078_screenshot.png,flux1-schnell,,Apache-2.0,임정민,"ai_0078_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0079_jpeg70,ai_0079,ai,jpeg70,images/ai/ai_0079_jpeg70.jpg,sdxl,,CreativeML-OpenRAIL++-M,임정민,ai_0079_original의 변형: JPEG q70 4:2:0 재압축
+ai_0079_resize50,ai_0079,ai,resize50,images/ai/ai_0079_resize50.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"ai_0079_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0079_screenshot,ai_0079,ai,screenshot,images/ai/ai_0079_screenshot.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"ai_0079_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0080_jpeg70,ai_0080,ai,jpeg70,images/ai/ai_0080_jpeg70.jpg,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,ai_0080_original의 변형: JPEG q70 4:2:0 재압축
+ai_0080_resize50,ai_0080,ai,resize50,images/ai/ai_0080_resize50.png,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,"ai_0080_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0080_screenshot,ai_0080,ai,screenshot,images/ai/ai_0080_screenshot.png,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,"ai_0080_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0081_jpeg70,ai_0081,ai,jpeg70,images/ai/ai_0081_jpeg70.jpg,flux1-schnell,,Apache-2.0,임정민,ai_0081_original의 변형: JPEG q70 4:2:0 재압축
+ai_0081_resize50,ai_0081,ai,resize50,images/ai/ai_0081_resize50.png,flux1-schnell,,Apache-2.0,임정민,"ai_0081_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0081_screenshot,ai_0081,ai,screenshot,images/ai/ai_0081_screenshot.png,flux1-schnell,,Apache-2.0,임정민,"ai_0081_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0082_jpeg70,ai_0082,ai,jpeg70,images/ai/ai_0082_jpeg70.jpg,sdxl,,CreativeML-OpenRAIL++-M,임정민,ai_0082_original의 변형: JPEG q70 4:2:0 재압축
+ai_0082_resize50,ai_0082,ai,resize50,images/ai/ai_0082_resize50.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"ai_0082_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0082_screenshot,ai_0082,ai,screenshot,images/ai/ai_0082_screenshot.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"ai_0082_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0083_jpeg70,ai_0083,ai,jpeg70,images/ai/ai_0083_jpeg70.jpg,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,ai_0083_original의 변형: JPEG q70 4:2:0 재압축
+ai_0083_resize50,ai_0083,ai,resize50,images/ai/ai_0083_resize50.png,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,"ai_0083_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0083_screenshot,ai_0083,ai,screenshot,images/ai/ai_0083_screenshot.png,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,"ai_0083_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0084_jpeg70,ai_0084,ai,jpeg70,images/ai/ai_0084_jpeg70.jpg,flux1-schnell,,Apache-2.0,임정민,ai_0084_original의 변형: JPEG q70 4:2:0 재압축
+ai_0084_resize50,ai_0084,ai,resize50,images/ai/ai_0084_resize50.png,flux1-schnell,,Apache-2.0,임정민,"ai_0084_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0084_screenshot,ai_0084,ai,screenshot,images/ai/ai_0084_screenshot.png,flux1-schnell,,Apache-2.0,임정민,"ai_0084_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0085_jpeg70,ai_0085,ai,jpeg70,images/ai/ai_0085_jpeg70.jpg,sdxl,,CreativeML-OpenRAIL++-M,임정민,ai_0085_original의 변형: JPEG q70 4:2:0 재압축
+ai_0085_resize50,ai_0085,ai,resize50,images/ai/ai_0085_resize50.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"ai_0085_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0085_screenshot,ai_0085,ai,screenshot,images/ai/ai_0085_screenshot.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"ai_0085_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0086_jpeg70,ai_0086,ai,jpeg70,images/ai/ai_0086_jpeg70.jpg,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,ai_0086_original의 변형: JPEG q70 4:2:0 재압축
+ai_0086_resize50,ai_0086,ai,resize50,images/ai/ai_0086_resize50.png,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,"ai_0086_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0086_screenshot,ai_0086,ai,screenshot,images/ai/ai_0086_screenshot.png,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,"ai_0086_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0087_jpeg70,ai_0087,ai,jpeg70,images/ai/ai_0087_jpeg70.jpg,flux1-schnell,,Apache-2.0,임정민,ai_0087_original의 변형: JPEG q70 4:2:0 재압축
+ai_0087_resize50,ai_0087,ai,resize50,images/ai/ai_0087_resize50.png,flux1-schnell,,Apache-2.0,임정민,"ai_0087_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0087_screenshot,ai_0087,ai,screenshot,images/ai/ai_0087_screenshot.png,flux1-schnell,,Apache-2.0,임정민,"ai_0087_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0088_jpeg70,ai_0088,ai,jpeg70,images/ai/ai_0088_jpeg70.jpg,sdxl,,CreativeML-OpenRAIL++-M,임정민,ai_0088_original의 변형: JPEG q70 4:2:0 재압축
+ai_0088_resize50,ai_0088,ai,resize50,images/ai/ai_0088_resize50.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"ai_0088_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0088_screenshot,ai_0088,ai,screenshot,images/ai/ai_0088_screenshot.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"ai_0088_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0089_jpeg70,ai_0089,ai,jpeg70,images/ai/ai_0089_jpeg70.jpg,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,ai_0089_original의 변형: JPEG q70 4:2:0 재압축
+ai_0089_resize50,ai_0089,ai,resize50,images/ai/ai_0089_resize50.png,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,"ai_0089_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0089_screenshot,ai_0089,ai,screenshot,images/ai/ai_0089_screenshot.png,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,"ai_0089_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0090_jpeg70,ai_0090,ai,jpeg70,images/ai/ai_0090_jpeg70.jpg,flux1-schnell,,Apache-2.0,임정민,ai_0090_original의 변형: JPEG q70 4:2:0 재압축
+ai_0090_resize50,ai_0090,ai,resize50,images/ai/ai_0090_resize50.png,flux1-schnell,,Apache-2.0,임정민,"ai_0090_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0090_screenshot,ai_0090,ai,screenshot,images/ai/ai_0090_screenshot.png,flux1-schnell,,Apache-2.0,임정민,"ai_0090_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0091_jpeg70,ai_0091,ai,jpeg70,images/ai/ai_0091_jpeg70.jpg,sdxl,,CreativeML-OpenRAIL++-M,임정민,ai_0091_original의 변형: JPEG q70 4:2:0 재압축
+ai_0091_resize50,ai_0091,ai,resize50,images/ai/ai_0091_resize50.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"ai_0091_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0091_screenshot,ai_0091,ai,screenshot,images/ai/ai_0091_screenshot.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"ai_0091_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0092_jpeg70,ai_0092,ai,jpeg70,images/ai/ai_0092_jpeg70.jpg,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,ai_0092_original의 변형: JPEG q70 4:2:0 재압축
+ai_0092_resize50,ai_0092,ai,resize50,images/ai/ai_0092_resize50.png,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,"ai_0092_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0092_screenshot,ai_0092,ai,screenshot,images/ai/ai_0092_screenshot.png,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,"ai_0092_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0093_jpeg70,ai_0093,ai,jpeg70,images/ai/ai_0093_jpeg70.jpg,flux1-schnell,,Apache-2.0,임정민,ai_0093_original의 변형: JPEG q70 4:2:0 재압축
+ai_0093_resize50,ai_0093,ai,resize50,images/ai/ai_0093_resize50.png,flux1-schnell,,Apache-2.0,임정민,"ai_0093_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0093_screenshot,ai_0093,ai,screenshot,images/ai/ai_0093_screenshot.png,flux1-schnell,,Apache-2.0,임정민,"ai_0093_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0094_jpeg70,ai_0094,ai,jpeg70,images/ai/ai_0094_jpeg70.jpg,sdxl,,CreativeML-OpenRAIL++-M,임정민,ai_0094_original의 변형: JPEG q70 4:2:0 재압축
+ai_0094_resize50,ai_0094,ai,resize50,images/ai/ai_0094_resize50.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"ai_0094_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0094_screenshot,ai_0094,ai,screenshot,images/ai/ai_0094_screenshot.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"ai_0094_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0095_jpeg70,ai_0095,ai,jpeg70,images/ai/ai_0095_jpeg70.jpg,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,ai_0095_original의 변형: JPEG q70 4:2:0 재압축
+ai_0095_resize50,ai_0095,ai,resize50,images/ai/ai_0095_resize50.png,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,"ai_0095_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0095_screenshot,ai_0095,ai,screenshot,images/ai/ai_0095_screenshot.png,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,"ai_0095_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0096_jpeg70,ai_0096,ai,jpeg70,images/ai/ai_0096_jpeg70.jpg,flux1-schnell,,Apache-2.0,임정민,ai_0096_original의 변형: JPEG q70 4:2:0 재압축
+ai_0096_resize50,ai_0096,ai,resize50,images/ai/ai_0096_resize50.png,flux1-schnell,,Apache-2.0,임정민,"ai_0096_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0096_screenshot,ai_0096,ai,screenshot,images/ai/ai_0096_screenshot.png,flux1-schnell,,Apache-2.0,임정민,"ai_0096_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0097_jpeg70,ai_0097,ai,jpeg70,images/ai/ai_0097_jpeg70.jpg,sdxl,,CreativeML-OpenRAIL++-M,임정민,ai_0097_original의 변형: JPEG q70 4:2:0 재압축
+ai_0097_resize50,ai_0097,ai,resize50,images/ai/ai_0097_resize50.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"ai_0097_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0097_screenshot,ai_0097,ai,screenshot,images/ai/ai_0097_screenshot.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"ai_0097_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0098_jpeg70,ai_0098,ai,jpeg70,images/ai/ai_0098_jpeg70.jpg,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,ai_0098_original의 변형: JPEG q70 4:2:0 재압축
+ai_0098_resize50,ai_0098,ai,resize50,images/ai/ai_0098_resize50.png,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,"ai_0098_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0098_screenshot,ai_0098,ai,screenshot,images/ai/ai_0098_screenshot.png,sdxl-lightning,,CreativeML-OpenRAIL++-M,임정민,"ai_0098_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0099_jpeg70,ai_0099,ai,jpeg70,images/ai/ai_0099_jpeg70.jpg,flux1-schnell,,Apache-2.0,임정민,ai_0099_original의 변형: JPEG q70 4:2:0 재압축
+ai_0099_resize50,ai_0099,ai,resize50,images/ai/ai_0099_resize50.png,flux1-schnell,,Apache-2.0,임정민,"ai_0099_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0099_screenshot,ai_0099,ai,screenshot,images/ai/ai_0099_screenshot.png,flux1-schnell,,Apache-2.0,임정민,"ai_0099_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
+ai_0100_jpeg70,ai_0100,ai,jpeg70,images/ai/ai_0100_jpeg70.jpg,sdxl,,CreativeML-OpenRAIL++-M,임정민,ai_0100_original의 변형: JPEG q70 4:2:0 재압축
+ai_0100_resize50,ai_0100,ai,resize50,images/ai/ai_0100_resize50.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"ai_0100_original의 변형: 가로·세로 50% bicubic 축소, PNG"
+ai_0100_screenshot,ai_0100,ai,screenshot,images/ai/ai_0100_screenshot.png,sdxl,,CreativeML-OpenRAIL++-M,임정민,"ai_0100_original의 변형: 긴 변 1080px bilinear 축소(이미 작으면 그대로), PNG"
