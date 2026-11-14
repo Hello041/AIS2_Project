@@ -1,8 +1,9 @@
 """검증 데이터 전체를 detector로 채점해 ml/scores.csv에 저장한다 (계획서 B6).
 
-    python ml/score_samples.py                      # manifest 전체, 모델은 DETECTORS 또는 기본(univfd, aide, bfree)
+    python ml/score_samples.py                      # manifest 전체, 모델은 DETECTORS 또는 기본(commfor, aide, bfree)
     python ml/score_samples.py --limit 5            # 시험: 아직 안 한 것 중 5장만
-    python ml/score_samples.py --models univfd,aide # 일부 모델만 (새 파일로 시작할 때)
+    python ml/score_samples.py --models commfor,aide # 일부 모델만 (새 파일로 시작할 때)
+    python ml/score_samples.py --manifest ml/data/holdout/manifest.csv --out ml/scores_holdout.csv   # 확인용 데이터
 
 - 서버(inference/main.py)와 같은 detector를 쓴다 → 점수가 서버 결과와 같다.
 - 한 장 끝날 때마다 바로 저장한다. 끊겨도 다시 실행하면 이미 채점한 image_id는 건너뛴다.
@@ -39,6 +40,7 @@ def main() -> None:
     p.add_argument("--models", help="쉼표 구분 (없으면 DETECTORS 환경 변수 또는 기본값)")
     p.add_argument("--out", default=str(ROOT / "ml" / "scores.csv"))
     p.add_argument("--limit", type=int, help="이번에 채점할 최대 장수 (시험용)")
+    p.add_argument("--manifest", default=str(MANIFEST), help="대상 manifest (기본 ml/data/manifest.csv)")
     args = p.parse_args()
 
     models = args.models.split(",") if args.models else active_names()
@@ -54,7 +56,7 @@ def main() -> None:
                          "모델 구성을 바꿨다면 다른 --out으로 새로 시작하세요.")
             done = {r["image_id"] for r in reader}
 
-    with MANIFEST.open(encoding="utf-8-sig", newline="") as f:
+    with Path(args.manifest).open(encoding="utf-8-sig", newline="") as f:
         rows = list(csv.DictReader(f))
     todo = [r for r in rows if r["image_id"] not in done]
     if args.limit is not None:

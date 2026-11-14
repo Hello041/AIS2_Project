@@ -12,7 +12,7 @@ ml/data/*
 !ml/data/*.py
 
 # 채점 결과 (score_samples.py가 생성)
-ml/scores.csv
+ml/scores*.csv
 
 # Python
 __pycache__/

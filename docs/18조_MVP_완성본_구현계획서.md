@@ -14,7 +14,7 @@
 
 11/18에 **간단한 데모 프로토타입**을 시연한다. 시연 흐름은 다음과 같다.
 
-> 휴대폰 앱에서 이미지 한 장 선택 → 노트북의 추론 서버가 모델 3종(UnivFD, AIDE, B-Free)으로 분석 → 결과 화면에 **종합 판정 배지**와 **모델별 3구간 막대**, 참고용 안내 문구 표시
+> 휴대폰 앱에서 이미지 한 장 선택 → 노트북의 추론 서버가 모델 3종(Community Forensics, AIDE, B-Free)으로 분석 → 결과 화면에 **종합 판정 배지**와 **모델별 3구간 막대**, 참고용 안내 문구 표시
 
 기획서 기준으로 Sprint 1 프로토타입("앱에서 이미지를 선택하면 추론 서버가 AI 탐지 점수를 돌려주고, 세 구간으로 표시")에 해당한다. 여기에 더해 **앙상블(점수 보정 + 스태킹)을 단계적 목표로 포함**한다. 진행 상황에 따라 어느 단계까지 넣을지 정한다(§5.3).
 
@@ -69,9 +69,10 @@ AIS2_Project/            # https://github.com/Hello041/AIS2_Project
 │  ├─ main.py            # /health, /analyze
 │  ├─ detectors/         # 모델별 모듈 1개씩
 │  │  ├─ base.py         # Detector 인터페이스
-│  │  ├─ univfd.py
+│  │  ├─ commfor.py      # Community Forensics, UnivFD 대체 (2026-11-14, §7)
 │  │  ├─ aide.py
-│  │  └─ bfree.py       # NPR 대체 (2026-11-10, §7)
+│  │  ├─ bfree.py       # NPR 대체 (2026-11-10, §7)
+│  │  └─ univfd.py      # 비교·재현용으로 남김 (활성 아님)
 │  ├─ banding.py         # 원점수→구간, 종합 판정(규칙/스태킹)
 │  ├─ provenance.py      # (여유 시) C2PA·EXIF
 │  ├─ thresholds.yaml    # 모델별 경계값
@@ -99,14 +100,14 @@ AIS2_Project/            # https://github.com/Hello041/AIS2_Project
 
 ```python
 class Detector:
-    name: str                              # "univfd" | "aide" | "bfree"
+    name: str                              # "commfor" | "aide" | "bfree"
     def load(self) -> None: ...            # 서버 시작 시 1회 호출
     def score(self, img: PIL.Image) -> float:
         """0~1 원점수. 클수록 AI 생성 쪽. 확률이 아님."""
 ```
 
 - 모든 모델은 원점수를 **0~1 범위, 클수록 AI 생성 쪽**으로 맞춰서 반환한다(필요하면 sigmoid를 적용). 이렇게 해야 경계값을 같은 방식으로 다룰 수 있다.
-- UnivFD는 CLIP의 **이미지 인코더만** 올린다. 텍스트 인코더는 쓰지 않으므로 메모리를 약 0.5GB 아낄 수 있다.
+- UnivFD는 CLIP의 **이미지 인코더만** 올린다. 텍스트 인코더는 쓰지 않으므로 메모리를 약 0.5GB 아낄 수 있다. (2026-11-14 Community Forensics로 교체되어 활성 아님)
 - 모델은 서버를 시작할 때 모두 올려 두고, 요청마다 다시 올리지 않는다.
 - 추론은 `torch.inference_mode()`, 배치 크기 1로 한다.
 
@@ -114,7 +115,7 @@ class Detector:
 
 ```yaml
 # 임시값. 검증 이미지 점수 분포를 보고 모델별로 조정한다.
-univfd: { low: 0.3, high: 0.7 }
+commfor: { low: 0.3, high: 0.7 }
 aide:   { low: 0.3, high: 0.7 }
 bfree:  { low: 0.3, high: 0.7 }
 ```
@@ -122,6 +123,18 @@ bfree:  { low: 0.3, high: 0.7 }
 - `score < low` → `weak`(AI 흔적 약함)
 - `low ≤ score ≤ high` → `uncertain`(판단하기 어려움)
 - `score > high` → `strong`(AI 흔적 강함)
+
+**결정 (2026-11-14, B6): 검증 데이터 800장으로 경계값을 정했다.** 모델별로 `high`는 실제 사진 400장의 FPR이 약 5%가 되는 값, `low`는 AI 이미지 400장의 대부분이 넘는 값이다. 문제가 생기면 같은 절차로 다시 조정한다.
+
+| 모델 | low | high | 모델 FPR | AI→strong | AI→weak |
+|---|---|---|---|---|---|
+| Community Forensics | 0.0025 | 0.032 | 5.2% | 89% | 5.2% |
+| AIDE | 0.10 | 0.92 | 5.5% | 14% | 13% |
+| B-Free | 0.10 | 0.13 | 5.0% | 93% | 6% |
+
+- 단계 0 규칙 종합 판정(800장): 실제→`strong` 0.25%(1장, resize50), 실제→`weak` 79%, AI→`strong` 74%, AI→`weak` 0.75%, `uncertain` 23%.
+- 처음(같은 날) UnivFD(0.0005/0.39)로 정했을 때는 AI→`strong`이 22%였다. 규칙상 두 모델 이상이 `strong`이어야 하는데 UnivFD·AIDE가 `strong`을 거의 내지 않았기 때문이다. UnivFD를 Community Forensics로 바꾼 뒤 74%가 됐다(§7 '11/14 모델 교체').
+- 데이터 분석: `ml/reports/scores_분석_2026-11-12.md`. 한계: 실제 사진 출처 1곳(RAISE 풍경), 독립 원본 실제 100장.
 
 ### 5.3 종합 판정 — `banding.overall()`
 
@@ -147,7 +160,7 @@ bfree:  { low: 0.3, high: 0.7 }
 
 ```yaml
 # ensemble.yaml — ml/fit_ensemble.py가 생성. 손으로 고치지 않는다.
-calibration: { univfd: [a, b], aide: [a, b], bfree: [a, b] }
+calibration: { commfor: [a, b], aide: [a, b], bfree: [a, b] }
 stacking:    { weights: [w1, w2, w3], bias: c }
 disagreement_tau: 0.5
 bands:       { low: t_low, high: t_high }
@@ -167,7 +180,7 @@ trained_on:  "mvp-200 (2026-11-xx)"
 **`GET /health`** — 앱이 홈 화면에 들어올 때 호출해 연결을 확인한다.
 
 ```json
-{ "status": "ok", "models": ["univfd", "aide", "bfree"] }
+{ "status": "ok", "models": ["commfor", "aide", "bfree"] }
 ```
 
 **`POST /analyze`** — `multipart/form-data`, 필드 이름은 `image`
@@ -179,7 +192,7 @@ trained_on:  "mvp-200 (2026-11-xx)"
   "overall": "uncertain",
   "overall_method": "stacking",
   "models": [
-    { "name": "univfd", "raw_score": 0.52, "band": "uncertain" },
+    { "name": "commfor", "raw_score": 0.52, "band": "uncertain" },
     { "name": "aide",   "raw_score": 0.81, "band": "strong" },
     { "name": "bfree",  "raw_score": 0.12, "band": "weak" }
   ],
@@ -218,7 +231,7 @@ trained_on:  "mvp-200 (2026-11-xx)"
    - AI 탐지: **모델별 3칸 막대 3줄**. 해당 구간만 강조하고, 숫자와 점(●)은 표시하지 않는다
 
      ```
-     UnivFD  [ 약함 ][■어려움■][ 강함 ]
+     CommFor [ 약함 ][■어려움■][ 강함 ]
      AIDE    [ 약함 ][ 어려움 ][■강함■]
      B-Free  [■약함■][ 어려움 ][ 강함 ]
      ※ 모델별 추정 구간이며 확률이 아닙니다.
@@ -297,6 +310,48 @@ trained_on:  "mvp-200 (2026-11-xx)"
 - B-Free: Guillaro et al., CVPR 2025, [grip-unina/B-Free](https://github.com/grip-unina/B-Free). **라이선스는 정보·비영리 목적만**(수업 데모 가능, 상업 서비스 불가), 결과를 공개할 때 원저자 인용 필수. 의존성으로 timm 1.0.12 필요(AIDE 점수는 0.9.6과 동일 확인).
 - 한계: 실제 사진 출처가 RAISE 하나, 주제가 풍경 하나다. 휴대폰 사진과 변형 버전(jpeg70·resize50·screenshot)으로 다시 확인해야 한다(B6).
 - 앙상블 단계 1 진행 여부: 미정 (조건은 충족). B-Free 단독도 비교 대상에 넣는다(§12.4 기준: 스태킹이 단일 최고 모델보다 FPR이 낮지 않으면 단일 최고 모델).
+
+**11/14 모델 교체: UnivFD → Community Forensics**
+
+- 계기: C2(`ml/fit_ensemble.py`) 비교에서 단계 0 규칙이 AI를 22%만 `strong`으로 잡았다(FPR 0.2%). UnivFD(AUC 0.60)·AIDE가 `strong`을 거의 내지 않아 B-Free의 판단이 다수결에서 묻혔다. 스태킹은 가중치가 B-Free에 몰려(UnivFD ≈ 0) B-Free 단일과 사실상 같았고, FPR이 규칙보다 높아 채택 기준(§5.3)을 넘지 못했다. 채택 기준을 바꾸는 대신 약한 모델을 교체하기로 했다.
+- **결정 (2026-11-14): UnivFD를 Community Forensics(Park & Owens, CVPR 2025)로 교체한다.** AIDE·B-Free는 유지. `detectors/univfd.py`는 지우지 않고 기본 모델에서만 뺐다.
+- 선정 근거: 공개 탐지기를 그대로 비교한 독립 벤치마크(arXiv 2602.07814)에서 1위, 생성기 4,803종으로 학습, 코드·가중치 MIT, ViT-S/16(384)로 CPU 장당 약 0.5초.
+- 검증 데이터 800장 결과 (`ml/scores.csv`, 같은 detector 코드로 채점):
+
+  | 모델 | AUC | original | jpeg70 | resize50 | screenshot | flux1-schnell |
+  |---|---|---|---|---|---|---|
+  | UnivFD (교체 전) | 0.603 | 0.660 | 0.584 | 0.512 | 0.669 | — |
+  | **Community Forensics** | **0.974** | 0.978 | 0.973 | **0.984** | 0.978 | 0.922 |
+  | B-Free | 0.969 | 0.999 | 0.995 | 0.875 | 0.999 | 0.906 |
+
+  - B-Free와 오탐이 거의 겹치지 않는다: 모델별 FPR 5% 기준 실제 사진 오탐이 각 20장, 공통 1장. B-Free가 놓친 축소 FLUX 이미지 24장 중 18장을 잡는다.
+- 종합 판정 (5-fold, `ml/reports/ensemble_compare.md`):
+
+  | 모델 구성 | 방식 | FPR | AI→`strong` | AI→`weak` | 판정 정확도 | `uncertain` |
+  |---|---|---|---|---|---|---|
+  | UnivFD + AIDE + B-Free | 규칙 | 0.2% | 22.0% | 4.0% | 95.4% | 54% |
+  | **Community Forensics + AIDE + B-Free** | **규칙** | **0.2%** | **73.8%** | **0.8%** | **99.3%** | **23%** |
+  | Community Forensics + AIDE + B-Free | 스태킹 | 5.8% | 96.0% | 4.0% | 95.1% | 0% |
+
+  - 채택 기준(§5.3)은 그대로다. 스태킹은 FPR이 규칙보다 높아 여전히 미충족 → **단계 0 규칙으로 시연**(C4에서 최종 확인).
+- 참고: Community Forensics·B-Free가 모두 `strong`인데 AIDE가 `weak`이면 규칙 ①(strong·weak 공존)로 `uncertain`이 된다. 두 모델만 쓰면 AI→`strong` 84%지만, 화면·계획이 모델 3개를 전제로 하므로 AIDE는 유지한다.
+- 한계: 경계값을 800장 전체로 정해 규칙 수치가 약간 유리하다. 실제 사진 출처 1곳(RAISE 풍경), 독립 원본 실제 100장.
+- 영향: §12.4 히트맵 후보(UnivFD Attention Rollout)와 UnivFD 전이학습은 교체 후 재검토.
+
+**확인용 평가 전 설정 고정 (2026-11-14)**
+
+모델 선택·경계값을 모두 같은 800장으로 정했으므로, 처음 보는 데이터로 **한 번만** 확인한다(`holdout_kit/README.md` '평가 규칙'). 평가 전에 아래 설정을 고정하고, 결과를 본 뒤에는 바꾸지 않는다. 결과가 나빠 설정을 바꾸게 되면 그 사실과 원래 결과를 함께 보고하고, 바꾼 설정은 새 확인용 데이터 없이는 '확인됨'이라고 쓰지 않는다.
+
+| 항목 | 고정값 |
+|---|---|
+| 모델 | Community Forensics(`commfor`, HF 리비전 `6076002`), AIDE(`sd14_train.pth`), B-Free(`BFREE_dino2reg4`) — sha256은 `download_weights.py`의 `KNOWN_SHA256` |
+| 경계값 | commfor 0.0025/0.032, aide 0.10/0.92, bfree 0.10/0.13 (`thresholds.yaml`, 이 날짜 작업본 sha256 `4a37e14a…fb8bd08`) |
+| 종합 판정 | 단계 0 규칙(`banding.overall`), `ensemble.yaml` 없음 |
+| 목표 | 실제 사진 FPR ≤ 5% (§12.4). 추정값과 95% 신뢰구간 상한을 함께 보고 |
+| 데이터 | `holdout_kit`로 수집한 실제(RAISE) 250 + AI(Cloudflare 3종) 250 원본, 기존 800장과 겹치지 않음. 기존과 같은 변환(`ml/data/build_holdout.py`)과 변형 3종(`make_variants.py --manifest`)으로 2,000장 |
+| 평가 | `ml/score_samples.py --manifest ml/data/holdout/manifest.csv --out ml/scores_holdout.csv` → `ml/eval_holdout.py` 한 번. 보고: FPR·실제→약함·AI→강함·AI→약함·판정 정확도·어려움, 원본 ID 단위 부트스트랩 95% 신뢰구간, 변형·카테고리·생성기·모델별 |
+
+- 한계(보고서에 적을 것): 실제 사진은 RAISE(야외, Nikon DSLR)뿐이라 실내·휴대폰 사진은 없다. AI 생성기는 기존과 같은 3종이라 처음 보는 생성기 성능은 알 수 없다.
 
 ## 8. 주차별 일정
 
@@ -466,6 +521,8 @@ trained_on:  "mvp-200 (2026-11-xx)"
 
 #### UnivFD 전이학습 (조건부)
 
+- **교체 후 재검토 필요 (2026-11-14):** UnivFD가 Community Forensics로 교체되어 활성 모델이 아니다. Sprint 2 시작 때 대상(Community Forensics 분류층 등)을 다시 정한다.
+
 - 조건: 앙상블 단계 2와 판정 안정성이 끝난 뒤 시간이 남을 때만 진행한다.
 - 방식: CLIP 이미지 인코더는 고정하고 분류층만 재학습한다. GenImage 등 공개 데이터셋 일부에서 특징을 한 번 추출해 두고 선형층만 학습하므로 CPU로도 할 수 있다. 데이터는 검증 데이터 800장과 겹치지 않게 한다.
 - 전이학습 후에는 점수 분포가 바뀌므로 `score_samples.py` → `fit_ensemble.py`를 다시 돌린다.
@@ -550,7 +607,7 @@ usage_daily (
   "nonce": "…",
   "overall": "uncertain",
   "overall_method": "stacking",
-  "models": [{ "name": "univfd", "raw_score": 0.52, "band": "uncertain" }],
+  "models": [{ "name": "commfor", "raw_score": 0.52, "band": "uncertain" }],
   "provenance": { "c2pa": "none", "summary": null, "exif": { "camera": null, "software": null } },
   "heatmap": { "model": "npr", "png_base64": "…" },   // NPR 교체 후 대표 모델 재선정 필요 (§12.4)
   "robustness": [{ "variant": "original", "band": "uncertain" }],

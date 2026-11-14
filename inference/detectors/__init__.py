@@ -19,7 +19,7 @@ __all__ = [
     "DEFAULT_DETECTORS", "active_names", "get_detector_class", "create_detectors",
 ]
 
-DEFAULT_DETECTORS = ("univfd", "aide", "bfree")  # 2026-11-10 NPR → B-Free (계획서 §7 '11/10 점검 결과')
+DEFAULT_DETECTORS = ("commfor", "aide", "bfree")  # 2026-11-10 NPR → B-Free, 2026-11-14 UnivFD → Community Forensics (계획서 §7)
 _NAME = re.compile(r"^[a-z][a-z0-9_]*$")
 
 

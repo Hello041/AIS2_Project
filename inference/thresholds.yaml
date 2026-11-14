@@ -1,15 +1,20 @@
 # 모델별 원점수 경계값 (계획서 §5.2).
-# 활성 모델: univfd, aide, bfree — 서버 기본 모델(detectors.DEFAULT_DETECTORS)과 같아야 한다.
+# 활성 모델: commfor, aide, bfree — 서버 기본 모델(detectors.DEFAULT_DETECTORS)과 같아야 한다.
 # 활성 모델의 경계값이 없으면 /analyze가 판정하지 못한다(banding.ThresholdError → 500).
-#
-# ※ 세 모델 모두 임시값이다(미확정). 검증 이미지 점수 분포(ml/score_samples.py → ml/scores.csv)를 보고
-#   모델별로 확정한다(B6). 확정하면 해당 줄 주석에 근거(날짜, 데이터 장수, 기준)를 남긴다.
-# ※ bfree: 2026-11-11 기준 점수 원자료(scores.csv)가 저장소에 없어 §5.2 임시값을 그대로 둔다. 확정값 아님.
-# ※ NPR은 2026-11-10 B-Free로 교체되어 활성 설정에서 뺐다(과거 기록: 계획서 §7 '11/10 점검 결과').
+# ※ NPR은 2026-11-10 B-Free로, UnivFD는 2026-11-14 Community Forensics(commfor)로 교체되어 활성 설정에서 뺐다(계획서 §7).
+#   과거 UnivFD 경계값(2026-11-14 B6): low 0.0005, high 0.39.
 #
 #   score < low          → weak       (AI 흔적 약함)
 #   low ≤ score ≤ high   → uncertain  (판단하기 어려움)
 #   score > high         → strong     (AI 흔적 강함)
-univfd: { low: 0.3, high: 0.7 }   # 임시 (§5.2)
-aide:   { low: 0.3, high: 0.7 }   # 임시 (§5.2)
-bfree:  { low: 0.3, high: 0.7 }   # 임시 (§5.2), B-Free 점수 분포로 미검증
+#
+# 근거 (2026-11-14, B6 절차 3·4번): ml/scores.csv 800장
+#   = 실제 400(RAISE 원본 100 + jpeg70·resize50·screenshot) + AI 400(sdxl·sdxl-lightning·flux1-schnell 원본 100 + 같은 변형).
+#   high: 모델별로 실제 사진 400장 중 strong 비율(FPR)이 약 5%가 되는 값.
+#   low:  AI 이미지 400장의 대부분이 넘는 값.
+#   단계 0 규칙 종합 판정(800장, commfor·aide·bfree): 실제→strong 0.25%(1장), 실제→weak 79%, AI→strong 74%, AI→weak 0.75%, uncertain 23%.
+#   분석: ml/reports/scores_분석_2026-11-12.md, ml/reports/ensemble_compare.md. 문제가 생기면 같은 절차로 다시 조정한다.
+#   ※ 독립 원본은 실제 100장뿐이라(변형은 같은 원본에서 만듦) FPR 1%p 차이는 표본 오차 범위다.
+commfor: { low: 0.0025, high: 0.032 }  # FPR 5.2%, AI→strong 89%, AI→weak 5.2%
+aide:    { low: 0.10,   high: 0.92 }   # FPR 5.5%, AI→strong 14%, AI→weak 13%
+bfree:   { low: 0.10,   high: 0.13 }   # FPR 5.0%, AI→strong 93%, AI→weak 6%
