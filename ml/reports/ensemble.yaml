@@ -1,0 +1,22 @@
+# ensemble.yaml — ml/fit_ensemble.py가 생성. 손으로 고치지 않는다 (계획서 §5.3).
+calibration:
+  commfor:
+  - 21.278677
+  - -1.976754
+  aide:
+  - 2.064501
+  - -0.757866
+  bfree:
+  - 8.586041
+  - -2.70092
+stacking:
+  weights:
+  - 3.858678
+  - 1.089199
+  - 4.915065
+  bias: -4.105773
+disagreement_tau: 1.0
+bands:
+  low: 0.165605
+  high: 0.165605
+trained_on: 800장 (실제 400, AI 400, 2026-11-14)
