@@ -1,7 +1,7 @@
 """서버(main.py) ↔ 실제 banding.py·thresholds.yaml 연결 테스트. 모델 가중치 없이 DummyDetector로 돈다.
 
 - test_api.py는 main.banding을 가짜로 바꿔 끼우므로, 실제 판정 로직과의 연결은 여기서 확인한다.
-- 가짜 모델 이름은 활성 모델(univfd, aide, bfree)을 쓴다. 실제 AI 모델은 로드·추론하지 않는다.
+- 가짜 모델 이름은 활성 모델(commfor, aide, bfree)을 쓴다. 실제 AI 모델은 로드·추론하지 않는다.
 - 경계값이 B6에서 바뀌어도 깨지지 않게, 각 모델의 점수는 실제 thresholds.yaml 값에서 구간별로 계산한다.
 - httpx(TestClient) 없이 ASGI 앱을 직접 호출한다.
 - main.create_app이 없는 브랜치(서버 통합 전)에서는 모듈 전체를 건너뛴다.
@@ -23,7 +23,7 @@ if not hasattr(main, "create_app"):
 from detectors import DEFAULT_DETECTORS  # noqa: E402
 from detectors.dummy import DummyDetector  # noqa: E402
 
-ACTIVE = ("univfd", "aide", "bfree")
+ACTIVE = ("commfor", "aide", "bfree")
 BOUNDARY = b"----ais2-test-boundary"
 
 
@@ -136,7 +136,7 @@ def test_model_without_threshold_is_not_judged():
     """경계값 없는 모델(예: 제거한 npr)이 활성화되면 판정하지 않는다.
     현재 main.py는 시작 시 경계값을 검사하지 않아 /analyze가 500이 된다. 시작 검사를 추가하면 서버가
     시작되지 않아야 한다 — 둘 다 '잘못된 판정을 내보내지 않음'으로 통과시킨다."""
-    dets = [DummyDetector("univfd", 0.5), DummyDetector("aide", 0.5), DummyDetector("npr", 0.5)]
+    dets = [DummyDetector("commfor", 0.5), DummyDetector("aide", 0.5), DummyDetector("npr", 0.5)]
     try:
         [(status, body)] = call(dets, analyze_request())
     except Exception:
