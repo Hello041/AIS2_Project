@@ -7,7 +7,9 @@ from __future__ import annotations
 
 import math
 from abc import ABC, abstractmethod
+from dataclasses import dataclass
 
+import numpy as np
 from PIL import Image
 
 
@@ -44,6 +46,21 @@ def check_score(value: object, name: str = "?") -> float:
     if math.isnan(score) or not 0.0 <= score <= 1.0:
         raise ScoreRangeError(f"[{name}] 원점수가 [0, 1] 밖입니다: {score!r}")
     return score
+
+
+@dataclass
+class Explanation:
+    """모델 주목 영역 (히트맵 원자료). 판정과 무관한 참고 정보다.
+
+    - ``values``: 이미지를 ``cell``×``cell`` 픽셀 칸으로 나눈 격자(행, 열)의 주목도. 클수록 더 주목.
+      모델이 **보지 않은 칸은 NaN**이다(분석 범위 밖). 격자 밖(오른쪽·아래 자투리)도 범위 밖이다.
+    - ``cell``: 격자 한 칸의 픽셀 크기. 좌표는 디코딩된 이미지의 저장 방향(EXIF 회전 적용 전) 기준.
+    - ``method``: 계산 방법 이름 (예: "attention_rollout").
+    """
+
+    values: np.ndarray
+    cell: int
+    method: str
 
 
 class Detector(ABC):
@@ -84,6 +101,29 @@ class Detector(ABC):
         if not self._loaded:
             raise RuntimeError(f"[{self.name}] load()를 먼저 호출해야 합니다")
         return check_score(self._score(to_rgb(img)), self.name)
+
+    # ---------------------------------------------------------------- 히트맵 (선택 기능)
+    #: 히트맵을 만들 수 있는 모델만 True. main.py는 이 값과 HEATMAP_MODEL로 대상을 고른다.
+    supports_explanation: bool = False
+
+    def score_and_explain(self, img: Image.Image) -> tuple[float, Explanation | None]:
+        """원점수와 주목 영역을 **같은 추론 한 번**으로 얻는다.
+
+        원점수는 ``score()``와 같아야 한다(주목 영역 수집이 판정에 영향을 주면 안 된다).
+        주목 영역 계산이 실패하면 예외 대신 ``None``을 돌려준다 — 판정은 그대로 진행돼야 하므로.
+        지원하지 않는 모델은 ``(score(img), None)``.
+        """
+        if not self._loaded:
+            raise RuntimeError(f"[{self.name}] load()를 먼저 호출해야 합니다")
+        rgb = to_rgb(img)
+        if not self.supports_explanation:
+            return check_score(self._score(rgb), self.name), None
+        score, explanation = self._score_and_explain(rgb)
+        return check_score(score, self.name), explanation
+
+    def _score_and_explain(self, img: Image.Image) -> tuple[float, Explanation | None]:
+        """하위 클래스가 supports_explanation=True일 때 구현한다. RGB 이미지만 받는다."""
+        return self._score(img), None
 
     @abstractmethod
     def _load(self) -> None:
