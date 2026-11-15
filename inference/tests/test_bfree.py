@@ -39,6 +39,19 @@ def test_matches_official_demo_results(bfree):
 
 
 @needs_weights
+@pytest.mark.parametrize("fn", ["img0000.png", "img0002.png"])  # 실제 1장, AI 1장 (metainfo.csv 라벨 0/1)
+def test_score_and_explain_keeps_score_identical(bfree, fn):
+    """히트맵용 어텐션 수집(hook으로 읽기만)이 판정 점수를 비트 단위로 바꾸지 않는지."""
+    img = Image.open(DEMO / fn).convert("RGB")
+    score, ex = bfree.score_and_explain(img)
+    assert score == bfree.score(img)
+    w, h = img.size
+    assert ex is not None and ex.values.shape == (h // 14, w // 14) and ex.cell == 14
+    seen = ~np.isnan(ex.values)
+    assert seen.mean() > 0.8 and (ex.values[seen] >= 0).all()
+
+
+@needs_weights
 @pytest.mark.parametrize("size,mode", [((640, 480), "RGB"), ((100, 80), "RGB"), ((300, 300), "RGBA"), ((257, 199), "L")])
 def test_score_in_range_for_various_inputs(bfree, size, mode):
     rng = np.random.default_rng(0)
