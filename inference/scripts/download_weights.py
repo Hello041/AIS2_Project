@@ -1,11 +1,11 @@
 """모델 공식 코드와 가중치를 내려받는다.
 
-    python inference/scripts/download_weights.py              # 사용 중인 모델 전부 (univfd, aide, bfree)
-    python inference/scripts/download_weights.py --only bfree # 일부 (univfd,aide,bfree / npr은 비교 재현용)
+    python inference/scripts/download_weights.py              # 사용 중인 모델 전부 (commfor, aide, bfree)
+    python inference/scripts/download_weights.py --only bfree # 일부 (commfor,aide,bfree / univfd·npr은 비교 재현용)
     python inference/scripts/download_weights.py --list       # 받지 않고 URL·저장 경로만 출력
 
-- 공식 코드: inference/third_party/{univfd,npr,aide,bfree}/ (커밋 고정, git 제외)
-- 가중치:   inference/weights/{univfd,npr,aide,bfree}/  (git 제외)
+- 공식 코드: inference/third_party/{commfor,univfd,npr,aide,bfree}/ (커밋 고정, git 제외)
+- 가중치:   inference/weights/{commfor,univfd,npr,aide,bfree}/  (git 제외)
 - 이미 있는 파일은 건너뛴다. 끝나면 파일마다 크기와 sha256을 출력한다.
 - AIDE 체크포인트는 Google Drive에 있어 gdown이 필요하다.
 """
@@ -28,11 +28,14 @@ CODE = {
     "npr": ("chuangchuangtan/NPR-DeepfakeDetection", "781ced3f7ca2cdc69ec9dd4ef27e8d0b3c07752a"),
     "aide": ("shilinyan99/AIDE", "6725b710d5c437ab2f59792908ce0377dfc907de"),
     "bfree": ("grip-unina/B-Free", "c6a9f898782fb466b29af01f21960b67415afb0e"),
+    "commfor": ("JeongsooP/Community-Forensics", "ee5b71d43db0f3779e1edd64ee927b13f2dd6ad4"),
 }
 
 # (모델, 저장 경로[weights/ 기준], 출처). 출처는 URL, ("gdrive_folder", 폴더 ID, 파일 이름),
 # 또는 ("zip", URL, zip 안의 경로) — zip을 받아 해당 파일만 저장 경로에 푼다.
 BFREE_ZIP = "https://www.grip.unina.it/download/prog/B-Free/weights/BFREE_dino2reg4.zip"  # MD5 f3f53fa6…a198 (공식)
+# Community Forensics: Hugging Face OwensLab/commfor-model-384 (MIT), 리비전 고정
+COMMFOR_HF = "https://huggingface.co/OwensLab/commfor-model-384/resolve/6076002bf0d9dd37537f965ee2f06f826c333b61"
 FILES = [
     ("univfd", "univfd/fc_weights.pth",
      f"https://raw.githubusercontent.com/{CODE['univfd'][0]}/{CODE['univfd'][1]}/pretrained_weights/fc_weights.pth"),
@@ -46,6 +49,8 @@ FILES = [
     ("bfree", "bfree/BFREE_dino2reg4/config.yaml", ("zip", BFREE_ZIP, "BFREE_dino2reg4/config.yaml")),
     ("bfree", "bfree/BFREE_dino2reg4/model_epoch_best.pth",
      ("zip", BFREE_ZIP, "BFREE_dino2reg4/model_epoch_best.pth")),
+    ("commfor", "commfor/config.json", f"{COMMFOR_HF}/config.json"),
+    ("commfor", "commfor/model.safetensors", f"{COMMFOR_HF}/model.safetensors"),
 ]
 
 # 알려진 sha256. 다르면 경고하고 종료 코드 1. ViT-L-14.pt는 OpenAI가 URL에 넣어 둔 값,
@@ -58,7 +63,11 @@ KNOWN_SHA256 = {
     # B-Free: 공식 zip(MD5 일치 확인)에서 푼 파일, 2026-11-10 계산
     "bfree/BFREE_dino2reg4/config.yaml": "1f0cb4988933de06a4c2427b1b5b015baa18cea7bc5223a9f54ca5e077ec8d40",
     "bfree/BFREE_dino2reg4/model_epoch_best.pth": "5948ca78f4d94e820c250d24cdf155035b4a85960443800bfe6bb7f06bffe947",
+    # Community Forensics: Hugging Face 리비전 6076002, 2026-11-14 계산
+    "commfor/config.json": "877416e73aac0fdbc1be723f5ddf674e78a2350305865ad9031564b287b60147",
+    "commfor/model.safetensors": "b89f36275f3bf5e2b040eee36597a8f19db051bff9a473a9cf7b2466284fb387",
 }
+RETIRED = {"npr", "univfd"}  # 교체된 모델: 기본 다운로드에서 제외
 TIMEOUT_S = 60  # 연결·읽기가 이 시간 동안 멈추면 실패
 
 
@@ -170,13 +179,14 @@ def fetch_code(name: str) -> None:
 
 def main() -> None:
     p = argparse.ArgumentParser()
-    p.add_argument("--only", help="쉼표로 구분한 모델 이름 (univfd,aide,bfree / npr)")
+    p.add_argument("--only", help="쉼표로 구분한 모델 이름 (commfor,aide,bfree / univfd,npr)")
     p.add_argument("--list", action="store_true", help="URL과 저장 경로만 출력")
     p.add_argument("--skip-code", action="store_true", help="공식 코드는 받지 않음")
     args = p.parse_args()
 
-    # NPR은 2026-11-10 B-Free로 교체되어 기본에서 뺀다. 비교 재현이 필요하면 --only npr
-    names = args.only.split(",") if args.only else [n for n in CODE if n != "npr"]
+    # NPR(2026-11-10 → B-Free)과 UnivFD(2026-11-14 → Community Forensics)는 교체되어 기본에서 뺀다.
+    # 비교 재현이 필요하면 --only npr / --only univfd
+    names = args.only.split(",") if args.only else [n for n in CODE if n not in RETIRED]
     unknown = set(names) - set(CODE)
     if unknown:
         sys.exit(f"모르는 모델: {', '.join(sorted(unknown))}")

@@ -44,7 +44,7 @@ curl -F "image=@ml/data/images/ai/ai_0001_original.png" http://localhost:8000/an
 ## Detector 추가하기
 
 `detectors/<이름>.py`에 `Detector`(detectors/base.py) 하위 클래스를 **하나** 만들고 `name = "<이름>"`, `_load()`, `_score(img)`를 구현한다.
-`score()`는 기반 클래스가 RGB 변환 → `_score` → 0~1 범위 검사 순으로 처리한다. 활성 모델은 환경 변수 `DETECTORS="univfd,bfree"`로 고른다(없으면 univfd, aide, bfree 셋 다).
+`score()`는 기반 클래스가 RGB 변환 → `_score` → 0~1 범위 검사 순으로 처리한다. 활성 모델은 환경 변수 `DETECTORS="commfor,bfree"`로 고른다(없으면 commfor, aide, bfree 셋 다).
 `main.py`·`banding.py`·`detectors/__init__.py`는 고치지 않는다.
 
 ## 가중치·공식 코드 받기
@@ -52,8 +52,8 @@ curl -F "image=@ml/data/images/ai/ai_0001_original.png" http://localhost:8000/an
 가중치(`weights/`)와 모델 공식 코드(`third_party/`)는 git에 올리지 않는다. 아래 스크립트로 받는다.
 
 ```bash
-python inference/scripts/download_weights.py              # 사용 중인 모델 전부 (univfd, aide, bfree, 약 4.6GB)
-python inference/scripts/download_weights.py --only bfree # 일부만 (univfd,npr,aide,bfree)
+python inference/scripts/download_weights.py              # 사용 중인 모델 전부 (commfor, aide, bfree, 약 3.8GB)
+python inference/scripts/download_weights.py --only bfree # 일부만 (commfor,aide,bfree / 교체된 univfd,npr)
 python inference/scripts/download_weights.py --list       # 받지 않고 URL·저장 경로만 출력
 ```
 
@@ -66,7 +66,8 @@ python inference/scripts/download_weights.py --list       # 받지 않고 URL·�
 | NPR (ProGAN 4-class) | `weights/npr/model_epoch_last_3090.pth` | 5.6MB | NPR 저장소 루트 |
 | AIDE (SD1.4 학습) | `weights/aide/sd14_train.pth` | 3.35GB | [Google Drive](https://drive.google.com/drive/folders/1qx76UFvDpgCxaPLBCmsA2WY-SSzeJrd4) |
 | B-Free (DINOv2 ViT-B/14 reg4) | `weights/bfree/BFREE_dino2reg4/{config.yaml, model_epoch_best.pth}` | 330MB | [GRIP 공식 zip](https://www.grip.unina.it/download/prog/B-Free/weights/BFREE_dino2reg4.zip) (MD5 공식값 일치 확인) |
-| 공식 코드 | `third_party/{univfd,npr,aide,bfree}/` | — | 아래 표의 커밋으로 고정 |
+| Community Forensics (ViT-S/16, 384) | `weights/commfor/{config.json, model.safetensors}` | 83MB | [Hugging Face OwensLab/commfor-model-384](https://huggingface.co/OwensLab/commfor-model-384) 리비전 `6076002` |
+| 공식 코드 | `third_party/{commfor,univfd,npr,aide,bfree}/` | — | 아래 표의 커밋으로 고정 |
 
 **AIDE가 "Too many users have viewed or downloaded this file recently"로 실패하면** Google Drive의 다운로드 한도 때문이다. 몇 시간 뒤 다시 하거나, 구글에 로그인한 브라우저에서 [sd14_train.pth](https://drive.google.com/file/d/1JYD1QO62wHwrvh2MVWS1GPjV314WsHcx/view)를 직접 받아 `inference/weights/aide/sd14_train.pth`에 둔다.
 
@@ -80,27 +81,30 @@ python inference/scripts/download_weights.py --list       # 받지 않고 URL·�
 | 가중치 학습 데이터 | ProGAN (CNNDetection 학습셋, 20 클래스) | ProGAN 4 클래스 (car·cat·chair·horse) | SD1.4 (GenImage 하위셋) |
 | 요구 패키지 | torch, torchvision (버전 없음). 저장소 안 `models/clip/`의 OpenAI clip 코드 (ftfy, regex, tqdm, pkg_resources) | torch>=1.2.0, torchvision (버전 없음) | 설치 문서: Python 3.10, torch 2.0.1, torchvision 0.15.2. requirements: timm 0.9.6, open-clip-torch 2.24.0, numpy 1.24.3 등 (timm 1.0.12에서도 동일 동작 확인) |
 
-- **NPR은 2026-11-10부터 쓰지 않는다** (B-Free로 교체, 계획서 §7 '11/10 점검 결과'). 다운로드 스크립트에는 비교·재현용으로 남겨 둔다.
+- **NPR은 2026-11-10부터, UnivFD는 2026-11-14부터 쓰지 않는다** (각각 B-Free, Community Forensics로 교체, 계획서 §7). `detectors/univfd.py`와 다운로드 스크립트(`--only univfd`, `--only npr`)는 비교·재현용으로 남겨 둔다.
+- **Community Forensics** ([JeongsooP/Community-Forensics](https://github.com/JeongsooP/Community-Forensics) `ee5b71d`, CVPR 2025, Park & Owens): 코드 MIT (© 2025 Jeongsoo Park), 가중치 MIT (Hugging Face 모델 카드). 학습 데이터: 생성기 4,803종 270만 장(CC BY-4.0, 생성기 다수는 CreativeML OpenRAIL-M). 공식 요구: torch 2.7.1, timm 1.0.15 — 이 프로젝트는 torch 2.0.1·timm 1.0.12로 모델을 직접 구성해 올린다(키 전부 일치, strict 로드).
 - **NPR은 라이선스가 명시되어 있지 않다.** 저작권법상 기본값은 '모든 권리 보유'다. 이 프로젝트에서는 학술·비상업 데모 목적으로만 사용하고, 코드를 저장소에 복사해 커밋하지 않는다(`third_party/`는 git 제외).
 - **B-Free** ([grip-unina/B-Free](https://github.com/grip-unina/B-Free) `c6a9f89`, CVPR 2025): GRIP-UNINA 자체 라이선스 — 코드·가중치 모두 **정보·비영리 목적만** 사용·복제·수정 가능, 영리 목적 금지, 저작권 표시 유지, **결과를 공개할 때 원저자 인용 필수**(발표·보고서에 Guillaro et al., CVPR 2025 표기). 학습 데이터: COCO 실제 이미지 + SD2.1 자기조건 재구성·인페인팅. 요구: torch 2.0.1, torchvision 0.15.2, timm>=1.0.12.
 - AIDE 저장소의 Chameleon 데이터셋은 "academic research only, commercial use prohibited"이다. 이 프로젝트는 Chameleon을 쓰지 않는다.
-- 세 모델 모두 가중치 자체의 라이선스는 명시되어 있지 않다. 서비스 공개(Sprint 2 이후) 전에 다시 확인한다.
+- AIDE 가중치 자체의 라이선스는 명시되어 있지 않고, B-Free는 비영리 전용이다. 서비스 공개(Sprint 2 이후) 전에 다시 확인한다.
 
 ## 주의사항
 
 - **UnivFD는 OpenAI `clip` 구현을 쓴다.** 공식 코드는 저장소 안 `models/clip/`(OpenAI CLIP 복사본)으로 `ViT-L/14`를 올린다. CLIP 정규화값은 mean `0.48145466, 0.4578275, 0.40821073`, std `0.26862954, 0.26130258, 0.27577711`. **open_clip으로 바꾸면 가중치와 전처리가 같은지 검증한다.** 이미지 인코더만 올린다(`ml/measure.py`의 `load_univfd`는 `visual.*` 가중치만 골라 인코더만 만든다).
 - **UnivFD 전처리: 공식 평가 코드(`validate.py`)대로 Resize 없이 CenterCrop 224** (`detectors/univfd.py` 기본값, 환경 변수 `UNIVFD_PREPROCESS=crop`). 2026-11-10 검증 데이터 200장 비교: crop은 AUC 0.66, CLIP 기본 전처리(Resize 224 → Crop, `UNIVFD_PREPROCESS=resize`)는 AUC 0.45 — 축소하면 흔적이 지워져 모든 이미지를 '실제'(점수 약 0)로 판정한다. crop의 약점: 큰 원본 사진은 가운데 224×224만 보므로 점수가 그 부분 내용에 흔들린다(원본 크기 실제 10장 중 2장 오탐).
+- **Community Forensics 전처리: 공식 `dataloader.py` test 모드대로 Resize 440(짧은 변) → CenterCrop 384 → ImageNet 정규화.** 출력은 로짓 1개(학습 라벨 real=0, fake=1) → sigmoid로 0~1. 공식 저장소 예제 이미지(DALL-E 2) 5장 모두 0.79~1.00. CPU에서 장당 약 0.5초(충전 중). 2026-11-14 검증 데이터 800장 AUC 0.974(resize50 0.984), B-Free와 오탐이 거의 겹치지 않는다(FPR 5% 기준 각 20장 중 공통 1장).
 - **B-Free 전처리:** ToTensor + ImageNet 정규화만 하고 Resize·Crop은 하지 않는다. 모델 내부에서 504×504 크기 5곳(가운데+네 모서리)을 잘라 평균하고, 504보다 작으면 반복해 채운다. 출력은 로짓 1개(양수 = AI) → sigmoid로 0~1. 공식 데모 4장의 로짓과 소수점 5자리까지 일치 확인(2026-11-10). CPU에서 이미지 크기와 무관하게 약 12초, 상주 0.36GB.
 - **AIDE 백본은 따로 받지 않는다.** 모델 생성자가 `resnet_path`·`convnext_path`를 받지만, `sd14_train.pth`에 ConvNeXt-XXL·ResNet 가중치가 모두 들어 있다(8.98억 파라미터). 둘 다 `None`으로 만든 뒤 체크포인트의 `model`을 올리면 키가 모두 일치한다(2026-11-04 확인).
 - AIDE 공식 코드의 `data/__init__.py`는 설치하지 않은 `kornia`를 끌어온다. 전처리는 `data/dct.py`만 직접 읽어 쓴다.
 - AIDE 출력은 2-클래스 logit이다. Detector에서 AI 쪽 softmax 값을 원점수로 쓴다(0~1, 확률 아님).
-- **점수 방향 (공식 코드 기준): 활성 모델 3개(UnivFD, AIDE, B-Free) 모두 클수록 AI.** 고정 커밋의 학습·평가 코드를 읽어 확인했다.
-  - UnivFD `030495a`: `validate.py`에서 `0_real`=0, `1_fake`=1. 출력 1개에 sigmoid. (2026-11-04 확인)
+- **점수 방향 (공식 코드 기준): 활성 모델 3개(Community Forensics, AIDE, B-Free) 모두 클수록 AI.** 고정 커밋의 학습·평가 코드를 읽어 확인했다.
+  - Community Forensics `ee5b71d`: README·`dataloader.py`의 라벨 `real:0,fake:1`, 공식 예제는 `sigmoid(out)`. (2026-11-14 확인)
+  - 과거 기록 — UnivFD `030495a`(2026-11-14 Community Forensics로 교체): `validate.py`에서 `0_real`=0, `1_fake`=1. 출력 1개에 sigmoid. (2026-11-04 확인)
   - AIDE `6725b71`: `data/datasets.py`에서 `0_real`=0, `1_fake`=1. 평가 시 `softmax(...)[:, 1]`. (2026-11-04 확인)
   - B-Free `c6a9f89`: `code/main_bfree.py`에서 `label != 'REAL'`을 AI로 두고 `score > 0`(로짓)을 AI로 판정한다. 출력 로짓 1개, sigmoid 없음. (2026-11-11 확인)
   - 과거 기록 — NPR `781ced3`(2026-11-10 B-Free로 교체, 활성 설정에서 제거): `ImageFolder`가 폴더 이름 정렬로 `0_real`=0, `1_fake`=1을 붙인다. 출력 1개, `BCEWithLogitsLoss`로 학습, 평가 시 sigmoid.
-  - **미검증:** 우리 Detector 구현(`detectors/*.py`)이 이 방향을 지키는지, 우리 데이터에서 실제로 AI 쪽 점수가 높은지는 B6의 모델별 실제·AI 점수 분포(`ml/scores.csv`)로 확인한다. 계획서 §7의 확인용 채점 요약은 참고 자료이며, 점수 원자료로 다시 확인하기 전까지 확정 사실로 쓰지 않는다.
-- **경계값(`thresholds.yaml`)은 세 모델 모두 임시값(§5.2)이다.** B-Free도 점수 분포로 검증하기 전까지 확정값이 아니다(B6).
+  - **우리 데이터에서 확인 (2026-11-14, `ml/scores.csv` 800장):** 세 모델 모두 AI 쪽 점수가 높다. AUC Community Forensics 0.974, AIDE 0.775, B-Free 0.969.
+- **경계값(`thresholds.yaml`)은 2026-11-14 검증 데이터 800장으로 정했다(B6, 계획서 §5.2).** 근거는 yaml 주석.
 - AIDE 저장소의 `requirements.txt`는 `torch==1.11.0`이지만 설치 문서는 torch 2.0.1이다. 이 프로젝트는 설치 문서(2.0.1)를 따른다.
 - `numpy`는 1.24.3에 고정한다. torch 2.0.1은 numpy 2.x와 호환되지 않는다.
 - `huggingface_hub` 등 간접 의존성은 고정하지 않았다. 설치가 깨지면 동작하는 환경에서 `pip freeze`로 고정한다.

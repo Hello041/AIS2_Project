@@ -4,7 +4,7 @@
 
 ## 프로젝트 한 줄 요약
 
-휴대폰 앱(Expo)에서 이미지 한 장을 고르면 노트북의 FastAPI 추론 서버가 모델 3종(UnivFD, AIDE, B-Free)으로 분석하고, 결과를 '약함 / 어려움 / 강함' 세 구간으로 보여준다. AI 생성 여부를 단정하지 않는 **참고용** 서비스다.
+휴대폰 앱(Expo)에서 이미지 한 장을 고르면 노트북의 FastAPI 추론 서버가 모델 3종(Community Forensics, AIDE, B-Free)으로 분석하고, 결과를 '약함 / 어려움 / 강함' 세 구간으로 보여준다. AI 생성 여부를 단정하지 않는 **참고용** 서비스다.
 
 - MVP 데모: **2026-11-18** (11/10 점검, 11/14 앙상블 채택 결정)
 - 담당: 김정효(모델·추론 서버), 임정민(앱) — 유동적
@@ -23,7 +23,7 @@
 app/          Expo(React Native) 앱
 inference/    FastAPI 추론 서버
   main.py           /health, /analyze
-  detectors/        base.py(인터페이스), univfd.py, aide.py, bfree.py (NPR은 2026-11-10 B-Free로 교체, 계획서 §7)
+  detectors/        base.py(인터페이스), commfor.py, aide.py, bfree.py (NPR은 2026-11-10 B-Free로, UnivFD는 2026-11-14 Community Forensics로 교체, 계획서 §7. univfd.py는 비교용으로 남김)
   banding.py        원점수→구간, 종합 판정 (판정 로직은 여기에만)
   thresholds.yaml   모델별 원점수 경계값
   ensemble.yaml     fit_ensemble.py가 생성. 손으로 고치지 않음
@@ -40,7 +40,8 @@ docs/
 - 모델 추가·교체는 `detectors/` 모듈 하나로 끝나야 한다. 이를 위해 `main.py`, `banding.py`를 고치게 된다면 설계가 잘못된 것이다.
 - 모델은 서버 시작 시 한 번만 로드한다. 추론은 `torch.inference_mode()`, 배치 1, CPU.
 - B-Free는 **비영리 라이선스**다(GRIP-UNINA). 상업적 사용 금지, 발표·보고서에 원저자(Guillaro et al., CVPR 2025) 인용.
-- UnivFD는 CLIP **이미지 인코더만** 올린다. 공식 코드는 OpenAI `clip` 패키지를 쓰므로, open_clip으로 바꾸면 가중치·전처리가 같은지 검증한다.
+- Community Forensics(commfor)는 공식 test 전처리(Resize 440 → CenterCrop 384 → ImageNet 정규화)를 따른다. 코드·가중치 MIT.
+- (비활성) UnivFD는 CLIP **이미지 인코더만** 올린다. 공식 코드는 OpenAI `clip` 패키지를 쓰므로, open_clip으로 바꾸면 가중치·전처리가 같은지 검증한다.
 - 경계값: `score < low` → `weak`, `low ≤ score ≤ high` → `uncertain`, `score > high` → `strong`.
 - 종합 판정은 `banding.overall()` 하나에만 둔다. `ensemble.yaml`이 있으면 스태킹, 없으면 규칙(단계 0).
 - 단계 0 규칙 (모델 수와 무관, 2026-11-04 팀 결정, 계획서 §5.3): ① strong과 weak가 함께 있으면 uncertain ② 아니면 전체 모델의 과반수(50% 초과)를 차지하는 구간 ③ 과반수 구간이 없으면(동률 포함) uncertain. 모델 0~1개는 uncertain.
