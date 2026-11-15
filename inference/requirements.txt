@@ -28,5 +28,5 @@ pyyaml==6.0.2
 # 가중치 다운로드 (scripts/download_weights.py, AIDE 체크포인트가 Google Drive에 있음)
 gdown==5.2.0
 
-# (여유 시) 출처 확인
-# c2pa-python
+# 출처 확인 (provenance.py, MIT OR Apache-2.0)
+c2pa-python==0.39.0

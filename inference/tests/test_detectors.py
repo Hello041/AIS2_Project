@@ -1,4 +1,5 @@
 """Detector 계약 테스트. 모델 가중치 없이 돈다."""
+import io
 import math
 
 import numpy as np
@@ -47,6 +48,16 @@ def test_to_rgb_modes(mode):
     src = Image.new(mode, (8, 8))
     out = to_rgb(src)
     assert out.mode == "RGB" and out.size == (8, 8)
+
+
+@pytest.mark.parametrize("bits16, expected", [(0, 0), (32896, 128), (65535, 255)])
+def test_to_rgb_16bit_gray_is_scaled_not_clipped(bits16, expected):
+    # 16비트 흑백 PNG가 거의 흰색으로 바뀌던 버그 (convert("RGB")가 255 넘는 값을 잘라냄)
+    buf = io.BytesIO()
+    Image.fromarray(np.full((4, 4), bits16, dtype=np.uint16)).save(buf, "PNG")
+    buf.seek(0)
+    with Image.open(buf) as src:
+        assert to_rgb(src).getpixel((0, 0)) == (expected,) * 3
 
 
 def test_to_rgb_transparent_becomes_white():

@@ -42,6 +42,8 @@ ALLOWED_FORMATS = {"JPEG", "PNG", "WEBP"}
 # (1,600만 화소에서 세 모델 최대 약 10GB, 계획서 §7). 노트북 16GB 기준 2,500만 화소로 제한.
 MAX_IMAGE_PIXELS = int(os.environ.get("MAX_IMAGE_PIXELS", 25_000_000))
 Image.MAX_IMAGE_PIXELS = MAX_IMAGE_PIXELS  # 이보다 2배 넘으면 Pillow가 DecompressionBombError
+# B-Free(ViT 패치 14px)는 14px 미만에서 실패해 500이 났다. 이렇게 작은 이미지는 판별 의미가 없어 400으로 거절.
+MIN_IMAGE_SIDE = 32
 DISCLAIMER = "본 결과는 참고용이며 AI 생성 여부를 보장하지 않습니다."
 
 MSG_400 = "지원하지 않는 이미지입니다"
@@ -138,7 +140,7 @@ def decode_image(data: bytes) -> Image.Image:
         img = Image.open(io.BytesIO(data))
         if img.format not in ALLOWED_FORMATS:
             raise HTTPError(400, MSG_400)
-        if img.width * img.height > MAX_IMAGE_PIXELS:
+        if img.width * img.height > MAX_IMAGE_PIXELS or min(img.size) < MIN_IMAGE_SIDE:
             raise HTTPError(400, MSG_400)
         img.load()
     except HTTPError:
