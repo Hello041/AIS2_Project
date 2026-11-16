@@ -87,6 +87,7 @@ python inference/scripts/download_weights.py --list       # 받지 않고 URL·�
 - **B-Free** ([grip-unina/B-Free](https://github.com/grip-unina/B-Free) `c6a9f89`, CVPR 2025): GRIP-UNINA 자체 라이선스 — 코드·가중치 모두 **정보·비영리 목적만** 사용·복제·수정 가능, 영리 목적 금지, 저작권 표시 유지, **결과를 공개할 때 원저자 인용 필수**(발표·보고서에 Guillaro et al., CVPR 2025 표기). 학습 데이터: COCO 실제 이미지 + SD2.1 자기조건 재구성·인페인팅. 요구: torch 2.0.1, torchvision 0.15.2, timm>=1.0.12.
 - AIDE 저장소의 Chameleon 데이터셋은 "academic research only, commercial use prohibited"이다. 이 프로젝트는 Chameleon을 쓰지 않는다.
 - AIDE 가중치 자체의 라이선스는 명시되어 있지 않고, B-Free는 비영리 전용이다. 서비스 공개(Sprint 2 이후) 전에 다시 확인한다.
+- **출처 확인** (`provenance.py`): [c2pa-python](https://github.com/contentauth/c2pa-python) 0.39.0, MIT OR Apache-2.0. 원격 매니페스트·OCSP는 받지 않는다(이미지 안의 URL로 외부 접속하지 않음). 테스트 샘플(`C.jpg`·`A.jpg`·`cloud.jpg`)은 같은 저장소의 `tests/fixtures/`에서 받아 `ml/data/c2pa_samples/`에 둔다(커밋 제외, 없으면 해당 테스트는 건너뜀). `C.jpg`는 테스트 인증서로 서명된 이미지라 `valid`지만 신뢰 목록에는 없다.
 
 ## 주의사항
 

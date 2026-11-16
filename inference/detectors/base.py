@@ -8,6 +8,7 @@ from __future__ import annotations
 import math
 from abc import ABC, abstractmethod
 
+import numpy as np
 from PIL import Image
 
 
@@ -19,9 +20,16 @@ def to_rgb(img: Image.Image) -> Image.Image:
     """모든 입력을 RGB로 맞춘다. RGBA·P(팔레트)·L(흑백)·CMYK 등을 처리한다.
 
     투명 영역은 흰색 배경 위에 합성한다(검은색으로 바뀌어 점수가 흔들리는 것을 막기 위해).
+    16비트 흑백(PNG → I;16 또는 I)은 0~65535를 0~255로 줄인다. Pillow의 convert("RGB")는
+    255를 넘는 값을 잘라내 거의 흰 이미지가 된다.
     """
     if img.mode == "RGB":
         return img
+    if img.mode.startswith("I;16") or img.mode == "I":
+        arr = np.asarray(img, dtype=np.float64)
+        if img.mode.startswith("I;16") or arr.max() > 255:  # I 모드는 8비트 범위 값일 수도 있다
+            arr = arr / 257.0
+        return Image.fromarray(np.clip(np.rint(arr), 0, 255).astype(np.uint8), "L").convert("RGB")
     if img.mode in ("RGBA", "LA") or (img.mode == "P" and "transparency" in img.info):
         rgba = img.convert("RGBA")
         background = Image.new("RGB", rgba.size, (255, 255, 255))
