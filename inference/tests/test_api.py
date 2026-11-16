@@ -204,6 +204,18 @@ def test_400_too_many_pixels(monkeypatch):
         assert post(c, image_bytes(size=(64, 48))).status_code == 400
 
 
+@pytest.mark.parametrize("size", [(1, 1), (13, 100), (100, 31)])
+def test_400_too_small(size):
+    # B-Free가 14px 미만에서 실패해 500이 나던 문제 → 입력 검사에서 400
+    with make_client(0.5) as c:
+        assert post(c, image_bytes(size=size)).status_code == 400
+
+
+def test_min_side_is_accepted():
+    with make_client(0.5) as c:
+        assert post(c, image_bytes(size=(main.MIN_IMAGE_SIDE, main.MIN_IMAGE_SIDE))).status_code == 200
+
+
 # ---------------------------------------------------------------- 413
 def test_413_image_over_10mb():
     data = b"\x89PNG" + b"0" * main.MAX_IMAGE_BYTES  # 10MB + 4바이트
