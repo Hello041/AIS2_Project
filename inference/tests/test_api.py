@@ -64,17 +64,113 @@ def test_analyze_ok_formats(fmt):
         r = post(c, image_bytes(fmt))
     assert r.status_code == 200, r.text
     body = r.json()
-    assert set(body) == {"overall", "overall_method", "models", "provenance", "elapsed_ms", "disclaimer"}
+    assert set(body) == {"overall", "overall_method", "models", "provenance", "heatmap", "elapsed_ms", "disclaimer"}
     assert body["overall"] == "strong" and body["overall_method"] == "rule"
     assert [m["name"] for m in body["models"]] == ["univfd", "aide", "bfree"]
     assert body["models"][0] == {"name": "univfd", "raw_score": 0.9, "band": "strong"}
     assert body["provenance"] is None and isinstance(body["elapsed_ms"], int)
+    assert body["heatmap"] is None  # DummyDetector는 히트맵을 지원하지 않음
     assert body["disclaimer"] == main.DISCLAIMER
 
 
 def test_mixed_bands_go_uncertain():
     with make_client(0.9, 0.1) as c:
         assert post(c, image_bytes()).json()["overall"] == "uncertain"
+
+
+# ---------------------------------------------------------------- 히트맵 (판정과 독립)
+from detectors.base import Explanation  # noqa: E402
+
+
+class ExplainingDummy(DummyDetector):
+    """히트맵을 지원하는 가짜 모델. mode: ok | raise_explain | none"""
+
+    supports_explanation = True
+
+    def __init__(self, name, score, mode="ok"):
+        super().__init__(name, score)
+        self.mode = mode
+        self.score_calls = 0
+
+    def _score(self, img):
+        self.score_calls += 1
+        return super()._score(img)
+
+    def _score_and_explain(self, img):
+        if self.mode == "raise_explain":
+            raise RuntimeError("explain broke")
+        if self.mode == "none":
+            return self.fixed_score, None
+        w, h = img.size
+        values = np.random.default_rng(0).random((h // 14, w // 14))
+        values[:, : values.shape[1] // 2] = np.nan  # 왼쪽 절반은 범위 밖
+        return self.fixed_score, Explanation(values=values, cell=14, method="attention_rollout")
+
+
+def heat_client(mode="ok"):
+    dets = [DummyDetector("univfd", 0.9), DummyDetector("aide", 0.8), ExplainingDummy("bfree", 0.95, mode)]
+    return dets, TestClient(main.create_app(dets))
+
+
+def baseline_body():
+    dets = [DummyDetector("univfd", 0.9), DummyDetector("aide", 0.8), DummyDetector("bfree", 0.95)]
+    with TestClient(main.create_app(dets)) as c:
+        return post(c, image_bytes(size=(280, 210))).json()
+
+
+def same_judgement(a, b):
+    return a["overall"] == b["overall"] and a["models"] == b["models"] and a["overall_method"] == b["overall_method"]
+
+
+def test_heatmap_returned_when_supported(monkeypatch):
+    monkeypatch.delenv("HEATMAP_MODEL", raising=False)  # 기본값 bfree
+    dets, client = heat_client("ok")
+    with client as c:
+        body = post(c, image_bytes(size=(280, 210))).json()
+    heat = body["heatmap"]
+    assert heat["model"] == "bfree" and heat["method"] == "attention_rollout"
+    assert heat["png_base64"] and 0 < heat["coverage"] < 1
+    assert max(heat["width"], heat["height"]) <= 512
+    assert same_judgement(body, baseline_body())
+    assert dets[2].score_calls == 0  # 같은 추론 한 번 (score를 따로 다시 부르지 않음)
+
+
+def test_explain_failure_falls_back_and_keeps_judgement():
+    dets, client = heat_client("raise_explain")
+    with client as c:
+        r = post(c, image_bytes(size=(280, 210)))
+    assert r.status_code == 200
+    body = r.json()
+    assert body["heatmap"] is None and same_judgement(body, baseline_body())
+    assert dets[2].score_calls == 1  # 원래 경로(score)로 다시 판정
+
+
+def test_render_failure_keeps_judgement(monkeypatch):
+    def boom(*a, **k):
+        raise MemoryError("render broke")
+
+    monkeypatch.setattr(main.heatmap, "render", boom)
+    _, client = heat_client("ok")
+    with client as c:
+        r = post(c, image_bytes(size=(280, 210)))
+    assert r.status_code == 200 and r.json()["heatmap"] is None
+    assert same_judgement(r.json(), baseline_body())
+
+
+def test_no_explanation_gives_null():
+    _, client = heat_client("none")
+    with client as c:
+        assert post(c, image_bytes(size=(280, 210))).json()["heatmap"] is None
+
+
+@pytest.mark.parametrize("value", ["off", "none", "0", ""])
+def test_heatmap_can_be_disabled(monkeypatch, value):
+    monkeypatch.setenv("HEATMAP_MODEL", value)
+    dets, client = heat_client("ok")
+    with client as c:
+        body = post(c, image_bytes(size=(280, 210))).json()
+    assert body["heatmap"] is None and same_judgement(body, baseline_body())
+    assert dets[2].score_calls == 1  # 꺼지면 원래 score 경로
 
 
 # ---------------------------------------------------------------- 400

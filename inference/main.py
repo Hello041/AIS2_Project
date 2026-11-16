@@ -9,10 +9,14 @@
 - 업로드는 **메모리(BytesIO)에서만** 다룬다. FastAPI의 UploadFile·File()은 Starlette가 1MB 넘는 파일을
   SpooledTemporaryFile로 디스크에 넘기므로 쓰지 않고, 요청 본문을 스트리밍으로 직접 파싱한다.
 - 로그에는 바이트 크기·처리 시간·상태 코드만 남긴다. 파일명·EXIF·이미지 내용은 남기지 않는다.
-- EXIF는 읽지 않는다 (provenance 미구현 → null).
+- EXIF는 히트맵 방향을 맞추는 Orientation 태그 하나만 읽는다 (provenance 미구현 → null, GPS는 읽지 않음).
 
 모델은 시작할 때 환경 변수 DETECTORS(없으면 detectors.DEFAULT_DETECTORS)대로 한 번만 로드한다.
 판정은 banding.band()·banding.overall()에만 맡긴다 (모델 추가·교체 시 이 파일은 고치지 않는다).
+
+히트맵(모델 주목 영역, 계획서 §12.4): 환경 변수 HEATMAP_MODEL(기본 "bfree", "off"면 끔)의 모델이
+supports_explanation이면 판정과 같은 추론에서 주목 영역을 얻고, 판정이 끝난 뒤 별도 단계로 PNG를 만든다.
+히트맵의 어떤 실패도 heatmap: null로 바뀌고 판정 응답은 그대로다.
 """
 from __future__ import annotations
 
@@ -31,6 +35,7 @@ from PIL import Image, UnidentifiedImageError
 from python_multipart.multipart import MultipartParser, parse_options_header
 
 import banding
+import heatmap
 from detectors import Detector, create_detectors
 
 log = logging.getLogger("inference")
@@ -45,6 +50,12 @@ Image.MAX_IMAGE_PIXELS = MAX_IMAGE_PIXELS  # 이보다 2배 넘으면 Pillow가 
 # B-Free(ViT 패치 14px)는 14px 미만에서 실패해 500이 났다. 이렇게 작은 이미지는 판별 의미가 없어 400으로 거절.
 MIN_IMAGE_SIDE = 32
 DISCLAIMER = "본 결과는 참고용이며 AI 생성 여부를 보장하지 않습니다."
+
+
+def heatmap_model() -> str | None:
+    """히트맵을 만들 모델 이름. HEATMAP_MODEL이 off/none/0/빈 값이면 None(끔)."""
+    value = os.environ.get("HEATMAP_MODEL", "bfree").strip().lower()
+    return None if value in ("", "off", "none", "0", "false") else value
 
 MSG_400 = "지원하지 않는 이미지입니다"
 MSG_413 = "10MB 이하 이미지를 선택해 주세요"
@@ -181,13 +192,33 @@ def create_app(detectors: list[Detector] | None = None) -> FastAPI:
         return {"status": "ok", "models": [d.name for d in request.app.state.detectors]}
 
     def _analyze_sync(state, img: Image.Image) -> dict:
+        target = heatmap_model()
+        explanation, explainer = None, None
         with state.lock:
             models = []
             for d in state.detectors:
-                score = d.score(img)
+                if target is not None and d.name == target and d.supports_explanation:
+                    try:
+                        score, explanation = d.score_and_explain(img)
+                        explainer = d.name
+                    except Exception:  # noqa: BLE001 — 주목 영역 경로의 문제로 판정이 막히지 않게 원래 경로로
+                        log.exception("score_and_explain failed; falling back to score()")
+                        score, explanation = d.score(img), None
+                else:
+                    score = d.score(img)
                 models.append({"name": d.name, "raw_score": score, "band": banding.band(d.name, score)})
         overall, method = banding.overall({m["name"]: m["band"] for m in models})
-        return {"overall": overall, "overall_method": method, "models": models}
+
+        # 판정이 끝난 뒤 별도 단계. 실패하면 null — 판정 결과는 바뀌지 않는다.
+        heat = None
+        if explanation is not None:
+            t = time.perf_counter()
+            try:
+                heat = heatmap.render(img, explanation, explainer)
+            except Exception:  # noqa: BLE001
+                log.exception("heatmap render failed")
+            log.info("heatmap %s render_ms=%d", "ok" if heat else "failed", (time.perf_counter() - t) * 1000)
+        return {"overall": overall, "overall_method": method, "models": models, "heatmap": heat}
 
     @app.post("/analyze")
     async def analyze(request: Request):

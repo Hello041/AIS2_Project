@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <mask id="face">
+      <rect width="1024" height="1024" fill="white"/>
+      <rect x="314" y="342" width="312" height="184" rx="92" fill="black"/>
+      <circle cx="560" cy="440" r="144" fill="black"/>
+    </mask>
+  </defs>
+  <line x1="470" y1="262" x2="470" y2="196" stroke="#fff" stroke-width="26" stroke-linecap="round"/>
+  <circle cx="470" cy="178" r="34" fill="#fff"/>
+  <rect x="236" y="392" width="56" height="128" rx="28" fill="#fff"/>
+  <g mask="url(#face)"><rect x="262" y="250" width="416" height="372" rx="150" fill="#fff"/>
+    <rect x="648" y="392" width="56" height="128" rx="28" fill="#fff"/></g>
+  <circle cx="404" cy="434" r="30" fill="#fff"/>
+  <circle cx="560" cy="434" r="46" fill="#fff"/>
+  <circle cx="560" cy="440" r="124" fill="none" stroke="#fff" stroke-width="40"/>
+  <line x1="652" y1="532" x2="778" y2="658" stroke="#fff" stroke-width="70" stroke-linecap="round"/>
+</svg>
