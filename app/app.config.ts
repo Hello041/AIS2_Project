@@ -7,7 +7,7 @@ import type { ConfigContext, ExpoConfig } from 'expo/config';
 // 바꾼 뒤에는 `npx expo start`를 다시 실행한다.
 export default ({ config }: ConfigContext): ExpoConfig => ({
   ...config,
-  name: 'AI 이미지 판별',
+  name: 'TraceLens',
   slug: 'ais2-app',
   version: '1.0.0',
   orientation: 'portrait',

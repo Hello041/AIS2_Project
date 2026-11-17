@@ -36,7 +36,7 @@ export default function SettingsScreen() {
   const router = useRouter();
   const { records } = useHistory();
   const version = Constants.expoConfig?.version ?? '-';
-  const appName = Constants.expoConfig?.name ?? 'AI 이미지 판별';
+  const appName = Constants.expoConfig?.name ?? 'TraceLens';
 
   return (
     <SafeAreaView style={common.screen} edges={['top', 'left', 'right']}>

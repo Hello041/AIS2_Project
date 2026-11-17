@@ -42,7 +42,7 @@ export function BrandSplash({ onDone }: { onDone: () => void }) {
     <Animated.View
       style={[StyleSheet.absoluteFill, styles.root, { opacity: all }]}
       accessible
-      accessibilityLabel="AI 이미지 판별"
+      accessibilityLabel="TraceLens"
       pointerEvents="none">
       {/* 로봇: 화면 정중앙 (네이티브 스플래시와 같은 위치·크기) */}
       <Image source={BRAND_IMAGES.splash} style={styles.robot} resizeMode="contain" />
@@ -51,7 +51,7 @@ export function BrandSplash({ onDone }: { onDone: () => void }) {
           styles.textBox,
           { opacity: text, transform: [{ translateY: text.interpolate({ inputRange: [0, 1], outputRange: [8, 0] }) }] },
         ]}>
-        <Text style={styles.name}>AI 이미지 판별</Text>
+        <Text style={styles.name}>TraceLens</Text>
         <Text style={styles.tagline}>이미지의 흔적을 분석합니다.</Text>
       </Animated.View>
     </Animated.View>
