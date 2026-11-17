@@ -85,7 +85,7 @@ export default function HomeScreen() {
         <View style={styles.topBar}>
           <View style={styles.brand}>
             <Logo size={36} />
-            <Text style={styles.brandName}>AI 이미지 판별</Text>
+            <Text style={styles.brandName}>TraceLens</Text>
           </View>
           <View
             style={styles.statusPill}
