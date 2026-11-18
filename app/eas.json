@@ -1,0 +1,20 @@
+{
+  "cli": {
+    "version": ">= 16.0.0",
+    "appVersionSource": "remote"
+  },
+  "build": {
+    "preview": {
+      "distribution": "internal",
+      "env": {
+        "API_BASE_URL": "https://ideally-snoring-thread.ngrok-free.dev"
+      },
+      "android": {
+        "buildType": "apk"
+      }
+    },
+    "production": {
+      "autoIncrement": true
+    }
+  }
+}

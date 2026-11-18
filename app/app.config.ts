@@ -16,6 +16,8 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   scheme: 'ais2app',
   userInterfaceStyle: 'light',
   android: {
+    // APK 배포용 고유 ID (EAS Build, 2026-11-18 결정). 한 번 배포하면 바꾸지 않는다.
+    package: 'com.team18.tracelens',
     adaptiveIcon: {
       backgroundColor: '#202544',
       foregroundImage: './assets/brand/android-foreground.png',
@@ -36,5 +38,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   experiments: { typedRoutes: true, reactCompiler: true },
   extra: {
     apiBaseUrl: process.env.API_BASE_URL ?? '',
+    // EAS 프로젝트 @limjeongmin/ais2-app (eas init으로 생성, 동적 설정이라 직접 기입)
+    eas: { projectId: '74e1d935-30ef-4be3-8dd4-5d954030afed' },
   },
 });
