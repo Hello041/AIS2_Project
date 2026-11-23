@@ -102,13 +102,13 @@ class UnivFDDetector(Detector):
             layers=layers, heads=width // 64, output_dim=sd["proj"].shape[1],
         )
         visual.load_state_dict(sd)  # strict
-        self._visual = visual.float().eval()
+        self._visual = visual.float().eval().to(self.device)
 
         fc = torch.nn.Linear(sd["proj"].shape[1], 1)
         fc.load_state_dict(torch.load(fc_pt, map_location="cpu"))  # strict
-        self._fc = fc.eval()
+        self._fc = fc.eval().to(self.device)
 
     @torch.inference_mode()
     def _score(self, img: Image.Image) -> float:
-        x = self._transform(img).unsqueeze(0)
+        x = self._transform(img).unsqueeze(0).to(self.device)
         return torch.sigmoid(self._fc(self._visual(x)))[0, 0].item()

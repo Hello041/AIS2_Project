@@ -87,7 +87,9 @@ class AIDEDetector(Detector):
         model.load_state_dict(ckpt.get("model", ckpt), strict=True)
         del ckpt
         gc.collect()
-        self._model = model.eval()
+        self._model = model.eval().to(self.device)
+        # DCT 전처리는 GPU여도 CPU에 둔다: torch.sort로 패치 순위를 매겨 고르므로, 부동소수점 차이로
+        # 다른 패치가 뽑히면 점수가 달라진다. CPU에 두면 GPU 실행에서도 CPU 검증 때와 같은 패치가 들어간다.
         self._dct = dct_module.DCT_base_Rec_Module()
 
         self._to_tensor = transforms.ToTensor()
@@ -111,5 +113,5 @@ class AIDEDetector(Detector):
         x = self._to_tensor(self._ensure_min_side(img))
         minmin, maxmax, minmin1, maxmax1 = self._dct(x)
         views = [self._post(v) for v in (minmin, maxmax, minmin1, maxmax1, x)]
-        logits = self._model(torch.stack(views).unsqueeze(0))
+        logits = self._model(torch.stack(views).unsqueeze(0).to(self.device))
         return torch.softmax(logits, dim=1)[0, 1].item()  # 1 = fake

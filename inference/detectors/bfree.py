@@ -10,7 +10,7 @@
 
 가중치: inference/weights/bfree/BFREE_dino2reg4/{config.yaml, model_epoch_best.pth} (330MB)
 공식 코드: inference/third_party/bfree/  (둘 다 scripts/download_weights.py --only bfree로 받는다)
-요구: timm>=1.0.12. CPU에서 이미지 크기와 무관하게 약 12초, 상주 약 0.36GB.
+요구: timm>=1.0.12. CPU에서 이미지 크기와 무관하게 약 12초, 상주 약 0.36GB. GPU는 DEVICE 환경 변수(base.resolve_device).
 
 2026-11-10 NPR을 대체 (NPR은 PNG/JPEG 형식에 반응해 AUC 0.43 — 계획서 §7 '11/10 점검 결과').
 """
@@ -91,7 +91,7 @@ def rollout(attentions: list[torch.Tensor], cls_index: int = 0) -> torch.Tensor:
     전체 행렬곱 대신 CLS 행 벡터만 뒤에서부터 곱한다(같은 결과, 계산량 N배 적음).
     """
     b, n, _ = attentions[0].shape
-    v = torch.zeros(b, 1, n, dtype=attentions[0].dtype)
+    v = torch.zeros(b, 1, n, dtype=attentions[0].dtype, device=attentions[0].device)
     v[:, 0, cls_index] = 1.0
     for a in reversed(attentions):
         v = 0.5 * (v @ a) + 0.5 * v
@@ -121,7 +121,7 @@ class BFreeDetector(Detector):
 
         networks = _import_networks()
         model = networks.get_network(cfg["arch"])  # pretrained=False: 인터넷에서 받지 않는다
-        self._model = networks.load_weights(model, str(weights)).eval()
+        self._model = networks.load_weights(model, str(weights)).eval().to(self.device)
         self._transform = transforms.Compose([
             transforms.ToTensor(), transforms.Normalize(IMAGENET_MEAN, IMAGENET_STD),
         ])
@@ -129,11 +129,15 @@ class BFreeDetector(Detector):
     def logit(self, img: Image.Image) -> float:
         """공식 출력(로짓) 그대로 — 공식 데모 결과와 비교할 때 쓴다."""
         with torch.inference_mode():
-            return self._model(self._transform(img).unsqueeze(0))[0, 0].item()
+            return self._model(self._input(img))[0, 0].item()
+
+    def _input(self, img: Image.Image) -> torch.Tensor:
+        """전처리는 CPU, 모델 입력만 self.device로."""
+        return self._transform(img).unsqueeze(0).to(self.device)
 
     @torch.inference_mode()
     def _score(self, img: Image.Image) -> float:
-        return torch.sigmoid(self._model(self._transform(img).unsqueeze(0)))[0, 0].item()
+        return torch.sigmoid(self._model(self._input(img)))[0, 0].item()
 
     # ---------------------------------------------------------------- 모델 주목 영역 (히트맵)
     def _score_and_explain(self, img: Image.Image) -> tuple[float, Explanation | None]:
@@ -172,7 +176,7 @@ class BFreeDetector(Detector):
         handles = [blk.attn.qkv.register_forward_hook(make_hook(blk.attn)) for blk in blocks]
         try:
             with torch.inference_mode():
-                logit = self._model(self._transform(img).unsqueeze(0))
+                logit = self._model(self._input(img))
         finally:
             for h in handles:
                 h.remove()
@@ -203,7 +207,7 @@ class BFreeDetector(Detector):
 
         with torch.inference_mode():
             weights = rollout(attentions, cls_index=0)  # (5, N), timm 토큰 순서 [CLS, 레지스터 4, 패치]
-        patches = weights[:, self._model.model.num_prefix_tokens:].float().numpy()
+        patches = weights[:, self._model.model.num_prefix_tokens:].float().cpu().numpy()
         # 영역마다 CLS·레지스터로 간 비중이 달라 척도가 다르다 → 패치끼리의 상대 비중(합 1)으로 맞춘 뒤 합친다
         patches = patches / np.maximum(patches.sum(axis=1, keepdims=True), 1e-12)
         cells = crop_cells(grid_h, grid_w, crop, rep)
