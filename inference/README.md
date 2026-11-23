@@ -41,6 +41,42 @@ curl -F "image=@ml/data/images/ai/ai_0001_original.png" http://localhost:8000/an
 - 로그: `analyze status=200 bytes=123456 elapsed_ms=17000` 형식. 파일명·EXIF는 남기지 않는다.
 - 추론은 한 번에 하나씩(잠금). 동시에 여러 요청이 오면 순서대로 처리한다.
 
+## GPU 실행
+
+모델은 환경 변수 `DEVICE`로 정한 장치에 올린다 (`detectors/base.py`의 `resolve_device`).
+
+| 값 | 동작 |
+|---|---|
+| `auto` (기본) | GPU가 있으면 GPU, 없으면 CPU (경고 로그) |
+| `cuda` / `cuda:N` | GPU 필수. 쓸 수 없으면 서버가 시작하지 않는다 — **GPU 배포에서는 이 값을 쓴다** |
+| `cpu` | 항상 CPU |
+
+모델별로 따로 정하려면 `DEVICE_<모델>`(예: `DEVICE_AIDE=cpu`). VRAM이 작아 AIDE(가중치 3.4GB)가 안 들어갈 때 쓴다.
+시작 로그에 `[commfor] loaded on cuda`처럼 모델별 장치가 찍힌다.
+
+설치 (CUDA용 torch를 먼저):
+```bash
+pip install -r inference/requirements-gpu.txt
+pip install -r inference/requirements.txt
+python -c "import torch; print(torch.__version__, torch.cuda.is_available())"   # 2.0.1+cu118 True
+```
+
+실행:
+```bash
+cd inference
+DEVICE=cuda uvicorn main:app --host 0.0.0.0 --port 8000          # PowerShell: $env:DEVICE="cuda"
+DEVICE=cuda DEVICE_AIDE=cpu uvicorn main:app --host 0.0.0.0 --port 8000   # VRAM 부족 시 AIDE만 CPU
+```
+
+점수 일치 (경계값은 CPU 점수로 정했다):
+- FP32만 쓴다(FP16·autocast 없음). TF32를 끄고 결정적 알고리즘을 켠다(`configure_cuda`): 같은 이미지는 GPU에서도
+  매번 비트 단위로 같은 점수. 이를 위해 비결정적인 Memory-Efficient·Flash 어텐션을 끄고 `CUBLAS_WORKSPACE_CONFIG=:4096:8`을
+  설정한다(이미 있으면 그 값). B-Free가 약 25% 느려지는 대신 재현성을 얻는다.
+- 전처리는 CPU에서 하고 모델 계산만 GPU에서 한다. 특히 AIDE의 DCT 패치 선택(`torch.sort`)은 CPU에 둬서
+  CPU 검증 때와 같은 패치가 들어가게 한다.
+- 그래도 GPU 연산 순서 차이로 소수점 아래 값은 조금 다를 수 있다. 새 GPU 환경에서는
+  `ml/compare_devices.py`로(사용법은 파일 맨 위) CPU·GPU 점수 차이와 구간이 바뀐 이미지 수를 확인한다.
+
 ## Detector 추가하기
 
 `detectors/<이름>.py`에 `Detector`(detectors/base.py) 하위 클래스를 **하나** 만들고 `name = "<이름>"`, `_load()`, `_score(img)`를 구현한다.

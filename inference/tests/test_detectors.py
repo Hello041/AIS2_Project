@@ -185,3 +185,40 @@ def test_get_detector_class():
 def test_unknown_or_invalid_name(name):
     with pytest.raises(ValueError):
         get_detector_class(name)
+
+
+# ---------------------------------------------------------------- 추론 장치 (DEVICE)
+def test_resolve_device_cpu_and_override():
+    from detectors.base import resolve_device
+    assert resolve_device("aide", {"DEVICE": "cpu"}) == "cpu"
+    assert resolve_device("aide", {"DEVICE": "cuda", "DEVICE_AIDE": "cpu"}) == "cpu"  # 모델별 값이 우선
+    assert resolve_device("aide", {"DEVICE": " CPU "}) == "cpu"
+
+
+def test_resolve_device_rejects_bad_value():
+    from detectors.base import resolve_device
+    with pytest.raises(ValueError):
+        resolve_device("aide", {"DEVICE": "gpu"})
+
+
+def test_resolve_device_auto_and_cuda(monkeypatch):
+    torch = pytest.importorskip("torch")
+    from detectors.base import resolve_device
+    monkeypatch.setattr(torch.cuda, "is_available", lambda: False)
+    assert resolve_device("bfree", {}) == "cpu"                      # 기본 auto → GPU 없으면 CPU
+    with pytest.raises(RuntimeError):
+        resolve_device("bfree", {"DEVICE": "cuda"})                  # cuda는 GPU 필수
+    monkeypatch.setattr(torch.cuda, "is_available", lambda: True)
+    monkeypatch.setattr(torch.cuda, "device_count", lambda: 1)
+    assert resolve_device("bfree", {}) == "cuda"
+    assert resolve_device("bfree", {"DEVICE": "cuda:0"}) == "cuda:0"
+    with pytest.raises(RuntimeError):
+        resolve_device("bfree", {"DEVICE": "cuda:1"})
+
+
+def test_load_sets_device(monkeypatch):
+    from detectors.dummy import DummyDetector
+    monkeypatch.setenv("DEVICE", "cpu")
+    d = DummyDetector("dummy", 0.5)
+    d.load()
+    assert d.device == "cpu"

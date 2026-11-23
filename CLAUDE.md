@@ -46,7 +46,8 @@ docs/
 ### 모델·판정
 - 모든 Detector는 `score(img: PIL.Image) -> float`로 **0~1, 클수록 AI 쪽** 원점수를 반환한다. 확률이 아니다. 필요하면 sigmoid로 맞춘다.
 - 모델 추가·교체는 `detectors/` 모듈 하나로 끝나야 한다. 이를 위해 `main.py`, `banding.py`를 고치게 된다면 설계가 잘못된 것이다.
-- 모델은 서버 시작 시 한 번만 로드한다. 추론은 `torch.inference_mode()`, 배치 1, CPU.
+- 모델은 서버 시작 시 한 번만 로드한다. 추론은 `torch.inference_mode()`, 배치 1, FP32.
+- 장치는 환경 변수 `DEVICE`(auto/cpu/cuda, 모델별 `DEVICE_<NAME>`)로 정하며 GPU 실행을 지원해야 한다 (2026-11-23 결정). 전처리는 CPU, 모델 계산만 GPU. FP16·TF32는 쓰지 않고 결정적 모드를 켠다(경계값이 CPU 점수 기준, 같은 이미지는 같은 점수). 새 GPU 환경은 `ml/compare_devices.py`로 CPU 점수와 비교한다.
 - B-Free는 **비영리 라이선스**다(GRIP-UNINA). 상업적 사용 금지, 발표·보고서에 원저자(Guillaro et al., CVPR 2025) 인용.
 - Community Forensics(commfor)는 공식 test 전처리(Resize 440 → CenterCrop 384 → ImageNet 정규화)를 따른다. 코드·가중치 MIT.
 - (비활성) UnivFD는 CLIP **이미지 인코더만** 올린다. 공식 코드는 OpenAI `clip` 패키지를 쓰므로, open_clip으로 바꾸면 가중치·전처리가 같은지 검증한다.

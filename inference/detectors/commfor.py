@@ -62,7 +62,7 @@ class CommForDetector(Detector):
         model = timm.create_model("vit_small_patch16_384", pretrained=False, num_classes=1)
         state = {k.removeprefix("vit."): v for k, v in load_file(str(weights)).items()}
         model.load_state_dict(state, strict=True)
-        self._model = model.eval()
+        self._model = model.eval().to(self.device)
         self._transform = transforms.Compose([
             transforms.Resize(RESIZE),
             transforms.CenterCrop(CROP),
@@ -72,4 +72,5 @@ class CommForDetector(Detector):
 
     @torch.inference_mode()
     def _score(self, img: Image.Image) -> float:
-        return torch.sigmoid(self._model(self._transform(img).unsqueeze(0)))[0, 0].item()
+        x = self._transform(img).unsqueeze(0).to(self.device)  # 전처리는 CPU, 모델만 self.device
+        return torch.sigmoid(self._model(x))[0, 0].item()

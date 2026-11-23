@@ -110,6 +110,7 @@ class Detector:
 - UnivFD는 CLIP의 **이미지 인코더만** 올린다. 텍스트 인코더는 쓰지 않으므로 메모리를 약 0.5GB 아낄 수 있다. (2026-11-14 Community Forensics로 교체되어 활성 아님)
 - 모델은 서버를 시작할 때 모두 올려 두고, 요청마다 다시 올리지 않는다.
 - 추론은 `torch.inference_mode()`, 배치 크기 1로 한다.
+- (2026-11-23) GPU 실행 지원: 환경 변수 `DEVICE`(auto/cpu/cuda, 모델별 `DEVICE_<NAME>`)로 장치를 고른다. 전처리는 CPU, 모델 계산만 GPU, FP32(TF32 끔), 결정적 모드(같은 이미지 = 같은 점수). 확인: MX450(2GB)에서 CommFor·B-Free GPU + AIDE CPU(`DEVICE_AIDE=cpu`)로 개발용 원본 200장 채점 → CPU 점수와 최대 차이 CommFor 0.000018, B-Free 0.000006, AIDE 0, 구간·종합 판정 변화 0장. 변형 600장은 이 노트북에 이미지가 없어 미비교. 장당 중앙값 CommFor 364ms→68ms, B-Free 14.6초→4.9초(CPU 값은 기존 scores.csv 기록), 세 모델 합계 9.5초. 같은 이미지 1장 /analyze(히트맵 포함) CPU 24.1초 → GPU 12.2~12.8초(결정적 모드, 끄면 9.4초). 2GB GPU에 AIDE까지 올리면 드라이버가 시스템 RAM을 빌려 써서 요청당 약 90초 → 작은 GPU에서는 DEVICE_AIDE=cpu.
 
 ### 5.2 경계값 — `thresholds.yaml`
 
